@@ -119,3 +119,31 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#
+# volume control
+#
+
+# decrease volume
+XF86AudioLowerVolume
+	amixer sset 'Master' 3%-
+
+# increase volume
+XF86AudioRaiseVolume
+	amixer sset 'Master' 3%+
+
+# mute playback
+XF86AudioMute
+	amixer sset 'Master' toggle
+
+# mute caputer
+XF86AudioMicMute
+	amixer sset 'Capture' toggle
+
+# alternate increase volume
+super + equal
+      amixer sset 'Master' 3%+
+
+# alternate decrease volume
+super + minus
+      amixer sset 'Master' 3%-

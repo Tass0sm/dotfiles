@@ -1,136 +1,3 @@
-wget http://ftp.us.debian.org/debian/pool/non-free/f/firmware-nonfree/firmware-atheros_20161130-3_all.deb
-exit
-shutdown
-sudo apt-get install debian-nonfree
-sudo apt-get install firmware-nonfree
-sudo apt-get install linux-firmware
-wget https://mirrors.edge.kernel.org/ubuntu/pool/main/l/linux-firmware/linux-firmware_1.173.10_all.deb
-ls
-sudo dpkg -i linux-firmware_1.173.10_all.deb 
-sudo apt-get remove firmware-linux-free 
-sudo dpkg -i linux-firmware_1.173.10_all.deb 
-ls
-cd Downloads/
-ls
-ls -a
-ls -l
-sh SecureW2_JoinNow.run
-exit
-sudo apt-get install emacs
-clear
-emacs
-firefox
-clear
-exit
-cd ..
-ls
-cd usr/
-ls
-sudo apt-get install java
-sudo apt-get install openjdk-8-jre-headless
-clear
-cd ..
-cd ~
-ls
-cd ..
-ls
-cd ..
-ls
-cd home/anastasios/
-exit
-cd ..
-ls
-cd home/
-ls
-cd anastasios/
-ls
-exit
-ls
-cd ..
-exit
-git status
-clear
-exit
-ls
-ls -al
-cd .emacs.d/
-ls
-git clone https://github.com/Tass0sm/PersonalEmacsConfig.git
-sudo update-command-not-found
-git clone https://github.com/Tass0sm/PersonalEmacsConfig.git
-sudo apt-get install git
-clear
-git clone https://github.com/Tass0sm/PersonalEmacsConfig.git
-git sttus
-git status
-clear
-ls
-rm PersonalEmacsConfig/
-rm -df PersonalEmacsConfig/
-rm -Rf PersonalEmacsConfig/
-ls
-git clone https://github.com/Tass0sm/PersonalEmacsConfig.git .
-cler
-clear
-git init
-ls
-ls -a
-clear
-git remote add origin https://github.com/Tass0sm/PersonalEmacsConfig.git
-git pull origin master
-clear
-git status
-ls
-ls -a
-clear
-exit
-git
-git clone https://github.com/Tass0sm/PersonalEmacsConfig.git
-git add --all
-git commit -m "Switching to linux and making system dependent init config."
-git config --global --edit
-export EDITOR="/usr/bin/emacs"
-echo $EDITOR
-git config --global --edit
-clear
-git push origin master
-clear
-git status
-exit
-dpkg
-dpkg --help
-cd Desktop/
-sudo dpkg -i discord-0.0.9.deb 
-clear
-cd ..
-cd Downloads/
-chmod a+x Bitwarden-1.15.2-x86_64.AppImage 
-ls -al
-chmod a+x Bitwarden-1.15.2-x86_64.AppImage 
-run Bitwarden-1.15.2-x86_64.AppImage 
-clear
-sudo apt-get install bitwarden
-sudo snap install
-sudo dpkg -i Bitwarden-1.15.2-amd64.deb 
-clear
-sudo apt install -f
-clear
-exit
-bitwarden
-cd /opt/
-cd Bitwarden/
-ls -al
-chmod 4755 chrome-sandbox 
-sudo chmod 4755 chrome-sandbox 
-ls
-ls -al
-sudo chmod 0755 chrome-sandbox 
-ls -al
-clear
-sudo chown root chrome-sandbox 
-chmod 4755 chrome-sandbox 
-sudo chmod 4755 chrome-sandbox 
-ls -al
 bitwarden 
 exit
 rfkill
@@ -1639,4 +1506,495 @@ mkdir sxhd
 stow -t ~/.config/sxhkd/ sxhkd/
 stow -t ~/.emacs.d/ emacs.d/
 exit
+exit
+git status
+git add --all
+clear
+git add --all
+git commit -m "Added most important dotfiles"
+git remote add origin https://github.com/Tass0sm/dotfiles.git
+git push -u origin master
+clear
+ls -al
+clear
+exit
+wpg -m
+exit
+shutdown
+wpg -m
+shutdown
+wpg -m
+exit
+alsamixer
+exit
+hcitool
+clear
+hcitool scan
+systemctl bluetooth
+systemctl restart bluetooth
+hcitool scan
+gnome-control-center
+sudo gnome-control-center
+unity-control-center
+clear
+gnome-control-center
+setsid gnome-control-center
+clear
+exit
+gnome-control 
+gnome-control-center
+clear
+c
+clear
+sudo apt-get install blueman
+clear
+blueman
+clear
+sudo apt-get install bluez*
+clear
+sudo systemctl enable bluetooth.service
+sudo systemctl start bluetooth.service
+bluez
+man bluez
+clear
+bluetoothctl 
+man bluetoothctl
+man bluemoon
+sudo apt remove bluez*
+clear
+exit
+bluetoothctl
+man bluetoothctl
+clear
+sudo apt-get install bluez*
+sudo apt install bluez*
+bluez
+clear
+sudo apt-get install bluez-utils
+lsmod
+modprobe -c | grep btusb
+clear
+insmod btusb
+modprobe btusb
+clear
+systemctl start bluetooth.service
+sudo systemctl start bluetooth.servicec
+sudo systemctl start bluetooth.service 
+sudo systemctl start bluetooth.service -f
+sudo systemctl unmask bluetooth.servie
+sudo systemctl unmask bluetooth.service
+sudo systemctl start bluetooth.service
+clear
+bluetoothtl
+clear
+sudo apt-get install bluetoothctl
+sudo apt-get install bluez
+sudo apt-get install bluez-utils
+sudo apt-get install bluez*
+sudo apt-get install bluemna
+sudo apt-get install blueman
+clear
+sudo apt-get update
+sudo apt-get insall blueman
+blueman-manager
+clear
+exit
+sudo service gdm restart
+sudo systemctl restart bluetooth.service
+sudo apt-get install bluez
+sudo apt-get install bluez*
+sudo apt-get install bluez-alsa
+clear
+sudo bluetoothctl
+aptitude install blueooth
+aptitude install bluetooth
+clear
+aptitude
+clear
+service bluetooth status
+sudo apt-get install gnome-bluetooth
+sudo apt-get install blueman
+hcitool
+clear
+hcitool
+cler
+clear
+hcitool scn
+hcitool scan
+clear
+sudo systemctl restart bluetooth.service
+sudo systemctl status bluetooth.service
+sudo apt-get install bluetooth
+sudo apt-get install bluez
+sudo apt-get install bluez-tools
+sudo apt-get install rfkill
+sudo apt-get install rfcomm
+sudo apt-get install bluez-firmware
+sudo systemctl start bluetooth.service
+sudo systemctl enable bluetooth.service
+sudo rfkill list
+sudo hciconfig hci0 up
+apt-get install net-tools
+sudo apt-get install net-tools
+hciconfig
+hciscan
+clear
+hciconfig
+sudo hciconfig
+cler
+clear
+ifconfig
+clear
+pkgfile hciconfig
+sudo update-command-not-found
+hciconfig
+clear
+sudo command-not-found
+test
+hciconfig
+hcitool
+clear
+sudo ifconfig hci0 up
+ifconfig
+bluetoothctl
+sudo apt-get install bluez
+blueman
+sudo apt-get install blueman
+sudo apt-get -h
+sudo apt-get check
+sudo apt-get reinstall blueman
+sudo apt-get upgrade
+clear
+sudo apt-get -h
+sudo bluetoothctl
+clear
+exit
+sudo apt-get update
+hciconfig
+hcitool
+clear
+sudo apt-get install bluez*
+bluetoothctl
+clear
+alsamixer
+xit
+exit
+sudo hciconfig hci0 up
+sudo rfkill list
+sudo hciconfig hci0 up
+hcitool scan
+sdptool
+sdptool browse 64:A2:F9:FF:01:1BOnePlus Bullets Wireless
+anastasios@anastasios-pc:~$ sdptool
+sdptool - SDP tool v5.50
+Usage:
+sdptool [options] <command> [command parameters]
+Options:
+-hDisplay help
+-iSpecify source interface
+Commands:
+searchSearch for a service
+browseBrowse all available services
+recordsRequest all records
+add Add local service
+del Delete local service
+get Get local service
+setattrSet/Add attribute to a SDP record
+setseqSet/Add attribute sequence to a SDP record
+Services:
+DID SP DUN LAN FAX OPUSH FTP PRINT HS HSAG HF HFAG SAP PBAP MAP 
+NAP GN PANU HCRP HID KEYB WIIMOTE CIP CTP A2SRC A2SNK AVRCT AVRTG 
+UDIUE UDITE SEMCHLA SR1 SYNCML SYNCMLSERV ACTIVESYNC HOTSYNC 
+PALMOS NOKID PCSUITE NFTP NSYNCML NGAGE APPLE IAP ISYNC GATT 
+anastasios@anastasios-pc:~$ sdptool browse ^C
+anastasios@anastasios-pc:~$ sdptool browse 
+64:A2:F9:FF:01:1BOnePlus Bullets Wireless
+anastasios@anastasios-pc:~$ sdptool
+sdptool - SDP tool v5.50
+Usage:
+sdptool [options] <command> [command parameters]
+Options:
+-hDisplay help
+-iSpecify source interface
+Commands:
+searchSearch for a service
+browseBrowse all available services
+recordsRequest all records
+add Add local service
+del Delete local service
+get Get local service
+setattrSet/Add attribute to a SDP record
+setseqSet/Add attribute sequence to a SDP record
+Services:
+DID SP DUN LAN FAX OPUSH FTP PRINT HS HSAG HF HFAG SAP PBAP MAP 
+NAP GN PANU HCRP HID KEYB WIIMOTE CIP CTP A2SRC A2SNK AVRCT AVRTG 
+UDIUE UDITE SEMCHLA SR1 SYNCML SYNCMLSERV ACTIVESYNC HOTSYNC 
+PALMOS NOKID PCSUITE NFTP NSYNCML NGAGE APPLE IAP ISYNC GATT 
+anastasios@anastasios-pc:~$ sdptool browse ^C
+anastasios@anastasios-pc:~$ sdptool browse 
+64:A2:F9:FF:01:1BOnePlus Bullets Wireless
+anastasios@anastasios-pc:~$ sdptool
+sdptool - SDP tool v5.50
+Usage:
+sdptool [options] <command> [command parameters]
+Options:
+-hDisplay help
+-iSpecify source interface
+Commands:
+searchSearch for a service
+browseBrowse all available services
+recordsRequest all records
+add Add local service
+del Delete local service
+get Get local service
+setattrSet/Add attribute to a SDP record
+setseqSet/Add attribute sequence to a SDP record
+Services:
+DID SP DUN LAN FAX OPUSH FTP PRINT HS HSAG HF HFAG SAP PBAP MAP 
+NAP GN PANU HCRP HID KEYB WIIMOTE CIP CTP A2SRC A2SNK AVRCT AVRTG 
+UDIUE UDITE SEMCHLA SR1 SYNCML SYNCMLSERV ACTIVESYNC HOTSYNC 
+PALMOS NOKID PCSUITE NFTP NSYNCML NGAGE APPLE IAP ISYNC GATT 
+anastasios@anastasios-pc:~$ sdptool browse ^C
+anastasios@anastasios-pc:~$ sdptool browse 
+64:A2:F9:FF:01:1BOnePlus Bullets Wireless
+anastasios@anastasios-pc:~$ sdptool
+sdptool - SDP tool v5.50
+Usage:
+sdptool [options] <command> [command parameters]
+Options:
+-hDisplay help
+-iSpecify source interface
+Commands:
+searchSearch for a service
+browseBrowse all available services
+recordsRequest all records
+add Add local service
+del Delete local service
+get Get local service
+setattrSet/Add attribute to a SDP record
+setseqSet/Add attribute sequence to a SDP record
+Services:
+DID SP DUN LAN FAX OPUSH FTP PRINT HS HSAG HF HFAG SAP PBAP MAP 
+NAP GN PANU HCRP HID KEYB WIIMOTE CIP CTP A2SRC A2SNK AVRCT AVRTG 
+UDIUE UDITE SEMCHLA SR1 SYNCML SYNCMLSERV ACTIVESYNC HOTSYNC 
+PALMOS NOKID PCSUITE NFTP NSYNCML NGAGE APPLE IAP ISYNC GATT 
+anastasios@anastasios-pc:~$ sdptool browse ^C
+anastasios@anastasios-pc:~$ sdptool browse 
+64:A2:F9:FF:01:1BOnePlus Bullets Wireless
+anastasios@anastasios-pc:~$ sdptool
+sdptool - SDP tool v5.50
+Usage:
+lear
+cler
+clear
+hcitool scan
+sdptool browse 64:A2:F9:FF:01:1B
+bluetoothctl
+clear
+hcitool scan
+sudo l2ping 64:A2:F9:FF:01:1B
+sudo rfcomm connect hci0 64:A2:F9:FF:01:1B
+sudo rfkill list
+hcitool scan
+exit
+rkill
+rfkill
+clear
+cler
+clear
+rfkill -h
+rfkill block bluetooth
+clear
+rfkill list
+exit
+cd Desktop/
+ls
+cd school/
+cd OSU/ENG\ 1281.01H/
+ls
+cd Books\ and\ Admin/
+ls
+./MATLAB\ An\ Introduction\ with\ Applications\,\ 6th\ edition.pdf 
+1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;2c1;
+clear
+open
+cler
+clear
+emacs MATLAB\ An\ Introduction\ with\ Applications\,\ 6th\ edition.pdf 
+exit
+xit
+exit
+cd Desktop/school/OSU/ENG\ 1281.01H/
+ls
+cd C04/
+ls
+emacs manganaris.2APPC041.pdf 
+exit
+wpg -m
+alsamixer
+sudo service gdm restart
+shutdown
+xrandr
+xrandr --output HDMI-1 --auto
+xrandr --output eDP-1 --left-of HDMI-1
+wpg -m
+sudo apt-get install blender
+exit
+wpg -m
+alsamixer
+librecfg
+clear
+libnetcfg 
+clear
+exit
+xrandr 
+xrandr --output HDMI-1 --auto
+xrandr --output eDP-1 --left-of
+xrandr --output eDP-1 --left-of HDMI-1
+alsamixer
+exit
+alsamixer
+exit
+shutdown
+wpg -m
+find /lib/module -name "hfs*.ko"
+find /lib/modules -name "hfs*.ko"
+cd Desktop/projects/
+ls
+cd printing/
+ls
+clear
+ls
+clear
+ls
+sudo mount -t hfsplus 'Student BW and Color.dmg' 
+7z
+p7zip
+clear
+p7zip
+p7zip -h
+7z x 'Student BW and Color.dmg' 
+ls
+cd StudentBW\ and\ Color/
+ls
+shutdown
+wpg -m
+exit
+reboot
+wpg -m
+reboot
+wpg -m
+reboot
+ifconfig
+sudo wpa_cli
+reboot
+wpg -m
+exit
+alsamixer
+exit
+wpg -m
+alsamixer
+exit
+cd CSE-workspace/
+ls
+ls -al
+clear
+ls -al
+cd .metadata/
+ls
+ls -la
+ls -al
+clear
+ls -al
+cd .plugins/
+ls -al
+cd org.eclipse.core.resources/
+cd .
+cd .projects/
+ls
+ls -al
+rm -fdR RSSAggregator/
+clear
+ls
+ls -al
+clear
+exit
+shutdown
+man ifconfig
+ifconfig -a
+ifconfig
+ifconfig wlp3s0 up
+sudo ifconfig wlp3s0 up
+clear
+sudo ifconfig wlp3s0 up
+iwlist wlp3s0 scan
+clear
+sudo ifconfig wlp3s0 up
+reboot
+which ifconfig
+which iwlist
+which iwconfig
+which dhclient
+which wpa_supplicant
+ifconfig wlan0 up
+ifconfig wl3p0
+ifconfig
+clear
+man ifconfig
+clear
+wpg -m
+exit
+xrandr
+clear
+exit
+alsamixer
+exit
+cd .dotfiles/
+ls
+exit
+amixer
+man amixer
+amixer scontrols
+Master
+clear
+amixer sset 'Master' 50%
+alsamixer
+amixer sset 'Master' 90%
+alsamixer
+amixer sset 'Master' 3%-
+amixer sset 'Master' 3%+
+reboot
+exit
+wpg -m
+exit
+alsamixer
+exit
+reboot
+exit
+alsamixer
+reboot
+alsamixer
+exit
+man amixer
+amixer 'Master' mute
+amixer mute 'Master'
+amixer sset 'Master' mute
+amixer sset 'Master' unmute
+amixer
+amixer scontrols
+man amixer
+amixer sget 'Master'
+amixer sset 'Master' mute
+amixer sget 'Master'
+amixer sset 'Master' toggle
+amixer sget 'Mixer'
+amixer sget 'Master'
+amixer sset 'Capture' toggle
+wpg -m
+exit
+shutdown
+wpg -m
+shutdown
+wpg -m
+alsamixer
 exit
