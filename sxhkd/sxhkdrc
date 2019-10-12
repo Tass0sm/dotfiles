@@ -126,15 +126,15 @@ super + {Left,Down,Up,Right}
 
 # decrease volume
 XF86AudioLowerVolume
-	amixer sset 'Master' 3%-
+	volctl 3%-
 
 # increase volume
 XF86AudioRaiseVolume
-	amixer sset 'Master' 3%+
+	volctl 3%+
 
 # mute playback
 XF86AudioMute
-	amixer sset 'Master' toggle
+	volctl toggle
 
 # mute caputer
 XF86AudioMicMute
@@ -142,8 +142,8 @@ XF86AudioMicMute
 
 # alternate increase volume
 super + equal
-      amixer sset 'Master' 3%+
+      	volctl 3%+
 
 # alternate decrease volume
 super + minus
-      amixer sset 'Master' 3%-
+      	volctl 3%-
