@@ -19,6 +19,7 @@
 (require 'org)
 (setq org-agenda-files (list
 			"~/Desktop/organization/school.org"
+			"~/Desktop/organization/career.org"
 			"~/Desktop/organization/environment.org"
 			"~/Desktop/organization/life.org"
 			"~/Desktop/organization/fitness/fitness.org"
