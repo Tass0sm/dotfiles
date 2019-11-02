@@ -80,19 +80,25 @@ super + {o,i}
 	bspc node {older,newer} -f; \
 	bspc wm -h on
 
+#
+# view controls
+#
+
 # focus desktop on current monitor or other monitor
 super + {_, + alt +}{1-9,0}
-      	bspc desktop -f '{focused,last}:^{1-9,10}'
+      	bspc desktop -f '{focused,last}:^{1-9,0}'; \
+	bspc desktop -f 'last';
 
 # focus the given desktop on both monitors
 super + ctrl + {1-9,0}
-      	bspc desktop -f '^eDP-1:^{1-9,10}'; \
-	bspc desktop -f '^HDMI-1:^{1-9,10}';
+      	bspc desktop -f 'eDP-1:^{1-9,0}'; \
+	bspc desktop -f 'HDMI-1:^{1-9,0}';
+
+# focus or send to the given desktop
+super + shift + {1-9,0}
+	bspc node -d 'focused:^{1-9,0}'
 
 
-# send node to the given desktop on current or other monitor
-super + shift + {_, alt +}{1-9,0}
-	bspc node -d '{focused, last}:^{1-9,10}'
 
 #
 # preselect
@@ -101,6 +107,10 @@ super + shift + {_, alt +}{1-9,0}
 # preselect the direction
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+# super + ctrl + {1-9}
+#	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
 super + ctrl + space
