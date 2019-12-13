@@ -18,28 +18,29 @@
 
 (require 'org)
 (setq org-agenda-files (list
-			"~/Desktop/organization/school.org"
-			"~/Desktop/organization/career.org"
-			"~/Desktop/organization/environment.org"
-			"~/Desktop/organization/life.org"
-			"~/Desktop/organization/fitness/fitness.org"
-			"~/Desktop/organization/projects.org"))
+ 			"~/Desktop/organization/school.org"
+ 			"~/Desktop/organization/career/career.org"
+ 			"~/Desktop/organization/environment.org"
+ 			"~/Desktop/organization/life.org"
+ 			"~/Desktop/organization/fitness/fitness.org"
+ 			"~/Desktop/organization/projects.org"))
 
 (setq org-directory "~/Desktop/organization/")
-;;(setq org-mobile-checksum-binary "c:/Users/tasso/Desktop/Emacs/Sha1sum/sha1sum.exe")
-;;(setq org-mobile-inbox-for-pull "c:/Users/tasso/Desktop/Organization/flagged.org")
-;;(setq org-mobile-directory "c:/Users/tasso/Dropbox/Apps/Orgzly")
 (setq org-log-done t)
 (define-key global-map "\C-ca" 'org-agenda)
-;;(define-key global-map "\C-cl" 'org-store-link)
 
 (setq org-todo-keyword-faces
       '(("FAIL" . "yellow")))
 
-;;(require 'company)
-;;(require 'company-irony)
+(require 'yasnippet)
+(yas-global-mode t)
 
-;;(require 'company-irony-c-headers)
+(require 'org-journal)
+(setq org-journal-dir "~/Desktop/organization/diary/")
+
+(global-set-key (kbd "C-x g") 'magit-status)
+
+(require 'company)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -47,27 +48,10 @@
 
 (add-hook 'text-mode-hook #'visual-line-mode)
 (add-hook 'text-mode-hook #'flyspell-mode)
-
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends '(company-irony)))
-
-(eval-after-load 'company
-  '(add-to-list
-    'company-backends '(company-irony-c-headers)))
-
-;;(require 'yasnippet)
-;;(yas-global-mode t)
-
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;;(require 'gnuplot)
-
-;;(setq gnuplot-program "C:/Program Files (x86)/gnuplot/bin/gnuplot.exe")
-
-;;(setq-default ispell-program-name "C:/msys64/mingw64/bin/aspell.exe")
+(add-hook 'text-mode-hook 'flyspell-buffer)
 
 (require 'meghanada)
+
 (add-hook 'java-mode-hook
           (lambda ()
             ;; meghanada-mode on
@@ -75,19 +59,37 @@
             (flycheck-mode +1)
             (setq c-basic-offset 2)
             ;; use code format
-            (add-hook 'before-save-hook 'meghanada-code-beautify-before-save)))
+            ;;(add-hook 'before-save-hook 'meghanada-code-beautify-before-save)
+ 	    ))
 (cond
-   ((eq system-type 'windows-nt)
-    (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
-    (setq meghanada-maven-path "mvn.cmd"))
-   (t
-    (setq meghanada-java-path "java")
-    (setq meghanada-maven-path "mvn")))
+ ((eq system-type 'windows-nt)
+  (setq meghanada-java-path (expand-file-name "bin/java.exe" (getenv "JAVA_HOME")))
+  (setq meghanada-maven-path "mvn.cmd"))
+ (t
+  (setq meghanada-java-path "java")
+  (setq meghanada-maven-path "mvn")))
 
-(setq meghanada-code-beautify-before-save nil)
 (put 'scroll-left 'disabled nil)
 
-(require 'org-journal)
+(require 'multiple-cursors)
 
-(setq org-journal-dir "~/Desktop/organization/diary/")
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
 
+(require 'rust-mode)
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+;(setq TeX-PDF-mode t)
+
+(require 'flymake)
+
+(defun flymake-get-tex-args (file-name)
+  "??"
+  (list "pdflatex"
+	(list "-file-line-error" "-draftmode" "-interaction=nonstopmode"
+	      file-name)))
+
+(add-hook 'LaTeX-mode-hook 'flymake-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)

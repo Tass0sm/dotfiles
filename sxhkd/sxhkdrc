@@ -153,3 +153,20 @@ super + equal
 # alternate decrease volume
 super + minus
       	volctl 3%-
+
+#
+# brightness
+#
+
+XF86MonBrightnessDown
+	lightctl -100
+
+XF86MonBrightnessUp
+	lightctl 100
+
+#
+# screenshot
+#
+
+# super + print
+# 	flameshot gui

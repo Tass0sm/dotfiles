@@ -6,4 +6,3 @@
                   ((eq system-type 'gnu/linux) "linux.el")
                   (t "default-system.el"))
             user-emacs-directory))
-

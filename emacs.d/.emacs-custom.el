@@ -16,7 +16,7 @@
      ("melpa-stable" . "https://stable.melpa.org/packages/"))))
  '(package-selected-packages
    (quote
-    (csharp-mode no-littering org-journal meghanada auctex dumb-jump multiple-cursors yoshi-theme pdf-tools haskell-mode org-plus-contrib company-irony gnuplot company-irony-c-headers yasnippet-snippets yasnippet auto-complete magit elpy w3 web-mode speed-type midi-kbd ess))))
+    (cargo rust-playground rust-mode company-ctags ledger-mode csharp-mode no-littering org-journal meghanada auctex dumb-jump multiple-cursors yoshi-theme pdf-tools haskell-mode org-plus-contrib company-irony gnuplot company-irony-c-headers yasnippet-snippets yasnippet auto-complete magit elpy w3 web-mode speed-type midi-kbd ess))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

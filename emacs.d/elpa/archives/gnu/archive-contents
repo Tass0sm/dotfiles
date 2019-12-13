@@ -193,6 +193,18 @@
 	    ("Artur Malabarba" . "emacs@endlessparentheses.com"))
 	   (:maintainer "Artur Malabarba" . "emacs@endlessparentheses.com")
 	   (:url . "https://github.com/Malabarba/beacon"))])
+ (bluetooth .
+	    [(0 1 2)
+	     ((emacs
+	       (25 1))
+	      (dash
+	       (2 12 0)))
+	     "A Major mode for Bluetooth devices" single
+	     ((:keywords "hardware")
+	      (:authors
+	       ("Raffael Stocker" . "r.stocker@mnet-mail.de"))
+	      (:maintainer "Raffael Stocker" . "r.stocker@mnet-mail.de")
+	      (:url . "https://gitlab.com/rstocker/emacs-bluetooth"))])
  (bnf-mode .
 	   [(0 4 2)
 	    ((cl-lib
@@ -433,13 +445,11 @@
 		  ("Daiki Ueno" . "ueno@gnu.org"))
 		 (:maintainer nil . "emacs-devel@gnu.org"))])
  (debbugs .
-	  [(0 20)
+	  [(0 21)
 	   ((emacs
 	     (25 1))
 	    (soap-client
-	     (3 1 5))
-	    (cl-lib
-	     (0 5)))
+	     (3 1 5)))
 	   "SOAP library to access debbugs servers" tar
 	   ((:maintainer "Michael Albinus" . "michael.albinus@gmx.de")
 	    (:authors
@@ -615,7 +625,7 @@
 	      (:maintainer "Markus Triska" . "triska@metalevel.at")
 	      (:url . "https://www.metalevel.at/ediprolog/"))])
  (eev .
-      [(20190902)
+      [(20191105)
        ((emacs
 	 (24 1)))
        "Support for e-scripts (eepitch blocks, elisp hyperlinks, etc)" tar
@@ -1017,12 +1027,12 @@
 		 (:maintainer "Clemens Radermacher" . "clemera@posteo.net")
 		 (:url . "https://github.com/clemera/ivy-explorer"))])
  (javaimp .
-	  [(0 6 1)
-	   nil "Add and reorder Java import statements in Maven projects" tar
+	  [(0 7 1)
+	   nil "Add and reorder Java import statements in Maven/Gradle projects" tar
 	   ((:maintainer "Filipp Gunbin" . "fgunbin@fastmail.fm")
 	    (:authors
 	     ("Filipp Gunbin" . "fgunbin@fastmail.fm"))
-	    (:keywords "java" "maven" "programming")
+	    (:keywords "java" "maven" "gradle" "programming")
 	    (:url . "http://elpa.gnu.org/packages/javaimp.html"))])
  (jgraph-mode .
 	      [(1 1)
@@ -1059,7 +1069,7 @@
 	       ("Simen Heggestøyl" . "simenheg@gmail.com"))
 	      (:maintainer "Simen Heggestøyl" . "simenheg@gmail.com"))])
  (jsonrpc .
-	  [(1 0 7)
+	  [(1 0 8)
 	   ((emacs
 	     (25 2)))
 	   "JSON-RPC library" single
@@ -1499,7 +1509,7 @@
 	     ("Phillip Lord" . "phillip.lord@russet.org.uk"))
 	    (:url . "http://elpa.gnu.org/packages/persist.html"))])
  (phps-mode .
-	    [(0 3 5)
+	    [(0 3 20)
 	     ((emacs
 	       (26)))
 	     "Major mode for PHP with Semantic integration" tar
@@ -1573,7 +1583,7 @@
 	  (:maintainer "Toby Cubitt" . "toby-predictive@dr-qubit.org")
 	  (:url . "http://www.dr-qubit.org/emacs.php"))])
  (rainbow-mode .
-	       [(1 0 1)
+	       [(1 0 2)
 		nil "Colorize color names in buffers" single
 		((:url . "http://elpa.gnu.org/packages/rainbow-mode.html")
 		 (:keywords "faces")
@@ -1924,7 +1934,7 @@
 	 ("Felix E. Klee" . "felix.klee@inka.de"))
 	(:maintainer "Lars Magne Ingebrigtsen" . "larsi@gnus.org"))])
  (svg-clock .
-	    [(1 0)
+	    [(1 1)
 	     ((svg
 	       (0 1))
 	      (emacs
@@ -1992,7 +2002,7 @@
 	  ("Oleh Krehel" . "ohwoeowho@gmail.com"))
 	 (:keywords "convenience"))])
  (tramp .
-	[(2 4 2 4)
+	[(2 4 2 5)
 	 ((emacs
 	   (24 4)))
 	 "Transparent Remote Access, Multiple Protocol" tar
@@ -2101,7 +2111,7 @@
 	  (:maintainer "Justin Burkett" . "justin@burkett.cc")
 	  (:url . "https://github.com/justbur/emacs-vdiff"))])
  (verilog-mode .
-	       [(2019 9 23 4801067)
+	       [(2019 11 21 248091482)
 		nil "major mode for editing verilog source in Emacs" single
 		((:keywords "languages")
 		 (:authors
@@ -2189,7 +2199,7 @@
 	       ("Pierre Neidhardt" . "mail@ambrevar.xyz"))
 	      (:keywords "news" "hypermedia" "blog" "feed" "rss" "atom"))])
  (websocket .
-	    [(1 11 1)
+	    [(1 12)
 	     ((cl-lib
 	       (0 5)))
 	     "Emacs WebSocket client and server" tar
