@@ -168,5 +168,5 @@ XF86MonBrightnessUp
 # screenshot
 #
 
-# super + print
-# 	flameshot gui
+super + Print
+	flameshot gui

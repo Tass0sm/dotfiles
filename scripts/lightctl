@@ -1,5 +1,5 @@
 #!/bin/bash
-# changeBrightness
+# changeBrightness. Requires write access to the brightness file.
 
 # Arbitrary but unique message id
 msgId="991050"

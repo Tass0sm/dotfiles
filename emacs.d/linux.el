@@ -93,3 +93,5 @@
 
 (add-hook 'LaTeX-mode-hook 'flymake-mode)
 (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+
+(require 'mental-math-mode "~/.dotfiles/emacs.d/mental-math/mental-math-mode.el")
