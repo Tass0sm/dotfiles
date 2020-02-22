@@ -2,9 +2,13 @@
 # wm independent hotkeys
 #
 
+# emacs
+super + e
+	  	emacs
+
 # terminal emulator
 super + Return
-      	urxvt
+	  	st
 	
 # program launcher
 super + @space
@@ -81,8 +85,8 @@ super + {o,i}
 	bspc wm -h on
 
 # focus desktop on current monitor or other monitor
-super + {_, + alt +}{1-9,0}
-      	bspc desktop -f '{focused,last}:^{1-9,10}'
+super + {_, + alt +}{1-8}
+      	bspc desktop -f '{focused,last}:^{1-8}'
 
 # focus the given desktop on both monitors
 super + ctrl + {1-9,0}
