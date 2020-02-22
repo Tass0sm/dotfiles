@@ -1,0 +1,33 @@
+#!/bin/bash
+# changeBrightness. Requires write access to the brightness file.
+
+# Arbitrary but unique message id
+msgId="991050"
+
+# Get current and max brightness from backlight files.
+current_brightness=$(</sys/class/backlight/intel_backlight/brightness)
+max_brightness=$(</sys/class/backlight/intel_backlight/max_brightness)
+
+# Compute new brightness without regard to limits.
+delta=$@
+new_brightness=$((current_brightness+delta))
+
+# Bright new brightness into the range of acceptable values.
+if [[ $new_brightness -lt 1 ]]; then
+    new_brightness=1
+elif [[ $new_brightness -gt $max_brightness ]]; then
+    new_brightness=$max_brightness
+fi
+
+# Compute new brightness percentage.
+percent_brightness=$((100 * new_brightness / max_brightness))
+
+# Write new brightness to file to create the change.
+echo "$new_brightness" > /sys/class/backlight/intel_backlight/brightness
+
+# Show notification for brightness.
+dunstify -a "changeBrightness" -u low -r "$msgId" \
+	 "Brightness: ${percent_brightness}%" "$(getProgressString 10 "<b>#</b>" "_" $percent_brightness)"
+
+
+
