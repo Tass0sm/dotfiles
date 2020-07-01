@@ -1,0 +1,21 @@
+*.color0: #1e1f21
+*.color1: #738970
+*.color2: #acb95b
+*.color3: #8d8a74
+*.color4: #9da061
+*.color5: #617388
+*.color6: #748b94
+*.color7: #c9c9c1
+*.color8: #8c8c87
+*.color9: #738970
+*.color10: #acb95b
+*.color11: #8d8a74
+*.color12: #9da061
+*.color13: #617388
+*.color14: #748b94
+*.color15: #c9c9c1
+*.background: #1e1f21
+*.foreground: #c9c9c1
+*.cursor: #c9c9c1
+!! wallpaper: /home/tassos/Images/bellows.png
+!! alpha: 100

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Verbosity and settings that I always want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -vI" \
+	mkdir="mkdir -pv"
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto"
+
+# Abbreviated
+alias \
+    ll="ls -hNal --color=auto --group-directories-first"
+	    
+# Config tool
+alias \
+    config="/usr/bin/git --git-dir=$XDG_CONFIG_HOME/dotfiles --work-tree=$XDG_CONFIG_HOME"

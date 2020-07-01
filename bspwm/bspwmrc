@@ -1,33 +1,29 @@
-#! /bin/sh
+#!/bin/sh
 
-# Automatically Started Programs #
-sxhkd &
+# Take care of aesthetic choices.
+schemeSwitch bellows
+colorizeAlacritty
 
-~/.config/polybar/launch.sh
+# Launch all the background programs.
+pidof sxhkd || sxhkd &
+pidof dunst || dunst &
+pidof picom || picom &
+pidof emacs || emacs --daemon &
+pidof bspswallow || bspswallow &
+pidof polybar && killall polybar
+polybar bar0 &
 
-wpg -s gammaWallpaper.png
 
-xinput set-prop "SynPS/2 Synaptics TouchPad" "Device Enabled" 0
 
-### ---MONITORS--- ###
-bspc monitor eDP-1 -d I II III IV V VI VII VIII
-bspc monitor HDMI-1 -d I II III IV V VI VII VIII
+bspc monitor -d I II III IV V VI VII VIII
 
-#Hot Plugging:
-
-### ---GLOBAL CONFIG--- ###
-bspc config border_width         4
+bspc config border_width         2
 bspc config window_gap          12
 
-bspc config split_ratio          0.50
+
+bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
-
-### ---RULES--- ###
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
-bspc rule -a Emacs state=tiled
-
+bspc rule -a Emacs state=tiled 
 

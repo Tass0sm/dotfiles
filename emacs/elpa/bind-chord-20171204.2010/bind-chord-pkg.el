@@ -1,0 +1,2 @@
+;;; Generated package description from /home/tassos/.config/emacs/elpa/bind-chord-20171204.2010/bind-chord.el  -*- no-byte-compile: t -*-
+(define-package "bind-chord" "20171204.2010" "key-chord binding helper for use-package-chords" '((bind-key "1.0") (key-chord "0.6")) :commit "c873d5529c9c80cb58222f22873a4f081c307cb2" :keywords '("convenience" "tools" "extensions") :authors '(("Justin Talbott" . "justin@waymondo.com")) :maintainer '("Justin Talbott" . "justin@waymondo.com") :url "https://github.com/waymondo/use-package-chords")
