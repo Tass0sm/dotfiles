@@ -1,0 +1,23 @@
+#!/bin/sh
+# lightctl
+
+# Arbitrary but unique message id
+msgId="991049"
+
+# Get brightness
+brightness=$(cat /sys/class/backlight/intel_backlight/brightness)
+max_bright=$(cat /sys/class/backlight/intel_backlight/max_brightness)
+
+# Calculate new brightness
+((new_bright=$brightness + $@))
+
+# Adjust if there is an issue
+[[ $new_bright -lt 0 ]] && new_bright=0
+[[ $new_bright -gt $max_bright ]] && new_bright=$max_bright
+
+bright_pct=$(($new_bright * 100 / $max_bright))
+    
+dunstify -a "lightctl" -u low -r "$msgId" \
+"Brightness: ${bright_pct}%" "$(getProgressString 20 "<b>#</b>" "_" $bright_pct)"
+
+echo $new_bright > /sys/class/backlight/intel_backlight/brightness

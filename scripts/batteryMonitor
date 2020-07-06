@@ -1,0 +1,46 @@
+#!/bin/sh
+
+msgId="991050"
+
+# If charging, exit and close notification.
+if [ $( cat /sys/class/power_supply/BAT0/status ) = Charging ]
+then
+    dunstify --close=$msgId
+    exit
+fi
+
+# Make variable for current battery percentage.
+bat=$( cat /sys/class/power_supply/BAT0/capacity)
+
+# Define function to
+function battery_prompt {
+    # Arguments
+    status_id=$1
+    text=$2
+    icon=$3
+
+
+    # Exit function if user has seen this dialog
+    current_status_id=$( cat /tmp/battery_script_status )
+
+    if [ "$status_id" = "$current_status_id" ]
+    then
+	exit
+    fi
+
+    dunstify -a "batteryMonitor" -u critical -i "$icon" -r "$msgId" "Battery Warning" "$text"
+}
+
+
+
+if [ $bat -le 5 ]
+then
+    battery_prompt 2 "Battery is critically low!" battery-empty
+    echo "2" > /tmp/battery_script_status
+elif [ $bat -le 20 ]
+then
+    battery_prompt 1 "Battery is at 20%." battery-low
+    echo "1" > /tmp/battery_script_status
+else
+    echo "0" > /tmp/battery_script_status
+fi
