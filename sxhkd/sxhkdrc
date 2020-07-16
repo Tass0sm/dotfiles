@@ -31,8 +31,8 @@ super + {_,shift + }{1-8}
 	bspc {desktop -f,node -d} '^{1-8}'
 
 # move incrementally through desktops
-super + {period,comma}
-      	bspc desktop -f '{next,prev}'
+super + {_,shift + }{period,comma}
+      	bspc {desktop -f,node -d} '{next,prev}'
 
 #
 # bspwm states

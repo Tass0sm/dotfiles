@@ -94,3 +94,5 @@
   (setq org-journal-dir "~/Org/diary"))
 
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+
+(setq-default truncate-lines t)

@@ -13,7 +13,9 @@ pidof bspswallow || bspswallow &
 pidof polybar && killall polybar
 polybar bar0 &
 
-
+# Disable Trackpad
+touchPadID=$(xinput | grep "TouchPad" | awk '{print substr($6,4,2)}')
+xinput set-prop $touchPadID "Device Enabled" 0
 
 bspc monitor -d I II III IV V VI VII VIII
 
