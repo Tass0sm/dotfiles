@@ -6,6 +6,10 @@
 super + Return
 	contextTerm
 
+# language
+super + semicolon
+      switchKeyboard euro
+
 # editor
 super + e
       	ec

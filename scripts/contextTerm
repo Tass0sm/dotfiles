@@ -6,8 +6,9 @@ app_name=$(echo $wm_class | cut -d '"' -f2)
 
 if [ $app_name = "emacs" ]; then
     current_file=$(emacsclient -e "(current-directory)" | cut -d '"' -f2)
-    if [ $current_file != "nil" ]; then
-	alacritty --working-directory=$current_file &
+    echo $current_file
+    if [ "${current_file}" != "nil" ]; then
+	alacritty --working-directory="${current_file}" &
     else
 	alacritty &
     fi

@@ -10,7 +10,7 @@
 	       (:maintainer "Oleh Krehel" . "ohwoeowho@gmail.com")
 	       (:url . "https://github.com/abo-abo/ace-window"))])
  (ack .
-      [(1 8)
+      [(1 10)
        nil "interface to ack-like tools" tar
        ((:url . "https://github.com/leoliu/ack-el")
 	(:maintainer "João Távora" . "joaotavora@gmail.com")
@@ -32,7 +32,7 @@
 	      ("Stephen Leake" . "stephen_leake@stephe-leake.org"))
 	     (:keywords "languages" "ada"))])
  (ada-ref-man .
-	      [(2012 5)
+	      [(2020 1)
 	       nil "Ada Reference Manual 2012" tar
 	       ((:url . "http://stephe-leake.org/ada/arm.html")
 		(:maintainer "Stephen Leake" . "stephen_leake@member.fsf.org")
@@ -334,7 +334,7 @@
 		       (:maintainer "Clément Pit-Claudel" . "clement.pitclaudel@live.com")
 		       (:url . "https://github.com/cpitclaudel/compact-docstrings"))])
  (company .
-	  [(0 9 12)
+	  [(0 9 13)
 	   ((emacs
 	     (24 3)))
 	   "Modular text completion framework" tar
@@ -457,7 +457,7 @@
 		  ("Daiki Ueno" . "ueno@gnu.org"))
 		 (:maintainer nil . "emacs-devel@gnu.org"))])
  (debbugs .
-	  [(0 24)
+	  [(0 25)
 	   ((emacs
 	     (25 1))
 	    (soap-client
@@ -469,7 +469,7 @@
 	    (:keywords "comm" "hypermedia")
 	    (:url . "http://elpa.gnu.org/packages/debbugs.html"))])
  (delight .
-	  [(1 5)
+	  [(1 7)
 	   ((cl-lib
 	     (0 5))
 	    (nadvice
@@ -675,7 +675,7 @@
 	      (:keywords "lisp")
 	      (:url . "http://elpa.gnu.org/packages/el-search.html"))])
  (eldoc .
-	[(1 0 0)
+	[(1 8 0)
 	 ((emacs
 	   (26 3)))
 	 "Show function arglist or variable docstring in echo area" single
@@ -814,9 +814,11 @@
 	     ("Barry O'Reilly" . "gundaetiapo@gmail.com"))
 	    (:maintainer "Barry O'Reilly" . "gundaetiapo@gmail.com"))])
  (flymake .
-	  [(1 0 8)
+	  [(1 0 9)
 	   ((emacs
-	     (26 1)))
+	     (26 1))
+	    (eldoc
+	     (1 1 0)))
 	   "A universal on-the-fly syntax checker" single
 	   ((:url . "http://elpa.gnu.org/packages/flymake.html")
 	    (:keywords "c" "languages" "tools")
@@ -1033,7 +1035,7 @@
 	   ("Oleh Krehel" . "ohwoeowho@gmail.com"))
 	  (:keywords "bindings"))])
  (hyperbole .
-	    [(7 0 6)
+	    [(7 1 2)
 	     ((emacs
 	       (24 4)))
 	     "GNU Hyperbole: The Everyday Hypertextual Information Manager" tar
@@ -1598,7 +1600,7 @@
 	     ("Phillip Lord" . "phillip.lord@russet.org.uk"))
 	    (:url . "http://elpa.gnu.org/packages/persist.html"))])
  (phps-mode .
-	    [(0 3 51)
+	    [(0 3 52)
 	     ((emacs
 	       (26)))
 	     "Major mode for PHP with Semantic integration" tar
@@ -1634,7 +1636,7 @@
 	     (:maintainer "Feng Shu" . "tumashu@163.com")
 	     (:url . "https://github.com/tumashu/posframe"))])
  (project .
-	  [(0 4 0)
+	  [(0 5 0)
 	   ((emacs
 	     (26 3)))
 	   "Operations on the current project" single
@@ -1648,6 +1650,14 @@
 	   ("James Clark" . "jjc@clark.com"))
 	  (:keywords "languages")
 	  (:url . "http://elpa.gnu.org/packages/psgml.html"))])
+ (pspp-mode .
+	    [(1 1)
+	     nil "Major mode for editing PSPP files" single
+	     ((:url . "http://elpa.gnu.org/packages/pspp-mode.html")
+	      (:keywords "pspp" "major-mode")
+	      (:authors
+	       ("Scott Andrew Borton" . "scott@pp.htv.fi"))
+	      (:maintainer "John Darrington" . "john@darrington.wattle.id.au"))])
  (python .
 	 [(0 26 1)
 	  ((emacs
@@ -1678,7 +1688,7 @@
 	  (:maintainer "Toby Cubitt" . "toby-predictive@dr-qubit.org")
 	  (:url . "http://www.dr-qubit.org/emacs.php"))])
  (rainbow-mode .
-	       [(1 0 4)
+	       [(1 0 5)
 		nil "Colorize color names in buffers" single
 		((:url . "http://elpa.gnu.org/packages/rainbow-mode.html")
 		 (:keywords "faces")
@@ -2132,7 +2142,7 @@
 	  ("Oleh Krehel" . "ohwoeowho@gmail.com"))
 	 (:keywords "convenience"))])
  (tramp .
-	[(2 4 4)
+	[(2 4 4 1)
 	 ((emacs
 	   (24 4)))
 	 "Transparent Remote Access, Multiple Protocol" tar
@@ -2250,7 +2260,7 @@
 	  (:maintainer "Justin Burkett" . "justin@burkett.cc")
 	  (:url . "https://github.com/justbur/emacs-vdiff"))])
  (verilog-mode .
-	       [(2020 2 23 232634261)
+	       [(2020 6 27 14326051)
 		nil "major mode for editing verilog source in Emacs" single
 		((:keywords "languages")
 		 (:authors

@@ -1,10 +1,7 @@
 #! /bin/sh
 
 if [ $# -ne 0 ]; then
-    emacsclient -c $@
+    emacsclient -c -a "" $@
 else
-    emacsclient -c -e "(switch-to-buffer (current-buffer+))"
+    [ $# -ne 0 ] || emacsclient -c -a "" -e "(switch-to-buffer (current-buffer+))"
 fi
-
-
- 

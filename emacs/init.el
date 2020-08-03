@@ -96,3 +96,36 @@
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 (setq-default truncate-lines t)
+
+;; SLIME
+
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
+(require 'slime)
+(slime-setup)
+
+;; WS-BUTLER
+
+(use-package ws-butler
+  :config
+  (add-hook 'prog-mode-hook #'ws-butler-mode))
+(put 'downcase-region 'disabled nil)
+
+;; Dired Hide Details
+
+(add-hook 'dired-mode-hook 'dired-hide-details-mode)
+
+;; Multiple cursors
+
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
+;; Smart Tabs
+
+(use-package smart-tabs-mode
+  :config
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (smart-tabs-insinuate 'c))
