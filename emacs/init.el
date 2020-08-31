@@ -13,14 +13,17 @@
   (add-to-list 'load-path "~/.config/emacs/elpa/use-package-20200322.2110")
   (require 'use-package))
 
-(use-package package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(use-package package
+  :config
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
 
-(use-package projectile)
-(projectile-mode +1)
+(use-package projectile
+  :init
+  (projectile-mode +1))
 
-(use-package which-key)
-(which-key-mode)
+(use-package which-key
+  :init
+  (which-key-mode))
 
 (setq backup-directory-alist
  '(("." . "~/.local/share/emacs/saves/")))
@@ -66,11 +69,6 @@
  ("w"
   (("1" delete-other-windows))))
 
-;; (ryo-modal-major-mode-keys
-;;  'org-agenda
-;;  ("t" org-agenda-todo))
-
-
 (use-package ivy
   :config (ivy-mode 1))
 
@@ -80,10 +78,19 @@
 (use-package smooth-scroll
   :config (smooth-scroll-mode t))
 
-(setq org-agenda-files '("~/Org/school.org"
-			 "~/Org/projects.org"
-			 "~/Org/life.org"
-			 "~/Org/routine.org"))
+;; Org
+
+;;(load (concat user-emacs-directory "org-notify.el"))
+;;(require 'org-notify)
+;;(org-notify-start)
+;;(org-notify-add 'CLASS
+;;                '(:time "20m" :period "2m" :duration 100
+;;                        :actions -notify))
+
+(setq org-agenda-files '("~/Org/school.org"))
+;			 "~/Org/projects.org"
+;			 "~/Org/life.org"
+;			 "~/Org/routine.org"))
 
 (setq org-todo-keywords
       '((sequence "TODO" "|" "DONE" "KILL" "FAIL")))
@@ -113,14 +120,21 @@
 
 ;; Dired Hide Details
 
-(add-hook 'dired-mode-hook 'dired-hide-details-mode)
+(use-package dired
+  :config
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+  (setq dired-auto-revert-buffer t
+        dired-dwim-target t))
 
 ;; Multiple cursors
 
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package multiple-cursors
+  :ensure t
+  :bind
+  ("C-S-c C-S-c" . mc/edit-lines)
+  ("C->" . mc/mark-next-like-this)
+  ("C-<" . mc/mark-previous-like-this)
+  ("C-c C-<" . mc/mark-all-like-this))
 
 ;; Smart Tabs
 
@@ -129,3 +143,25 @@
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
   (smart-tabs-insinuate 'c))
+
+(advice-add 'yank :after
+            (lambda (ARG)
+              "Indent the text just yanked."
+              (indent-region (region-beginning) (region-end))))
+
+;; Flyspell
+
+(use-package flyspell
+  :config
+  (add-hook 'text-mode-hook 'flyspell-mode))
+
+;; Borg
+
+(load (concat user-emacs-directory "borg-mode.el"))
+
+;; Magit
+
+(use-package magit
+  :ensure t
+  :bind
+  ("\C-x g" . magit-status))

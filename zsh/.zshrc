@@ -1,5 +1,9 @@
 # tassos zsh config - 5.8
 
+# getting normal key functionality
+bindkey "^[[3~" delete-char
+bindkey "^[[3;5~" delete-word
+
 # control
 autoload -U select-word-style
 select-word-style bash
@@ -26,3 +30,6 @@ precmd() {
 
 # syntax highlighting
 source "${HOME}/Software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# history
+export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history"

@@ -3,15 +3,18 @@
 
 (setq mc/cmds-to-run-for-all
       '(
-	c-electric-colon
-	c-electric-paren
-	c-electric-semi&comma
-	c-electric-slash
-	kill-region
-	overwrite-mode
-	transpose-words
-	))
+        c-electric-brace
+        c-electric-colon
+        c-electric-paren
+        c-electric-semi&comma
+        c-electric-slash
+        c-electric-star
+        c-indent-line-or-region
+        kill-region
+        overwrite-mode
+        transpose-words
+        ))
 
 (setq mc/cmds-to-run-once
       '(
-	))
+        ))

@@ -38,3 +38,7 @@ the internal daemon frame."
   "The directory of the currently visited file, or nil if not
 visiting a file."
   real-current-directory)
+
+(global-set-key (kbd "C-x C-c") 'save-buffers-kill-emacs)
+
+(setq pop-up-frames t)

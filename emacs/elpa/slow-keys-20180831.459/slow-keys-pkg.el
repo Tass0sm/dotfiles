@@ -1,0 +1,2 @@
+;;; Generated package description from /home/tassos/.config/emacs/elpa/slow-keys-20180831.459/slow-keys.el  -*- no-byte-compile: t -*-
+(define-package "slow-keys" "20180831.459" "Slow keys mode to avoid RSI" '((emacs "24.1")) :commit "b93ad77f9fc1d14e080d7d64864fc9cb222248b6" :keywords '("convenience") :authors '(("Manuel Uberti" . "manuel.uberti@inventati.org")) :maintainer '("Manuel Uberti" . "manuel.uberti@inventati.org") :url "https://github.com/manuel-uberti/slow-keys")
