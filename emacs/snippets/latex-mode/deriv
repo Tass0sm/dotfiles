@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: deriv
+# key: deriv
+# --
+\frac{d}{d${1:x}}

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: table
+# key: table
+# --
+\begin{tabular}{ | c | c | c | }
+\hline
+A & A & A \\\ \hline
+A & A & A \\\ \hline
+A & A & A \\\ \hline
+\end{tabular}

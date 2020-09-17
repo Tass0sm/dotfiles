@@ -33,3 +33,7 @@ source "${HOME}/Software/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 # history
 export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history"
+
+# dir tricks
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs

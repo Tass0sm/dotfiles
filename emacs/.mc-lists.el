@@ -3,14 +3,29 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        LaTeX-insert-left-brace
+        TeX-insert-backslash
+        TeX-insert-dollar
+        TeX-insert-sub-or-superscript
         c-electric-brace
         c-electric-colon
         c-electric-paren
+        c-electric-pound
         c-electric-semi&comma
         c-electric-slash
         c-electric-star
         c-indent-line-or-region
+        indent-for-tab-command
         kill-region
+        org-beginning-of-line
+        org-cycle
+        org-end-of-line
+        org-force-self-insert
+        org-kill-line
+        org-open-line
+        org-self-insert-command
+        org-shifttab
+        org-yank
         overwrite-mode
         transpose-words
         ))

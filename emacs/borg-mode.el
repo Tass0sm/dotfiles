@@ -16,7 +16,15 @@
 (defun borg-documented-symbol-list ()
   "Return the list of symbols to pick from when searching for
 documentation."
-  '("test-function" "test-variable" "test-macro"))
+  (if (zerop (call-process "borg" nil (get-buffer-create "tmp-buffer") nil "list" "all"))
+      (save-excursion
+        (let (result)
+          (set-buffer "tmp-buffer")
+          (setq result (buffer-string)) ; This seems bad. Make buffer, go to
+                                        ; buffer, copy string, return.
+          (kill-buffer "tmp-buffer")
+          (split-string result "\n" t)))
+    nil))
 
 (defun borg-document-thing (thing)
   "Search for the documentation of the thing named THING. If not
@@ -38,11 +46,12 @@ documented, return nil."
   (interactive
    (let* ((fn (ivy-thing-at-point))
           (enable-recursive-minibuffers t)
+          (documented-symbols (borg-documented-symbol-list))
           (val (completing-read
-                (if fn
+                (if (and fn (member fn documented-symbols))
                     (format "Describe function (default %s): " fn)
                   "Describe function: ")
-                (borg-documented-symbol-list)
+                documented-symbols
                 (lambda (f) t)
                 t
                 nil
@@ -78,3 +87,5 @@ documented, return nil."
         (princ thing)
         (princ ":\n\n")
         (princ (borg-document-thing thing))))))
+
+(global-set-key (kbd "C-h O") 'borg-describe-thing)

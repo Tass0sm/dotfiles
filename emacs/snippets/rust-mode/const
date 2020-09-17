@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: const
+# key: const
+# --
+const ${1:CONSTANT}${2:: Type} = ${3:value};

@@ -17,7 +17,7 @@ polybar bar0 &
 touchPadID=$(xinput | grep "TouchPad" | awk '{print substr($6,4,2)}')
 xinput set-prop $touchPadID "Device Enabled" 1
 
-bspc monitor -d web mail dev dsc img vid conf
+bspc monitor -d web-p web-s mail dev dsc img vid conf
 
 bspc config border_width         2
 bspc config window_gap          12
@@ -27,7 +27,8 @@ bspc config borderless_monocle   true
 bspc config gapless_monocle      true
 
 bspc rule -a Emacs state=tiled
-bspc rule -a Thunderbird desktop='^2'
-bspc rule -a discord desktop='^4'
-bspc rule -a mpv desktop='^6' follow=on
-bspc rule -a zoom desktop='^7' follow=on
+bspc rule -a Thunderbird desktop='mail'
+bspc rule -a discord desktop='dsc'
+bspc rule -a Gimp desktop='img'
+bspc rule -a mpv desktop='vid' follow=on
+bspc rule -a zoom desktop='conf' follow=on

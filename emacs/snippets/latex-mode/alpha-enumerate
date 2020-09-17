@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: alpha-enumerate
+# key: aenum
+# --
+\begin{enumerate}[label=(\alph*)]
+\item $0
+\end{enumerate}

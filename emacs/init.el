@@ -1,9 +1,16 @@
+;; Load path Config
+
+(add-to-list 'load-path (concat user-emacs-directory "lisp"))
+
+;; Custom
+
 (setq custom-file "~/.config/emacs/emacs-custom.el")
 (load custom-file)
 
 ;; Visual Customization
 
 (load (concat user-emacs-directory "visual.el"))
+(setq-default truncate-lines t)
 
 ;; BSPWM Ease of life
 
@@ -52,57 +59,62 @@
    ("v" scroll-up-command)
    ("u" scroll-down-command)
    ("c" recenter-top-bottom))
+  (ryo-modal-keys
+   ("p"
+    (("p" projectile-switch-project :name "Switch Project")
+     ("f" projectile-find-file)))
+   ("f"
+    (("f" find-file :name "Find File")
+     ("s" save-buffer :name "Save Buffer")
+     ("k" kill-buffer :name "Kill Buffer")))
+   ("o"
+    (("a" org-agenda-list :name "Org Agenda List")))
+   ("b"
+    (("s" ivy-switch-buffer)))
+   ("w"
+    (("1" delete-other-windows))))
   (ryo-modal-mode 1))
-
-(ryo-modal-keys
- ("p"
-  (("p" projectile-switch-project :name "Switch Project")
-   ("f" projectile-find-file)))
- ("f"
-  (("f" find-file :name "Find File")
-   ("s" save-buffer :name "Save Buffer")
-   ("k" kill-buffer :name "Kill Buffer")))
- ("o"
-  (("a" org-agenda :name "Org Agenda")))
- ("b"
-  (("s" ivy-switch-buffer)))
- ("w"
-  (("1" delete-other-windows))))
 
 (use-package ivy
   :config (ivy-mode 1))
 
+;; Yasnippet
+
 (use-package yasnippet
   :config (yas-global-mode 1))
 
-(use-package smooth-scroll
-  :config (smooth-scroll-mode t))
+;; Smooth Scroll
+
+;; (use-package smooth-scroll
+;;   :config (smooth-scroll-mode t))
 
 ;; Org
 
-;;(load (concat user-emacs-directory "org-notify.el"))
-;;(require 'org-notify)
-;;(org-notify-start)
-;;(org-notify-add 'CLASS
-;;                '(:time "20m" :period "2m" :duration 100
-;;                        :actions -notify))
-
-(setq org-agenda-files '("~/Org/school.org"))
-;			 "~/Org/projects.org"
-;			 "~/Org/life.org"
-;			 "~/Org/routine.org"))
-
-(setq org-todo-keywords
-      '((sequence "TODO" "|" "DONE" "KILL" "FAIL")))
+(use-package org-notify
+  :config
+  (org-notify-start)
+  (setq org-notify-map nil)
+  (org-notify-add 'homework
+                  '(:time "6h" :actions -notify/window :duration 60))
+  (org-notify-add 'important
+                  '(:time "20m" :actions -notify/window :period "2m" :duration 60)))
 
 (use-package org-journal
   :ensure t
   :config
   (setq org-journal-dir "~/Org/diary"))
 
-(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+(setq org-agenda-files '("~/Org/school.org"
+                         "~/Org/projects.org"))
+;			 "~/Org/life.org"
+;			 "~/Org/routine.org"))
 
-(setq-default truncate-lines t)
+(setq org-todo-keywords
+      '((sequence "TODO" "|" "DONE" "KILL" "FAIL")))
+
+;; Octave
+
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 ;; SLIME
 
@@ -140,13 +152,23 @@
 
 (use-package smart-tabs-mode
   :config
+
+ (smart-tabs-add-language-support lisp lisp-mode-hook
+   ((lisp-indent-line . lisp-indent-offset)
+    (lisp-indent-region . lisp-indent-offset)))
+
   (setq-default indent-tabs-mode nil)
   (setq-default tab-width 4)
-  (smart-tabs-insinuate 'c))
+  (smart-tabs-insinuate 'c 'lisp))
 
 (advice-add 'yank :after
             (lambda (ARG)
               "Indent the text just yanked."
+              (indent-region (region-beginning) (region-end))))
+
+(advice-add 'yank-pop :after
+            (lambda (ARG)
+              "Indent the text just popped from the kill ring."
               (indent-region (region-beginning) (region-end))))
 
 ;; Flyspell
@@ -155,13 +177,51 @@
   :config
   (add-hook 'text-mode-hook 'flyspell-mode))
 
-;; Borg
-
-(load (concat user-emacs-directory "borg-mode.el"))
-
 ;; Magit
 
 (use-package magit
   :ensure t
   :bind
   ("\C-x g" . magit-status))
+
+;; AucTEX
+
+(with-eval-after-load "tex"
+  (add-to-list 'TeX-view-program-list '("mupdf" "/usr/bin/mupdf %o"))
+  (setcdr (assq 'output-pdf TeX-view-program-selection) '("mupdf")))
+
+;; to use pdfview with auctex
+;;(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+;;      TeX-view-program-list '(("PDF Tools" TeX-pdf-tools-sync-view))
+;;      TeX-source-correlate-start-server t) ;; not sure if last line is neccessary
+;;
+;; to have the buffer refresh after compilation
+;;(add-hook 'TeX-after-compilation-finished-functions
+;;          #'TeX-revert-document-buffer)
+;;(put 'LaTeX-narrow-to-environment 'disabled nil)
+
+;; RunAssoc
+
+(use-package run-assoc
+  :config
+  (setq associated-program-alist
+        '(("mupdf" "\\.pdf")
+          ("waterfox-current" "\\.html"))))
+
+;; Expand Region
+
+(use-package expand-region
+  :ensure t
+  :bind
+  ("C-=" . er/expand-region))
+
+;; Column Number Mode
+
+(column-number-mode)
+
+;; Workspaces / Perspectives
+
+;; (use-package persp-mode
+;;   :ensure t
+;;   :config
+;;   (persp-mode 1))
