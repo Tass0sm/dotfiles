@@ -1,0 +1,7 @@
+(+ 1 2)
+(circle 10)
+#lang slideshow
+clear
+
+(+ 1 2)
+(exit)

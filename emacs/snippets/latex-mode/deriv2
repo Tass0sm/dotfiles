@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: deriv2
+# key: deriv2
+# --
+\frac{d^2}{d${1:x}^2}

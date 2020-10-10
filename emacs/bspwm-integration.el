@@ -3,9 +3,6 @@
 (setq real-current-buffer (current-buffer))
 (setq real-current-directory default-directory)
 
-(defun printf (&rest args)
-  (princ (apply #'format args) #'external-debugging-output))
-
 (defun actually-selected-frame ()
   "Return the selected frame as known by frame-focus-state." 
   (car (cl-remove-if-not 'frame-focus-state (visible-frame-list))))
@@ -14,8 +11,8 @@
   "Update real-current-buffer to the current-buffer, ignoring the
 internal daemon frame"
   (setq real-current-buffer (window-buffer
-			     (frame-selected-window
-			      (actually-selected-frame)))))
+                             (frame-selected-window
+                              (actually-selected-frame)))))
 
 (defun update-current-directory+ (&optional one two)
   "Update real-current-buffer to the current-buffer, ignoring the
@@ -26,7 +23,6 @@ internal daemon frame"
 (advice-add 'select-window :after 'update-current-directory+)
 (add-function :after after-focus-change-function 'update-current-buffer+)
 (add-function :after after-focus-change-function 'update-current-directory+)
-
 
 (defun current-buffer+ ()
   "The most recently open buffer accross all clients. Immune to

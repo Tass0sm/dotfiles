@@ -131,7 +131,7 @@
 	   ("John Wiegley" . "jwiegley@gmail.com"))
 	  (:keywords "async"))])
  (auctex .
-	 [(12 2 4)
+	 [(12 2 5)
 	  ((emacs
 	    (24 1))
 	   (cl-lib
@@ -196,7 +196,7 @@
 	   (:maintainer "Artur Malabarba" . "emacs@endlessparentheses.com")
 	   (:url . "https://github.com/Malabarba/beacon"))])
  (bluetooth .
-	    [(0 1 2)
+	    [(0 2)
 	     ((emacs
 	       (25 1))
 	      (dash
@@ -204,7 +204,8 @@
 	     "A Major mode for Bluetooth devices" single
 	     ((:keywords "hardware")
 	      (:authors
-	       ("Raffael Stocker" . "r.stocker@mnet-mail.de"))
+	       ("Raffael Stocker" . "r.stocker@mnet-mail.de")
+	       ("Etienne Prud’homme" . "e.e.f.prudhomme@gmail.com"))
 	      (:maintainer "Raffael Stocker" . "r.stocker@mnet-mail.de")
 	      (:url . "https://gitlab.com/rstocker/emacs-bluetooth"))])
  (bnf-mode .
@@ -649,7 +650,7 @@
 	      (:maintainer "Markus Triska" . "triska@metalevel.at")
 	      (:url . "https://www.metalevel.at/ediprolog/"))])
  (eev .
-      [(20200224)
+      [(20200928)
        ((emacs
 	 (24 1)))
        "Support for e-scripts (eepitch blocks, elisp hyperlinks, etc)" tar
@@ -711,7 +712,7 @@
 		      ("William Xu" . "william.xwl@gmail.com"))
 		     (:maintainer "William Xu" . "william.xwl@gmail.com"))])
  (elisp-benchmarks .
-		   [(1 7)
+		   [(1 8)
 		    nil "elisp benchmarks collection" tar
 		    ((:maintainer "Andrea Corallo" . "akrl@sdf.org")
 		     (:authors
@@ -763,13 +764,13 @@
 		    ("Matthew L. Fidler" . "matthew.fidler@gmail.com"))
 		   (:keywords "convenience"))])
  (excorporate .
-	      [(0 8 3)
+	      [(0 9 1)
 	       ((emacs
 		 (24 1))
 		(fsm
 		 (0 2 1))
 		(soap-client
-		 (3 1 5))
+		 (3 2 0))
 		(url-http-ntlm
 		 (2 0 4))
 		(nadvice
@@ -1037,7 +1038,7 @@
 	   ("Oleh Krehel" . "ohwoeowho@gmail.com"))
 	  (:keywords "bindings"))])
  (hyperbole .
-	    [(7 1 2)
+	    [(7 1 3)
 	     ((emacs
 	       (24 4)))
 	     "GNU Hyperbole: The Everyday Hypertextual Information Manager" tar
@@ -1089,6 +1090,21 @@
 		  ("Clemens Radermacher" . "clemera@posteo.net"))
 		 (:maintainer "Clemens Radermacher" . "clemera@posteo.net")
 		 (:url . "https://github.com/clemera/ivy-explorer"))])
+ (ivy-posframe .
+	       [(0 5 1)
+		((emacs
+		  (26 0))
+		 (posframe
+		  (0 8 0))
+		 (ivy
+		  (0 13 0)))
+		"Using posframe to show Ivy" single
+		((:keywords "abbrev" "convenience" "matching" "ivy")
+		 (:authors
+		  ("Feng Shu" . "tumashu@163.com")
+		  ("Naoya Yamashita" . "conao3@gmail.com"))
+		 (:maintainer "Feng Shu" . "tumashu@163.com")
+		 (:url . "https://github.com/tumashu/ivy-posframe"))])
  (javaimp .
 	  [(0 7 1)
 	   nil "Add and reorder Java import statements in Maven/Gradle projects" tar
@@ -1511,8 +1527,19 @@
 	     (:authors
 	      ("Ian Dunn" . "dunni@gnu.org"))
 	     (:keywords "convenience" "text" "org"))])
+ (org-translate .
+		[(0 1 1)
+		 ((emacs
+		   (25 1))
+		  (org
+		   (9 1)))
+		 "Org-based translation environment" single
+		 ((:url . "http://elpa.gnu.org/packages/org-translate.html")
+		  (:authors
+		   ("Eric Abrahamsen" . "eric@ericabrahamsen.net"))
+		  (:maintainer "Eric Abrahamsen" . "eric@ericabrahamsen.net"))])
  (orgalist .
-	   [(1 12)
+	   [(1 13)
 	    ((emacs
 	      (24 4)))
 	    "Manage Org-like lists in non-Org buffers" single
@@ -1596,7 +1623,7 @@
 	     ("Phillip Lord" . "phillip.lord@russet.org.uk"))
 	    (:url . "http://elpa.gnu.org/packages/persist.html"))])
  (phps-mode .
-	    [(0 3 55)
+	    [(0 3 62)
 	     ((emacs
 	       (26)))
 	     "Major mode for PHP with Semantic integration" tar
@@ -1622,7 +1649,7 @@
 	   ("Mario Lang" . "mlang@delysid.org"))
 	  (:maintainer "Mario Lang" . "mlang@delysid.org"))])
  (posframe .
-	   [(0 8 0)
+	   [(0 8 1)
 	    ((emacs
 	      (26)))
 	    "Pop a posframe (just a frame) at point" single
@@ -1868,7 +1895,7 @@
 		   ("Yoni Rabkin" . "yrk@gnu.org"))
 		  (:keywords "rt" "tickets"))])
  (rudel .
-	[(0 3 1)
+	[(0 3 2)
 	 ((emacs
 	   (24))
 	  (cl-lib
@@ -1926,6 +1953,16 @@
 	    (:authors
 	     ("Michael R. Mauger" . "michael@mauger.com"))
 	    (:maintainer "Michael R. Mauger" . "michael@mauger.com"))])
+ (shell-command+ .
+		 [(2 0 0)
+		  ((emacs
+		    (24 1)))
+		  "An extended shell-command" tar
+		  ((:url . "http://elpa.gnu.org/packages/shell-command+.html")
+		   (:maintainer "Philip K." . "philipk@posteo.net")
+		   (:authors
+		    ("Philip K." . "philipk@posteo.net"))
+		   (:keywords "unix" "processes" "convenience"))])
  (shen-mode .
 	    [(0 1)
 	     nil "A major mode for editing shen source code" tar
@@ -1995,7 +2032,7 @@
 	    (:maintainer "Phil Sainty" . "psainty@orcon.net.nz")
 	    (:url . "https://savannah.nongnu.org/projects/so-long"))])
  (soap-client .
-	      [(3 1 5)
+	      [(3 2 0)
 	       ((cl-lib
 		 (0 6 1)))
 	       "Access SOAP web services" tar
@@ -2326,7 +2363,7 @@
 	(:maintainer "Andrey Kotlarski" . "m00naticus@gmail.com")
 	(:keywords "large files" "utilities"))])
  (wcheck-mode .
-	      [(2019 6 17)
+	      [(2020 10 4)
 	       nil "General interface for text checkers" single
 	       ((:keywords "text" "spell" "check" "languages" "ispell")
 		(:authors

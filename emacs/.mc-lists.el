@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        LaTeX-babel-insert-hyphen
         LaTeX-insert-left-brace
         TeX-insert-backslash
         TeX-insert-dollar
@@ -15,6 +16,8 @@
         c-electric-slash
         c-electric-star
         c-indent-line-or-region
+        electric-newline-and-maybe-indent
+        end-of-buffer
         indent-for-tab-command
         kill-region
         org-beginning-of-line
@@ -27,7 +30,11 @@
         org-shifttab
         org-yank
         overwrite-mode
+        reindent-then-newline-and-indent
         transpose-words
+        wdired-downcase-word
+        wdired-finish-edit
+        yas-expand
         ))
 
 (setq mc/cmds-to-run-once

@@ -20,3 +20,8 @@ alias \
 # Config tool
 alias \
     config="/usr/bin/git --git-dir=$XDG_CONFIG_HOME/dotfiles --work-tree=$XDG_CONFIG_HOME"
+
+# Commands that should noglob.
+alias \
+    curl="noglob curl" \
+    youtube-dl="noglob youtube-dl"

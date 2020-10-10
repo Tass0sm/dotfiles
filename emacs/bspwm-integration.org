@@ -1,0 +1,68 @@
+* State Variables 
+
+  #+BEGIN_SRC emacs-lisp
+    (setq initial-frame (selected-frame))
+    (setq initial-window (selected-window))
+    (setq real-current-buffer (current-buffer))
+    (setq real-current-directory default-directory)
+  #+END_SRC
+
+* Selected Frame Utility
+  
+  #+BEGIN_SRC emacs-lisp
+    (defun actually-selected-frame ()
+      "Return the selected frame as known by frame-focus-state." 
+      (car (cl-remove-if-not 'frame-focus-state (visible-frame-list))))
+  #+END_SRC
+
+* Update State Variables
+
+  #+BEGIN_SRC emacs-lisp
+    (defun update-current-buffer+ (&optional one two)
+      "Update real-current-buffer to the current-buffer, ignoring the
+    internal daemon frame"
+      (setq real-current-buffer (window-buffer
+                                 (frame-selected-window
+                                  (actually-selected-frame)))))
+
+    (defun update-current-directory+ (&optional one two)
+      "Update real-current-buffer to the current-buffer, ignoring the
+    internal daemon frame"
+      (setq real-current-directory (expand-file-name default-directory)))
+  #+END_SRC
+
+* Call Functions
+
+  #+BEGIN_SRC emacs-lisp
+    (advice-add 'select-window :after 'update-current-buffer+)
+    (advice-add 'select-window :after 'update-current-directory+)
+    (add-function :after after-focus-change-function 'update-current-buffer+)
+    (add-function :after after-focus-change-function 'update-current-directory+)
+  #+END_SRC
+
+* Query State
+
+  #+BEGIN_SRC emacs-lisp
+    (defun current-buffer+ ()
+      "The most recently open buffer accross all clients. Immune to
+    the internal daemon frame."
+      (interactive)
+      real-current-buffer)
+
+    (defun current-directory ()
+      "The directory of the currently visited file, or nil if not
+    visiting a file."
+      real-current-directory)
+  #+END_SRC
+
+* Kill Daemon Keybind
+
+  #+BEGIN_SRC emacs-lisp
+    (global-set-key (kbd "C-x C-c") 'save-buffers-kill-emacs)
+  #+END_SRC
+
+* Open pop-up buffers in New Frames
+
+  #+BEGIN_SRC emacs-lisp
+    (setq pop-up-frames t)
+  #+END_SRC

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: forall
+# key: forall
+# --
+(\forall ${1:x} \in \mathbbm{${2:Z}})($3)

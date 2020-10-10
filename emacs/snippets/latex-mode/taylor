@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: taylor
+# key: taylor
+# --
+f(a) + \frac{f'(a)\}{1!\}(x - a) + \frac{f''(a)\}{2!\}(x - a)^2 + \frac{f'''(a)\}{3!\}(x - a)^3 + \ldots
