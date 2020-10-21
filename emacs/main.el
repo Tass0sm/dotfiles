@@ -20,15 +20,22 @@
   (setq company-backends '(company-dabbrev))
   (global-company-mode))
 
-(use-package company-box
-  :hook (company-mode . company-box-mode))
+;;(use-package company-box
+;;  :hook
+;;  (company-mode . company-box-mode))
+
+(setq company-active-map '(keymap . ()))
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+(define-key company-active-map (kbd "TAB") 'company-complete-selection)
+(define-key company-active-map (kbd "C-g") 'company-abort)
 
 (use-package dired
   :config
   (setq dired-auto-revert-buffer t
         dired-dwim-target t)
-  :hook
-  (dired-mode-hook . dired-hide-details-mode))
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode))
 
 (use-package expand-region
   :ensure t
@@ -38,6 +45,8 @@
 (use-package flyspell
   :hook
   (text-mode-hook . flyspell-mode))
+
+(setq Info-additional-directory-list '("/home/tassos/Info/"))
 
 (use-package ivy
   :config (ivy-mode 1))
@@ -131,3 +140,10 @@
 (use-package which-key
   :init
   (which-key-mode))
+
+(use-package ws-butler
+  :hook
+  (prog-mode-hook . ws-butler-mode))
+
+(use-package yasnippet
+  :config (yas-global-mode 1))

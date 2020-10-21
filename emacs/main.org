@@ -39,14 +39,29 @@
       (setq company-backends '(company-dabbrev))
       (global-company-mode))
   #+END_SRC
-
+  
 ** Front End
 
    #+BEGIN_SRC emacs-lisp
-     (use-package company-box
-       :hook (company-mode . company-box-mode))
+     ;;(use-package company-box
+     ;;  :hook
+     ;;  (company-mode . company-box-mode))
    #+END_SRC
-  
+
+** Keybinds
+
+   Manually select a item from the drop-down with C-n / C-p and insert the
+   current selection with tab. Abort with C-g.
+   
+   #+BEGIN_SRC emacs-lisp
+     (setq company-active-map '(keymap . ()))
+     (define-key company-active-map (kbd "C-n") 'company-select-next)
+     (define-key company-active-map (kbd "C-p") 'company-select-previous)
+     (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
+     (define-key company-active-map (kbd "TAB") 'company-complete-selection)
+     (define-key company-active-map (kbd "C-g") 'company-abort)
+   #+END_SRC
+   
 * Dired
 ** Hide Details Mode
 
@@ -55,8 +70,7 @@
        :config
        (setq dired-auto-revert-buffer t
              dired-dwim-target t)
-       :hook
-       (dired-mode-hook . dired-hide-details-mode))
+       (add-hook 'dired-mode-hook 'dired-hide-details-mode))
    #+END_SRC
 
 * Expand Region
@@ -74,6 +88,14 @@
     (use-package flyspell
       :hook
       (text-mode-hook . flyspell-mode))
+  #+END_SRC
+
+* Info
+
+  Add a directory for info documentation on personally selected topics.
+
+  #+BEGIN_SRC emacs-lisp
+    (setq Info-additional-directory-list '("/home/tassos/Info/"))
   #+END_SRC
 
 * Ivy
@@ -126,6 +148,7 @@
                            (delete-other-windows)))
        (setq org-agenda-files '("~/Org/school.org"
                                 "~/Org/projects.org"))
+       (setq org-adapt-indentation nil)
        (setq org-todo-keywords
              '((sequence "TODO" "|" "DONE" "KILL" "FAIL"))))
    #+END_SRC
