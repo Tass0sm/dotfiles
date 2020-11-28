@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# Set WM Environment Variable
+export WM="bspwm"
+
 # Take care of aesthetic choices.
 schemeSwitch bellows
 colorizeAlacritty

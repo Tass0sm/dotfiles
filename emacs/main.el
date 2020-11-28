@@ -33,6 +33,7 @@
 
 (use-package dired
   :config
+  (setq dired-listing-switches "--group-directories-first -al")
   (setq dired-auto-revert-buffer t
         dired-dwim-target t)
   (add-hook 'dired-mode-hook 'dired-hide-details-mode))
@@ -43,8 +44,8 @@
   ("C-=" . er/expand-region))
 
 (use-package flyspell
-  :hook
-  (text-mode-hook . flyspell-mode))
+  :config
+  (add-hook 'text-mode-hook 'flyspell-mode))
 
 (setq Info-additional-directory-list '("/home/tassos/Info/"))
 
@@ -76,8 +77,15 @@
                       (select-frame (make-frame))
                       (org-agenda-list)
                       (delete-other-windows)))
+  (bind-key "C-c t" (lambda () "Open Org-Todo in New Frame"
+                      (interactive)
+                      (select-frame (make-frame))
+                      (org-todo-list)
+                      (delete-other-windows)))
   (setq org-agenda-files '("~/Org/school.org"
-                           "~/Org/projects.org"))
+                           "~/Org/projects.org"
+                           "~/Org/personal.org"))
+  (setq org-adapt-indentation nil)
   (setq org-todo-keywords
         '((sequence "TODO" "|" "DONE" "KILL" "FAIL"))))
 
@@ -103,15 +111,22 @@
 
 (use-package projectile
   :init
-  (projectile-mode +1))
+  (projectile-mode +1)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
 
 (use-package run-assoc
   :config
+  (global-set-key (kbd "C-x C-r") 'run-associated-program)
   (setq associated-program-alist
         '(("mupdf" "\\.pdf")
           ("mpv" "\\.mkv")
           ("mpv" "\\.mp4")
-          ("waterfox-current" "\\.html"))))
+          ("waterfox-current" "\\.html")
+          ("libreoffice" "\\.docx"))))
+
+(setq scroll-conservatively 10000
+      scroll-preserve-screen-position t)
 
 (use-package smart-tabs-mode
   :config
@@ -128,6 +143,8 @@
             (lambda (ARG)
               "Indent the text just popped from the kill ring."
               (indent-region (region-beginning) (region-end))))
+
+(setq tramp-default-method "ssh")
 
 (use-package visible-mark
   :ensure t

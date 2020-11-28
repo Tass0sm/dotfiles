@@ -18,14 +18,17 @@
         c-indent-line-or-region
         electric-newline-and-maybe-indent
         end-of-buffer
+        haskell-indentation-common-electric-command
         indent-for-tab-command
         kill-region
+        mark-sexp
         org-beginning-of-line
         org-cycle
         org-end-of-line
         org-force-self-insert
         org-kill-line
         org-open-line
+        org-return-and-maybe-indent
         org-self-insert-command
         org-shifttab
         org-yank

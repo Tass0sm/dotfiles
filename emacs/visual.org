@@ -52,4 +52,9 @@
      (add-hook 'window-configuration-change-hook 'center-text-horizontally)
    #+END_SRC
 
+* Modeline
+
+#+BEGIN_SRC emacs-lisp
+  (set-face-attribute 'mode-line nil :box nil)
+#+END_SRC
 

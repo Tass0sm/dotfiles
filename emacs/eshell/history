@@ -10,3 +10,11 @@ ls
 lls
 clear
 exit
+ls
+ll
+echo $0
+echo "hello"
+clear
+clear
+ls
+waterfox-current

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: arabic-enumerate
+# key: 1enum
+# --
+\begin{enumerate}[label=(\arabic*)]
+\item $0
+\end{enumerate}

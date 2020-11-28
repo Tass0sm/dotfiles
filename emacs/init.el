@@ -18,8 +18,26 @@
 (setq custom-file (concat user-emacs-directory "emacs-custom.el"))
 (load custom-file)
 
+;; Window Manager Specific Config
+
+(defun config-for-bspwm ()
+  "Configure emacs for bspwm."
+  (org-babel-load-file (concat user-emacs-directory "bspwm-integration.org"))
+  (org-babel-load-file (concat user-emacs-directory "visual.org")))
+
+(defun config-for-exwm ()
+  "Configure emacs for exwm."
+  (org-babel-load-file (concat user-emacs-directory "exwm.org")))
+
+(let ((wm (getenv "WM")))
+  (cond
+   ((string= wm "bspwm") (config-for-bspwm))
+   (t (config-for-exwm))))
+
+;; Undisabled Commands
+
+(put 'scroll-left 'disabled nil)
+
 ;; Normal Files
 
-(org-babel-load-file (concat user-emacs-directory "bspwm-integration.org"))
-(org-babel-load-file (concat user-emacs-directory "visual.org"))
 (org-babel-load-file (concat user-emacs-directory "main.org"))

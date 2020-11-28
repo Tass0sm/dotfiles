@@ -26,3 +26,5 @@ fill-column value."
     (set-window-margins (selected-window) (round left-margin))))
 
 (add-hook 'window-configuration-change-hook 'center-text-horizontally)
+
+(set-face-attribute 'mode-line nil :box nil)

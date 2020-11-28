@@ -1,0 +1,65 @@
+#+BEGIN_SRC emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (scroll-bar-mode -1)
+  (set-fringe-mode 0)
+#+END_SRC
+
+* EXWM
+
+#+BEGIN_SRC emacs-lisp
+  (require 'exwm)
+  (exwm-enable)
+#+END_SRC
+
+** Basic Maintenance.
+
+Keybindings to reset the window manager, delete a workspace, and swap two workspaces.
+
+#+BEGIN_SRC emacs-lisp
+  (exwm-input-set-key (kbd "s-r") #'exwm-reset)
+  (exwm-input-set-key (kbd "s-k") #'exwm-workspace-delete)
+  (exwm-input-set-key (kbd "s-w") #'exwm-workspace-swap)
+#+END_SRC
+
+** Program Launcher (dmenu)
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dmenu
+    :ensure t
+    :bind
+    ("s-SPC" . 'dmenu))
+#+END_SRC
+
+** Workspaces
+
+#+BEGIN_SRC emacs-lisp
+  (setq exwm-workspace-number 4)
+#+END_SRC
+
+*** Switching Workspaces
+
+#+BEGIN_SRC emacs-lisp
+  (dotimes (i 10)
+    (exwm-input-set-key (kbd (format "s-%d" i))
+                        `(lambda ()
+                           (interactive)
+                           (exwm-workspace-switch-create ,i))))
+#+END_SRC
+
+** Windows
+
+#+BEGIN_SRC emacs-lisp
+  (exwm-input-set-key (kbd "s-j") #'windmove-left)
+  (exwm-input-set-key (kbd "s-l") #'windmove-right)
+  (exwm-input-set-key (kbd "s-i") #'windmove-up)
+  (exwm-input-set-key (kbd "s-k") #'windmove-down)
+#+END_SRC
+
+** Volume Control
+
+#+BEGIN_SRC emacs-lisp
+  (exwm-input-set-key (kbd "<XF86MonBrightnessDown>") (message "hello"))
+#+END_SRC
+
+
