@@ -18,6 +18,7 @@
         c-indent-line-or-region
         electric-newline-and-maybe-indent
         end-of-buffer
+        goto-line
         haskell-indentation-common-electric-command
         indent-for-tab-command
         kill-region
@@ -42,4 +43,6 @@
 
 (setq mc/cmds-to-run-once
       '(
+        handle-switch-frame
+        indent-region
         ))

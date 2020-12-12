@@ -104,11 +104,17 @@ chosen shell is zsh. This may change.
 #+END_SRC
 
 ** Workspaces
+Set initial number of workspaces to 4. Currently indexed starting at
+zero. Not sure if it can be changed.
+
 #+BEGIN_SRC emacs-lisp
   (setq exwm-workspace-number 4)
 #+END_SRC
 
 *** Switching Workspaces
+For every key in the number row, bind a function that switches to /
+creates the corresponding workspace.
+
 #+BEGIN_SRC emacs-lisp
   (dotimes (i 10)
     (exwm-input-set-key (kbd (format "s-%d" i))
@@ -117,9 +123,15 @@ chosen shell is zsh. This may change.
                            (exwm-workspace-switch-create ,i))))
 #+END_SRC
 
-*** TODO Move Window to Workspace
+*** Move Window to Workspace
+For every shifted key in the number row, bind a function that opens or
+sends the currently selected window to the corresponding
+workspace. For EXWM windows, the window is sent. For normal windows, a
+new window opened at the correct buffer is just opened in the other
+workspace.
+
 #+BEGIN_SRC emacs-lisp
-  (defun tassos/number-to-shift-map (i)
+  (defun tassos/number-to-punctuation (i)
     (cond
      ((= i 0) ?\))
      ((= i 1) ?\!)
@@ -130,17 +142,43 @@ chosen shell is zsh. This may change.
      ((= i 6) ?^) ;; Requires the lack of backslash!
      ((= i 7) ?\&)
      ((= i 8) ?\*)
-     ((= i 9) ?\()))
+     ((= i 9) ?\()
+     (t ?\!)))
 
-  (defun tassos/move-window-to-workspace (FRAME-OR-INDEX &optional WINDOW)
-    (interactive)
-    (message "TODO"))
+  (defun tassos/workspace-open-window (frame-or-index buffer)
+    (let* ((frame (exwm-workspace--workspace-from-frame-or-index frame-or-index))
+           (frame-window (frame-selected-window frame))
+           (new-window (split-window-sensibly frame-window)))
+      (set-window-buffer new-window buffer)))
+
+  (defun tassos/workspace-move-normal-window (frame-or-index window)
+    (let ((buffer (window-buffer window)))
+      (tassos/workspace-open-window frame-or-index buffer)))
+
+  (defun tassos/move-window-to-workspace (frame-or-index &optional window)
+    (interactive (list
+                  (cond
+                   ((null current-prefix-arg)
+                    (let ((exwm-workspace--prompt-add-allowed t)
+                          (exwm-workspace--prompt-delete-allowed t))
+                      (exwm-workspace--prompt-for-workspace "Move to [+/-]: ")))
+                   ((and (integerp current-prefix-arg)
+                         (<= 0 current-prefix-arg (exwm-workspace--count)))
+                    current-prefix-arg)
+                   (t 0))))
+
+    (unless window (setq window (frame-selected-window)))
+    (if (exwm--buffer->id (window-buffer window))
+        (exwm-workspace-move-window frame-or-index)
+      (tassos/workspace-move-normal-window frame-or-index window))
+    (message (format "Sent Window to Workspace %d" frame-or-index)))
 
   (dotimes (i 10)
-    (exwm-input-set-key (kbd (format "s-%c" (map-to-number-row-punc i)))
-                        `(lambda ()
-                           (interactive)
-                           (message (format "Moved to Workspace %d" ,i)))))
+    (exwm-input-set-key
+     (kbd (format "s-%c" (tassos/number-to-punctuation i)))
+     `(lambda ()
+        (interactive)
+        (tassos/move-window-to-workspace ,i))))
 #+END_SRC
 
 * Convenience

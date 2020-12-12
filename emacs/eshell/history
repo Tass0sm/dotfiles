@@ -26,3 +26,6 @@ dired .
 sudo dired .
 dired .
 sudo vi exwm.desktop
+ls
+man conda
+exit
