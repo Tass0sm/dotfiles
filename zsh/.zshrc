@@ -37,3 +37,20 @@ export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history"
 # dir tricks
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
+
+# Conda
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/tassos/Software/miniconda2-tmp/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/tassos/Software/miniconda2-tmp/etc/profile.d/conda.sh" ]; then
+        . "/home/tassos/Software/miniconda2-tmp/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/tassos/Software/miniconda2-tmp/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

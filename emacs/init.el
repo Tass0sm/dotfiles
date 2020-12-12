@@ -1,7 +1,12 @@
+;; Set up package.el
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(package-initialize)
+
 ;; Configure Load Path
 
 (add-to-list 'load-path (concat user-emacs-directory "lisp"))
-(add-to-list 'load-path (concat user-emacs-directory "elpa/use-package-20200322.2110"))
 
 ;; Load Use-Package
 
@@ -20,19 +25,20 @@
 
 ;; Window Manager Specific Config
 
-(defun config-for-bspwm ()
+(defun tassos/config-for-bspwm ()
   "Configure emacs for bspwm."
   (org-babel-load-file (concat user-emacs-directory "bspwm-integration.org"))
   (org-babel-load-file (concat user-emacs-directory "visual.org")))
 
-(defun config-for-exwm ()
+(defun tassos/config-for-exwm ()
   "Configure emacs for exwm."
+  (load-theme 'night-owl t)
   (org-babel-load-file (concat user-emacs-directory "exwm.org")))
 
 (let ((wm (getenv "WM")))
   (cond
-   ((string= wm "bspwm") (config-for-bspwm))
-   (t (config-for-exwm))))
+   ((string= wm "bspwm") (tassos/config-for-bspwm))
+   (t (tassos/config-for-exwm))))
 
 ;; Undisabled Commands
 

@@ -18,3 +18,11 @@ clear
 clear
 ls
 waterfox-current
+ls
+cd /usr/share/xsessions/
+ls
+dired
+dired .
+sudo dired .
+dired .
+sudo vi exwm.desktop

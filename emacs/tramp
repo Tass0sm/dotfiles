@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*- <20/11/20 11:07:17 /home/tassos/.config/emacs/tramp>
+;; -*- emacs-lisp -*- <20/12/11 01:09:41 /home/tassos/.config/emacs/tramp>
 ;; Tramp connection history.  Don't change this file.
 ;; Run `M-x tramp-cleanup-all-connections' instead.
 
@@ -25,4 +25,6 @@
   ("ls--quoting-style=literal --show-control-chars" "--quoting-style=literal --show-control-chars")
   ("ls--dired" "--dired")
   ("df-blocksize" 1)
-  ("df" "\\df --block-size=1 --output=size,used,avail")))
+  ("df" "\\df --block-size=1 --output=size,used,avail"))
+ ((tramp-file-name "sudo" "root" nil "localhost" nil nil nil)
+  nil))

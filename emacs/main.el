@@ -1,24 +1,14 @@
 (use-package avy
   :ensure t)
 
-(use-package tex
-  :config
-  (add-to-list 'TeX-view-program-list '("mupdf" "/usr/bin/mupdf %o"))  
-  (setcdr (assq 'output-pdf TeX-view-program-selection) '("mupdf"))
-  :chords
-  ("34" . TeX-insert-dollar))
-
-(setq backup-directory-alist
-      '(("." . "~/.local/share/emacs/saves/")))
-
-(column-number-mode)
+(setq scroll-conservatively 10000
+      scroll-preserve-screen-position t)
 
 (use-package company
   :ensure t
   :config
   (setq company-idle-delay 0)
-  (setq company-backends '(company-dabbrev))
-  (global-company-mode))
+  (setq company-minimum-prefix-length 1))
 
 ;;(use-package company-box
 ;;  :hook
@@ -30,6 +20,61 @@
 (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
 (define-key company-active-map (kbd "TAB") 'company-complete-selection)
 (define-key company-active-map (kbd "C-g") 'company-abort)
+
+(use-package magit
+  :ensure t
+  :bind
+  ("\C-x g" . magit-status))
+
+(use-package projectile
+  :init
+  (projectile-mode +1)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
+(use-package smart-tabs-mode
+  :config
+  (setq-default indent-tabs-mode nil)
+  (setq-default tab-width 4)
+  (smart-tabs-insinuate 'c))
+
+(advice-add 'yank :after
+            (lambda (ARG)
+              "Indent the text just yanked."
+              (indent-region (region-beginning) (region-end))))
+
+(advice-add 'yank-pop :after
+            (lambda (ARG)
+              "Indent the text just popped from the kill ring."
+              (indent-region (region-beginning) (region-end))))
+
+(defun tassos/c-mode-setup ()
+  "Setup emacs programming utilities for c-mode"
+  (setq company-backends '((company-keywords
+                            company-yasnippet
+                            company-dabbrev-code)))
+  (company-mode 1))
+
+(add-hook 'c-mode-hook 'tassos/c-mode-setup)
+
+(defun tassos/elisp-mode-setup ()
+  "Setup emacs programming utilities for emacs-lisp-mode"
+  (setq company-backends '((company-elisp
+                           company-keywords
+                           company-yasnippet
+                           company-dabbrev-code)))
+  (company-mode 1))
+
+(add-hook 'emacs-lisp-mode-hook 'tassos/elisp-mode-setup)
+
+(use-package octave
+  :config
+  (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode)))
+
+(use-package beacon
+  :ensure t
+  :config
+  (beacon-mode 1))
 
 (use-package dired
   :config
@@ -43,19 +88,10 @@
   :bind
   ("C-=" . er/expand-region))
 
-(use-package flyspell
-  :config
-  (add-hook 'text-mode-hook 'flyspell-mode))
-
 (setq Info-additional-directory-list '("/home/tassos/Info/"))
 
 (use-package ivy
   :config (ivy-mode 1))
-
-(use-package magit
-  :ensure t
-  :bind
-  ("\C-x g" . magit-status))
 
 (use-package multiple-cursors
   :ensure t
@@ -65,9 +101,53 @@
   ("C-<" . mc/mark-previous-like-this)
   ("C-c C-<" . mc/mark-all-like-this))
 
-(use-package octave
+(use-package run-assoc
   :config
-  (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode)))
+  (global-set-key (kbd "C-x C-r") 'run-associated-program)
+  (setq associated-program-alist
+        '(("sxiv" "\\.png")
+          ("mupdf" "\\.pdf")
+          ("mpv" "\\.mkv")
+          ("mpv" "\\.mp4")
+          ("waterfox-current" "\\.html")
+          ("libreoffice" "\\.docx"))))
+
+(setq tramp-default-method "ssh")
+
+(use-package visible-mark
+  :ensure t
+  :config
+  (setq visible-mark-max 3)
+  (global-visible-mark-mode)
+  :bind
+  ("C--" . avy-pop-mark))
+
+(use-package which-key
+  :init
+  (which-key-mode))
+
+(use-package ws-butler
+  :hook
+  (prog-mode-hook . ws-butler-mode))
+
+(use-package yasnippet
+  :config (yas-global-mode 1))
+
+(use-package telephone-line
+  :ensure t
+  :config
+  (telephone-line-mode 1))
+
+(use-package flyspell
+  :config
+  (add-hook 'text-mode-hook 'flyspell-mode))
+
+(use-package tex
+  :config
+  (add-to-list 'TeX-view-program-list '("mupdf" "/usr/bin/mupdf %o"))  
+  (setcdr (assq 'output-pdf TeX-view-program-selection) '("mupdf"))
+  :chords
+  ("34" . TeX-insert-dollar))
 
 (use-package org
   :ensure t
@@ -105,62 +185,7 @@
   :bind
   ("C-c j" . org-journal-new-entry))
 
-(use-package package
-  :config
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
+(setq backup-directory-alist
+      '(("." . "~/.local/share/emacs/saves/")))
 
-(use-package projectile
-  :init
-  (projectile-mode +1)
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
-
-(use-package run-assoc
-  :config
-  (global-set-key (kbd "C-x C-r") 'run-associated-program)
-  (setq associated-program-alist
-        '(("mupdf" "\\.pdf")
-          ("mpv" "\\.mkv")
-          ("mpv" "\\.mp4")
-          ("waterfox-current" "\\.html")
-          ("libreoffice" "\\.docx"))))
-
-(setq scroll-conservatively 10000
-      scroll-preserve-screen-position t)
-
-(use-package smart-tabs-mode
-  :config
-  (setq-default indent-tabs-mode nil)
-  (setq-default tab-width 4)
-  (smart-tabs-insinuate 'c))
-
-(advice-add 'yank :after
-            (lambda (ARG)
-              "Indent the text just yanked."
-              (indent-region (region-beginning) (region-end))))
-
-(advice-add 'yank-pop :after
-            (lambda (ARG)
-              "Indent the text just popped from the kill ring."
-              (indent-region (region-beginning) (region-end))))
-
-(setq tramp-default-method "ssh")
-
-(use-package visible-mark
-  :ensure t
-  :config
-  (setq visible-mark-max 3)
-  (global-visible-mark-mode)
-  :bind
-  ("C--" . avy-pop-mark))
-
-(use-package which-key
-  :init
-  (which-key-mode))
-
-(use-package ws-butler
-  :hook
-  (prog-mode-hook . ws-butler-mode))
-
-(use-package yasnippet
-  :config (yas-global-mode 1))
+(column-number-mode)

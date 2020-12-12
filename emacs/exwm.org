@@ -1,3 +1,5 @@
+#+TITLE: Emacs X Window Manager
+
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
@@ -5,16 +7,58 @@
   (set-fringe-mode 0)
 #+END_SRC
 
-* EXWM
+* Notes
+
+EXWM is a window manager. A normal window is displayed in an Emacs
+buffer using =exwm-mode=. =exwm-mode= has two input modes: =line-mode=
+and =char-mode=.
+
+To review, Emacs handles input events by looking up the input event in
+currently loaded key maps. First it checks specific keymaps associated
+to regions of the current buffer. Next are minor-mode keymaps. Then
+major-mode keymaps. Finally the global key-map. So more specific
+keymaps have greater precedence.
+
+The EXWM keymap is conceptually distinct and the most
+general. Therefore, it has the lowest precedence. However, keybindings
+made in the EXWM global map (that are not blocked by a keybinding in a
+lower-level map) can be used in any Emacs buffer (like for the global
+key map) and in all EXWM buffers, as well.
+
+In =char-mode=, Emacs only intercepts keys defined in the EXWM global
+map.
+
+In =line-mode=, Emacs intercepts every keybinding defined in
+minor-mode maps, the =exwm-mode-map=, the emacs global key map (C-x,
+C-h, etc.), and the EXWM global map.
+
+In both modes, if a keystroke like =self-insert-command= (like when
+pressing 'a', 'b', 'c', etc.) or "C-f" is called, they are passed to
+the application normally. I believe it can be assumed that commands
+like these, where they must operate on a normal Emacs buffer, are
+always passed straight to the application. Otherwise, they'd do
+nothing / send an error.
+
+* Loading EXWM
 
 #+BEGIN_SRC emacs-lisp
-  (require 'exwm)
-  (exwm-enable)
+  (use-package exwm
+    :ensure t)
 #+END_SRC
 
-** Basic Maintenance.
+* Loading d-menu
 
-Keybindings to reset the window manager, delete a workspace, and swap two workspaces.
+d-menu launches programs.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dmenu
+    :ensure t)
+#+END_SRC
+
+* Keybindings
+** General
+Keybindings for resetting the window manager, deleting a workspace,
+and swapping two workspaces.
 
 #+BEGIN_SRC emacs-lisp
   (exwm-input-set-key (kbd "s-r") #'exwm-reset)
@@ -22,23 +66,49 @@ Keybindings to reset the window manager, delete a workspace, and swap two worksp
   (exwm-input-set-key (kbd "s-w") #'exwm-workspace-swap)
 #+END_SRC
 
-** Program Launcher (dmenu)
+Keybinding for running dmenu.
 
 #+BEGIN_SRC emacs-lisp
-  (use-package dmenu
-    :ensure t
-    :bind
-    ("s-SPC" . 'dmenu))
+  (exwm-input-set-key (kbd "s-SPC") #'dmenu)
+#+END_SRC
+
+Keybinding for opening a terminal. My chosen terminal is ansi-term. My
+chosen shell is zsh. This may change.
+
+#+BEGIN_SRC emacs-lisp
+  (defun tassos/open-terminal ()
+    "Open ansi-term with zsh in newly created window."
+    (interactive)
+    (ansi-term "/bin/zsh"))
+
+  (exwm-input-set-key (kbd "<s-return>") #'tassos/open-terminal)
+#+END_SRC
+
+** Windows
+*** Switching Window Focus
+#+BEGIN_SRC emacs-lisp
+  (exwm-input-set-key (kbd "s-j") #'windmove-left)
+  (exwm-input-set-key (kbd "s-l") #'windmove-right)
+  (exwm-input-set-key (kbd "s-i") #'windmove-up)
+  (exwm-input-set-key (kbd "s-k") #'windmove-down)
+#+END_SRC
+
+*** Swapping Windows
+#+BEGIN_SRC emacs-lisp
+  (require 'buffer-move)
+
+  (exwm-input-set-key (kbd "s-J") #'buf-move-left)
+  (exwm-input-set-key (kbd "s-L") #'buf-move-right)
+  (exwm-input-set-key (kbd "s-I") #'buf-move-up)
+  (exwm-input-set-key (kbd "s-K") #'buf-move-down)
 #+END_SRC
 
 ** Workspaces
-
 #+BEGIN_SRC emacs-lisp
   (setq exwm-workspace-number 4)
 #+END_SRC
 
 *** Switching Workspaces
-
 #+BEGIN_SRC emacs-lisp
   (dotimes (i 10)
     (exwm-input-set-key (kbd (format "s-%d" i))
@@ -47,19 +117,78 @@ Keybindings to reset the window manager, delete a workspace, and swap two worksp
                            (exwm-workspace-switch-create ,i))))
 #+END_SRC
 
-** Windows
+*** TODO Move Window to Workspace
+#+BEGIN_SRC emacs-lisp
+  (defun tassos/number-to-shift-map (i)
+    (cond
+     ((= i 0) ?\))
+     ((= i 1) ?\!)
+     ((= i 2) ?\@)
+     ((= i 3) ?\#)
+     ((= i 4) ?\$)
+     ((= i 5) ?\%)
+     ((= i 6) ?^) ;; Requires the lack of backslash!
+     ((= i 7) ?\&)
+     ((= i 8) ?\*)
+     ((= i 9) ?\()))
+
+  (defun tassos/move-window-to-workspace (FRAME-OR-INDEX &optional WINDOW)
+    (interactive)
+    (message "TODO"))
+
+  (dotimes (i 10)
+    (exwm-input-set-key (kbd (format "s-%c" (map-to-number-row-punc i)))
+                        `(lambda ()
+                           (interactive)
+                           (message (format "Moved to Workspace %d" ,i)))))
+#+END_SRC
+
+* Convenience
+** Dashboard
+With hacky fix for dashboard after finished initializing:
 
 #+BEGIN_SRC emacs-lisp
-  (exwm-input-set-key (kbd "s-j") #'windmove-left)
-  (exwm-input-set-key (kbd "s-l") #'windmove-right)
-  (exwm-input-set-key (kbd "s-i") #'windmove-up)
-  (exwm-input-set-key (kbd "s-k") #'windmove-down)
+  (use-package dashboard
+    :ensure t
+    :config
+    (dashboard-setup-startup-hook)
+    (add-hook 'exwm-init-hook 'dashboard-refresh-buffer))
+#+END_SRC
+
+** Sudo-Edit
+#+BEGIN_SRC emacs-lisp
+  (use-package sudo-edit
+    :ensure t
+    :bind
+    ("s-e" . sudo-edit))
 #+END_SRC
 
 ** Volume Control
-
+*** Functions
 #+BEGIN_SRC emacs-lisp
-  (exwm-input-set-key (kbd "<XF86MonBrightnessDown>") (message "hello"))
+  (defun audio/mute ()
+    (interactive)
+    (shell-command "pactl set-sink-mute 0 toggle"))
+
+  (defun audio/lower-volume ()
+    (interactive)
+    (shell-command "volctl 3%-"))
+
+  (defun audio/raise-volume ()
+    (interactive)
+    (shell-command "volctl 3%+"))
 #+END_SRC
 
+*** Key Binding
 
+#+BEGIN_SRC emacs-lisp
+  (exwm-input-set-key (kbd "<XF86AudioMute>") 'audio/mute)
+  (exwm-input-set-key (kbd "<XF86AudioLowerVolume>") 'audio/lower-volume)
+  (exwm-input-set-key (kbd "<XF86AudioRaiseVolume>") 'audio/raise-volume)
+#+END_SRC
+
+* Enable EXWM
+
+#+BEGIN_SRC emacs-lisp
+  (exwm-enable)
+#+END_SRC

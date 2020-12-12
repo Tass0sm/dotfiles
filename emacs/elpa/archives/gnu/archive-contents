@@ -91,8 +91,8 @@
        ((:url . "http://elpa.gnu.org/packages/all.html")
 	(:keywords "matching")
 	(:authors
-	 ("Per Abrahamsen" . "abraham@dina.kvl.dk"))
-	(:maintainer "Per Abrahamsen" . "abraham@dina.kvl.dk"))])
+	 ("Per Abrahamsen" . "per.abrahamsen@gmail.com"))
+	(:maintainer "Per Abrahamsen" . "per.abrahamsen@gmail.com"))])
  (ampc .
        [(0 2)
 	nil "Asynchronous Music Player Controller" single
@@ -246,12 +246,12 @@
 		(1 3))
 	       (cl-lib
 		(0 5)))
-	      "Hunt down errors by bisecting elisp files" single
-	      ((:keywords "lisp")
+	      "Hunt down errors by bisecting elisp files" tar
+	      ((:url . "https://github.com/Malabarba/elisp-bug-hunter")
+	       (:maintainer "Artur Malabarba" . "emacs@endlessparentheses.com")
 	       (:authors
 		("Artur Malabarba" . "emacs@endlessparentheses.com"))
-	       (:maintainer "Artur Malabarba" . "emacs@endlessparentheses.com")
-	       (:url . "https://github.com/Malabarba/elisp-bug-hunter"))])
+	       (:keywords "lisp"))])
  (caps-lock .
 	    [(1 0)
 	     nil "Caps-lock as a minor mode" single
@@ -397,12 +397,12 @@
 	     (24 5))
 	    (swiper
 	     (0 13 1)))
-	   "Various completion functions using Ivy" single
-	   ((:keywords "convenience" "matching" "tools")
+	   "Various completion functions using Ivy" tar
+	   ((:url . "https://github.com/abo-abo/swiper")
+	    (:maintainer "Oleh Krehel" . "ohwoeowho@gmail.com")
 	    (:authors
 	     ("Oleh Krehel" . "ohwoeowho@gmail.com"))
-	    (:maintainer "Oleh Krehel" . "ohwoeowho@gmail.com")
-	    (:url . "https://github.com/abo-abo/swiper"))])
+	    (:keywords "convenience" "matching" "tools"))])
  (cpio-mode .
 	    [(0 17)
 	     ((emacs
@@ -422,7 +422,7 @@
 	   ("Gary D. Foster" . "Gary.Foster@Corp.Sun.COM"))
 	  (:maintainer "Luke Lee" . "luke.yx.lee@gmail.com"))])
  (csv-mode .
-	   [(1 12)
+	   [(1 13)
 	    ((emacs
 	      (24 1))
 	     (cl-lib
@@ -470,7 +470,7 @@
 		  ("Daiki Ueno" . "ueno@gnu.org"))
 		 (:maintainer nil . "emacs-devel@gnu.org"))])
  (debbugs .
-	  [(0 26)
+	  [(0 27)
 	   ((emacs
 	     (25 1))
 	    (soap-client
@@ -1193,7 +1193,7 @@
 	(:keywords "lisp" "convenience")
 	(:authors
 	 ("Tino Calancha" . "tino.calancha@gmail.com"))
-	(:maintainer "Tino Calancha"))])
+	(:maintainer "Tino Calancha" . "tino.calancha@gmail.com"))])
  (landmark .
 	   [(1 0)
 	    nil "Neural-network robot that learns landmarks" single
@@ -1304,8 +1304,8 @@
 		((:url . "http://elpa.gnu.org/packages/memory-usage.html")
 		 (:keywords "maint")
 		 (:authors
-		  ("Stefan Monnier" . "monnier@cs.yale.edu"))
-		 (:maintainer "Stefan Monnier" . "monnier@cs.yale.edu"))])
+		  ("Stefan Monnier" . "monnier@iro.umontreal.ca"))
+		 (:maintainer "Stefan Monnier" . "monnier@iro.umontreal.ca"))])
  (metar .
 	[(0 3)
 	 ((cl-lib
@@ -1721,8 +1721,8 @@
 		 ((:url . "http://elpa.gnu.org/packages/quarter-plane.html")
 		  (:keywords "convenience" "wp")
 		  (:authors
-		   ("Peter J. Weisberg"))
-		  (:maintainer "Peter J. Weisberg"))])
+		   ("Peter J. Weisberg" . "pj@irregularexpressions.net"))
+		  (:maintainer "Peter J. Weisberg" . "pj@irregularexpressions.net"))])
  (queue .
 	[(0 2)
 	 nil "Queue data structure" single
@@ -1886,9 +1886,9 @@
 		   ("Bastien Guerry" . "bzg@gnu.org"))
 		  (:maintainer "Bastien Guerry" . "bzg@gnu.org"))])
  (relint .
-	 [(1 18)
+	 [(1 19)
 	  ((xr
-	    (1 19))
+	    (1 20))
 	   (emacs
 	    (26 1)))
 	  "Elisp regexp mistake finder" tar
@@ -2009,7 +2009,7 @@
 	      (:maintainer "Ralph Amissah" . "ralph.amissah@gmail.com")
 	      (:url . "http://www.sisudoc.org/"))])
  (slime-volleyball .
-		   [(1 1 6)
+		   [(1 1 7)
 		    ((cl-lib
 		      (0 5)))
 		    "An SVG Slime Volleyball Game" tar
@@ -2177,12 +2177,12 @@
 	    (24 5))
 	   (ivy
 	    (0 13 1)))
-	  "Isearch with an overview. Oh, man!" single
-	  ((:keywords "matching")
+	  "Isearch with an overview. Oh, man!" tar
+	  ((:url . "https://github.com/abo-abo/swiper")
+	   (:maintainer "Oleh Krehel" . "ohwoeowho@gmail.com")
 	   (:authors
 	    ("Oleh Krehel" . "ohwoeowho@gmail.com"))
-	   (:maintainer "Oleh Krehel" . "ohwoeowho@gmail.com")
-	   (:url . "https://github.com/abo-abo/swiper"))])
+	   (:keywords "matching"))])
  (system-packages .
 		  [(1 0 11)
 		   ((emacs
@@ -2242,7 +2242,7 @@
 	  ("Oleh Krehel" . "ohwoeowho@gmail.com"))
 	 (:keywords "convenience"))])
  (tramp .
-	[(2 4 4 3)
+	[(2 4 4 4)
 	 ((emacs
 	   (24 4)))
 	 "Transparent Remote Access, Multiple Protocol" tar
@@ -2330,6 +2330,16 @@
 	     (:authors
 	      ("Artur Malabarba" . "emacs@endlessparentheses.com"))
 	     (:maintainer "Artur Malabarba" . "emacs@endlessparentheses.com"))])
+ (valign .
+	 [(3 0 0)
+	  ((emacs
+	    (26 0)))
+	  "Visually align tables" single
+	  ((:keywords "convenience" "text" "table")
+	   (:authors
+	    ("Yuan Fu" . "casouri@gmail.com"))
+	   (:maintainer "Yuan Fu" . "casouri@gmail.com")
+	   (:url . "https://github.com/casouri/valign"))])
  (vcard .
 	[(0 1)
 	 ((emacs
@@ -2538,7 +2548,7 @@
 	 ("Thien-Thi Nguyen" . "ttn@gnu.org"))
 	(:keywords "multimedia" "xpm"))])
  (xr .
-     [(1 19)
+     [(1 20)
       ((emacs
 	(26 1)))
       "Convert string regexp to rx notation" tar

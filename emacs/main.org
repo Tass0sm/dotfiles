@@ -1,46 +1,30 @@
-* Avy
-
+* Movement
+** Avy
 #+BEGIN_SRC emacs-lisp
   (use-package avy
     :ensure t)
 #+END_SRC
 
-* AucTEX
-
+** Scrolling
 #+BEGIN_SRC emacs-lisp
-  (use-package tex
-    :config
-    (add-to-list 'TeX-view-program-list '("mupdf" "/usr/bin/mupdf %o"))  
-    (setcdr (assq 'output-pdf TeX-view-program-selection) '("mupdf"))
-    :chords
-    ("34" . TeX-insert-dollar))
+  (setq scroll-conservatively 10000
+        scroll-preserve-screen-position t)
 #+END_SRC
 
-* File Backups
-
-#+BEGIN_SRC emacs-lisp
-  (setq backup-directory-alist
-        '(("." . "~/.local/share/emacs/saves/")))
-#+END_SRC
-  
-* Column Number Mode
-
-#+BEGIN_SRC emacs-lisp
-  (column-number-mode)
-#+END_SRC
-
-* Company
+* Programming
+** Tools
+*** Company
+Auto completion using company.
 
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :ensure t
     :config
     (setq company-idle-delay 0)
-    (setq company-backends '(company-dabbrev))
-    (global-company-mode))
+    (setq company-minimum-prefix-length 1))
 #+END_SRC
   
-** Front End
+**** Front End
 
 #+BEGIN_SRC emacs-lisp
   ;;(use-package company-box
@@ -48,7 +32,7 @@
   ;;  (company-mode . company-box-mode))
 #+END_SRC
 
-** Keybinds
+**** Keybinds
 
 Manually select a item from the drop-down with C-n / C-p and insert the
 current selection with tab. Abort with C-g.
@@ -62,9 +46,109 @@ current selection with tab. Abort with C-g.
   (define-key company-active-map (kbd "C-g") 'company-abort)
 #+END_SRC
    
-* Dired
-** Hide Details Mode
+*** Magit
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+    :ensure t
+    :bind
+    ("\C-x g" . magit-status))
+#+END_SRC
 
+*** Projectile
+#+BEGIN_SRC emacs-lisp
+  (use-package projectile
+    :init
+    (projectile-mode +1)
+    :bind-keymap
+    ("C-c p" . projectile-command-map))
+#+END_SRC
+
+*** Smart Tabs
+**** Configure Package
+#+BEGIN_SRC emacs-lisp
+  (use-package smart-tabs-mode
+    :config
+    (setq-default indent-tabs-mode nil)
+    (setq-default tab-width 4)
+    (smart-tabs-insinuate 'c))
+#+END_SRC
+
+**** Indent after Yank
+#+BEGIN_SRC emacs-lisp
+  (advice-add 'yank :after
+              (lambda (ARG)
+                "Indent the text just yanked."
+                (indent-region (region-beginning) (region-end))))
+
+  (advice-add 'yank-pop :after
+              (lambda (ARG)
+                "Indent the text just popped from the kill ring."
+                (indent-region (region-beginning) (region-end))))
+#+END_SRC
+
+** Languages
+*** CC-Mode Languages
+**** C
+Setup for C includes:
+1. Configure and activate auto completion with company.
+2. More to come...
+
+#+BEGIN_SRC emacs-lisp
+  (defun tassos/c-mode-setup ()
+    "Setup emacs programming utilities for c-mode"
+    (setq company-backends '((company-keywords
+                              company-yasnippet
+                              company-dabbrev-code)))
+    (company-mode 1))
+#+END_SRC
+
+Call function in c-mode hook.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'c-mode-hook 'tassos/c-mode-setup)
+#+END_SRC
+
+*** Lisp
+**** Emacs Lisp
+Setup for emacs-lisp includes:
+1. Configure and activate auto completion with company.
+2. More to come...
+
+#+BEGIN_SRC emacs-lisp
+  (defun tassos/elisp-mode-setup ()
+    "Setup emacs programming utilities for emacs-lisp-mode"
+    (setq company-backends '((company-elisp
+                             company-keywords
+                             company-yasnippet
+                             company-dabbrev-code)))
+    (company-mode 1))
+#+END_SRC
+
+Run setup function when entering a Emacs lisp buffer.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'emacs-lisp-mode-hook 'tassos/elisp-mode-setup)
+#+END_SRC
+
+*** Haskell
+*** Octave
+#+BEGIN_SRC emacs-lisp
+  (use-package octave
+    :config
+    (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode)))
+#+END_SRC
+
+* Utility
+** Beacon
+#+BEGIN_SRC emacs-lisp
+  (use-package beacon
+    :ensure t
+    :config
+    (beacon-mode 1))
+#+END_SRC
+
+** Dired
+*** Hide Details Mode
 #+BEGIN_SRC emacs-lisp
   (use-package dired
     :config
@@ -74,8 +158,7 @@ current selection with tab. Abort with C-g.
     (add-hook 'dired-mode-hook 'dired-hide-details-mode))
 #+END_SRC
 
-* Expand Region
-
+** Expand Region
 #+BEGIN_SRC emacs-lisp
   (use-package expand-region
     :ensure t
@@ -83,40 +166,20 @@ current selection with tab. Abort with C-g.
     ("C-=" . er/expand-region))
 #+END_SRC
 
-* Flyspell
-
-#+BEGIN_SRC emacs-lisp
-  (use-package flyspell
-    :config
-    (add-hook 'text-mode-hook 'flyspell-mode))
-#+END_SRC
-
-* Info
-
+** Info
 Add a directory for info documentation on personally selected topics.
 
 #+BEGIN_SRC emacs-lisp
   (setq Info-additional-directory-list '("/home/tassos/Info/"))
 #+END_SRC
 
-* Ivy
-
+** Ivy
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
     :config (ivy-mode 1))
 #+END_SRC
 
-* Magit
-
-#+BEGIN_SRC emacs-lisp
-  (use-package magit
-    :ensure t
-    :bind
-    ("\C-x g" . magit-status))
-#+END_SRC
-
-* Multiple Cursors
-
+** Multiple Cursors
 #+BEGIN_SRC emacs-lisp
   (use-package multiple-cursors
     :ensure t
@@ -127,17 +190,87 @@ Add a directory for info documentation on personally selected topics.
     ("C-c C-<" . mc/mark-all-like-this))
 #+END_SRC
 
-* Octave
-
+** RunAssoc
 #+BEGIN_SRC emacs-lisp
-  (use-package octave
+  (use-package run-assoc
     :config
-    (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode)))
+    (global-set-key (kbd "C-x C-r") 'run-associated-program)
+    (setq associated-program-alist
+          '(("sxiv" "\\.png")
+            ("mupdf" "\\.pdf")
+            ("mpv" "\\.mkv")
+            ("mpv" "\\.mp4")
+            ("waterfox-current" "\\.html")
+            ("libreoffice" "\\.docx"))))
 #+END_SRC
 
-* Org
-** Core
+** Tramp
+#+BEGIN_SRC emacs-lisp
+  (setq tramp-default-method "ssh")
+#+END_SRC
 
+** Visible Mark
+#+BEGIN_SRC emacs-lisp
+  (use-package visible-mark
+    :ensure t
+    :config
+    (setq visible-mark-max 3)
+    (global-visible-mark-mode)
+    :bind
+    ("C--" . avy-pop-mark))
+#+END_SRC
+
+** Which-Key
+#+BEGIN_SRC emacs-lisp
+  (use-package which-key
+    :init
+    (which-key-mode))
+#+END_SRC
+
+** WS-Butler
+#+BEGIN_SRC emacs-lisp
+  (use-package ws-butler
+    :hook
+    (prog-mode-hook . ws-butler-mode))
+#+END_SRC
+
+** YASnippet
+#+BEGIN_SRC emacs-lisp
+  (use-package yasnippet
+    :config (yas-global-mode 1))
+#+END_SRC
+
+* Visual
+** Mode-Line
+#+BEGIN_SRC emacs-lisp
+  (use-package telephone-line
+    :ensure t
+    :config
+    (telephone-line-mode 1))
+#+END_SRC
+
+* Writing
+** Flyspell
+#+BEGIN_SRC emacs-lisp
+  (use-package flyspell
+    :config
+    (add-hook 'text-mode-hook 'flyspell-mode))
+#+END_SRC
+
+*** Languages
+**** TEX
+***** AucTEX
+#+BEGIN_SRC emacs-lisp
+  (use-package tex
+    :config
+    (add-to-list 'TeX-view-program-list '("mupdf" "/usr/bin/mupdf %o"))  
+    (setcdr (assq 'output-pdf TeX-view-program-selection) '("mupdf"))
+    :chords
+    ("34" . TeX-insert-dollar))
+#+END_SRC
+
+**** Org
+***** Core
 #+BEGIN_SRC emacs-lisp
   (use-package org
     :ensure t
@@ -160,8 +293,7 @@ Add a directory for info documentation on personally selected topics.
           '((sequence "TODO" "|" "DONE" "KILL" "FAIL"))))
 #+END_SRC
 
-** Org-Notify
-
+***** Org-Notify
 #+BEGIN_SRC emacs-lisp
   (use-package org-notify
     :config
@@ -173,8 +305,7 @@ Add a directory for info documentation on personally selected topics.
                     '(:time "20m" :actions -notify/window :period "2m" :duration 60)))
 #+END_SRC
 
-** Org-Journal
-
+***** Org-Journal
 #+BEGIN_SRC emacs-lisp
   (use-package org-journal
     :ensure t
@@ -184,108 +315,19 @@ Add a directory for info documentation on personally selected topics.
     ("C-c j" . org-journal-new-entry))
 #+END_SRC
 
-* Package
-
+* Unsorted
+** File Backups
 #+BEGIN_SRC emacs-lisp
-  (use-package package
-    :config
-    (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")))
+  (setq backup-directory-alist
+        '(("." . "~/.local/share/emacs/saves/")))
+#+END_SRC
+  
+** Column Number Mode
+#+BEGIN_SRC emacs-lisp
+  (column-number-mode)
 #+END_SRC
 
-* Projectile
 
-#+BEGIN_SRC emacs-lisp
-  (use-package projectile
-    :init
-    (projectile-mode +1)
-    :bind-keymap
-    ("C-c p" . projectile-command-map))
-#+END_SRC
 
-* RunAssoc
 
-#+BEGIN_SRC emacs-lisp
-  (use-package run-assoc
-    :config
-    (global-set-key (kbd "C-x C-r") 'run-associated-program)
-    (setq associated-program-alist
-          '(("mupdf" "\\.pdf")
-            ("mpv" "\\.mkv")
-            ("mpv" "\\.mp4")
-            ("waterfox-current" "\\.html")
-            ("libreoffice" "\\.docx"))))
-#+END_SRC
-
-* Scrolling
-
-#+BEGIN_SRC emacs-lisp
-  (setq scroll-conservatively 10000
-        scroll-preserve-screen-position t)
-#+END_SRC
-
-* Smart Tabs
-** Configure Package
-
-#+BEGIN_SRC emacs-lisp
-  (use-package smart-tabs-mode
-    :config
-    (setq-default indent-tabs-mode nil)
-    (setq-default tab-width 4)
-    (smart-tabs-insinuate 'c))
-#+END_SRC
-
-** Indent after Yank
-
-#+BEGIN_SRC emacs-lisp
-  (advice-add 'yank :after
-              (lambda (ARG)
-                "Indent the text just yanked."
-                (indent-region (region-beginning) (region-end))))
-
-  (advice-add 'yank-pop :after
-              (lambda (ARG)
-                "Indent the text just popped from the kill ring."
-                (indent-region (region-beginning) (region-end))))
-#+END_SRC
-
-* Tramp
-
-#+BEGIN_SRC emacs-lisp
-  (setq tramp-default-method "ssh")
-#+END_SRC
-
-* Visible Mark
-
-#+BEGIN_SRC emacs-lisp
-  (use-package visible-mark
-    :ensure t
-    :config
-    (setq visible-mark-max 3)
-    (global-visible-mark-mode)
-    :bind
-    ("C--" . avy-pop-mark))
-#+END_SRC
-
-* Which-Key
-
-#+BEGIN_SRC emacs-lisp
-  (use-package which-key
-    :init
-    (which-key-mode))
-#+END_SRC
-
-* WS-Butler
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ws-butler
-    :hook
-    (prog-mode-hook . ws-butler-mode))
-#+END_SRC
-
-* YASnippet
-
-#+BEGIN_SRC emacs-lisp
-  (use-package yasnippet
-    :config (yas-global-mode 1))
-#+END_SRC
 
