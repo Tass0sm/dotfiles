@@ -55,6 +55,36 @@ d-menu launches programs.
     :ensure t)
 #+END_SRC
 
+* Buffers
+** Rename Buffers for Apps
+#+BEGIN_SRC emacs-lisp
+  ;; FROM THE EXWM Example Config:
+
+  ;; All buffers created in EXWM mode are named "*EXWM*". You may want to
+  ;; change it in `exwm-update-class-hook' and `exwm-update-title-hook', which
+  ;; are run when a new X window class name or title is available.  Here's
+  ;; some advice on this topic:
+  ;; + Always use `exwm-workspace-rename-buffer` to avoid naming conflict.
+  ;; + For applications with multiple windows (e.g. GIMP), the class names of
+  ;;  all windows are probably the same.  Using window titles for them makes
+  ;;   more sense.
+  ;; In the following example, we use class names for all windows except for
+  ;; Java applications and GIMP.
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (unless (or (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                          (string= "gimp" exwm-instance-name))
+                (exwm-workspace-rename-buffer exwm-class-name))))
+
+  (add-hook 'exwm-update-title-hook
+            (lambda ()
+              (when (or (not exwm-instance-name)
+                        (string-prefix-p "sun-awt-X11-" exwm-instance-name)
+                        (string= "gimp" exwm-instance-name))
+                (exwm-workspace-rename-buffer exwm-title))))
+#+END_SRC
+
+
 * Keybindings
 ** General
 Keybindings for resetting the window manager, deleting a workspace,
@@ -76,9 +106,16 @@ Keybinding for opening a terminal. My chosen terminal is ansi-term. My
 chosen shell is zsh. This may change.
 
 #+BEGIN_SRC emacs-lisp
+  (defun tassos/auto-split-window ()
+    "Split window like bspwm."
+    (if (< (window-width) (window-height))
+        (split-window-below)
+      (split-window-right)))
+
   (defun tassos/open-terminal ()
     "Open ansi-term with zsh in newly created window."
     (interactive)
+    (tassos/auto-split-window)
     (ansi-term "/bin/zsh"))
 
   (exwm-input-set-key (kbd "<s-return>") #'tassos/open-terminal)
