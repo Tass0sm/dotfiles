@@ -1,0 +1,2 @@
+;;; Generated package description from /home/tassos/.config/emacs/elpa/company-posframe-20201214.52/company-posframe.el  -*- no-byte-compile: t -*-
+(define-package "company-posframe" "20201214.52" "Use a posframe as company candidate menu" '((emacs "26.0") (company "0.9.0") (posframe "0.1.0")) :commit "5ea0b565972ca8d80f29a40068c65bab97384748" :keywords '("abbrev" "convenience" "matching") :authors '(("Clément Pit-Claudel, Feng Shu, Lars Andersen" . "expez@expez.com")) :maintainer '("Feng Shu" . "tumashu@163.com") :url "https://github.com/tumashu/company-posframe")

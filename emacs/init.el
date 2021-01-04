@@ -20,7 +20,7 @@
 
 ;; Custom File
 
-(setq custom-file (concat user-emacs-directory "emacs-custom.el"))
+(setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
 ;; Window Manager Specific Config

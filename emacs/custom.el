@@ -8,7 +8,7 @@
  '(display-battery-mode t)
  '(display-time-mode t)
  '(package-selected-packages
-   '(buffer-move telephone-line beacon golden-ratio sudo-edit dashboard meme night-owl-theme dmenu exwm yasnippet-snippets yaml-mode xah-fly-keys ws-butler which-key visible-mark use-package-chords smooth-scroll smart-tabs-mode slow-keys slime ryo-modal rust-mode runner ripgrep restart-emacs racket-mode projectile plisp-mode persp-mode pdf-tools org-journal multiple-cursors markdown-mode magit ivy-yasnippet haskell-tab-indent haskell-snippets haskell-mode go-mode glsl-mode expand-region company-box clojure-mode avy auctex)))
+   '(company-anaconda company-shell company-posframe posframe buffer-move telephone-line beacon golden-ratio sudo-edit dashboard meme night-owl-theme dmenu exwm yasnippet-snippets yaml-mode xah-fly-keys ws-butler which-key visible-mark use-package-chords smooth-scroll smart-tabs-mode slow-keys slime ryo-modal rust-mode runner ripgrep restart-emacs racket-mode projectile plisp-mode persp-mode pdf-tools org-journal multiple-cursors markdown-mode magit ivy-yasnippet haskell-tab-indent haskell-snippets haskell-mode go-mode glsl-mode expand-region company-box clojure-mode avy auctex)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

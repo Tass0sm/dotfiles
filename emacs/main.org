@@ -25,11 +25,18 @@ Auto completion using company.
 #+END_SRC
   
 **** Front End
+Using =company-posframe=. I wish I could use the child frame approach with
+another front end like =company-box=. I might try to make something myself for
+this. Right now, I just use =company-posframe= with extra stuff turned off.
 
 #+BEGIN_SRC emacs-lisp
-  ;;(use-package company-box
-  ;;  :hook
-  ;;  (company-mode . company-box-mode))
+  (use-package company-posframe
+    :ensure t
+    :config
+
+
+    (setq company-posframe-quickhelp-delay nil)
+    (company-posframe-mode 1))
 #+END_SRC
 
 **** Keybinds
@@ -38,12 +45,9 @@ Manually select a item from the drop-down with C-n / C-p and insert the
 current selection with tab. Abort with C-g.
    
 #+BEGIN_SRC emacs-lisp
-  (setq company-active-map '(keymap . ()))
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map (kbd "<tab>") 'company-complete-selection)
-  (define-key company-active-map (kbd "TAB") 'company-complete-selection)
-  (define-key company-active-map (kbd "C-g") 'company-abort)
+  (define-key company-posframe-active-map (kbd "C-n") 'company-select-next)
+  (define-key company-posframe-active-map (kbd "C-p") 'company-select-previous)
+  (define-key company-posframe-active-map (kbd "<tab>") 'company-complete-selection)
 #+END_SRC
    
 *** Magit
@@ -57,7 +61,8 @@ current selection with tab. Abort with C-g.
 *** Projectile
 #+BEGIN_SRC emacs-lisp
   (use-package projectile
-    :init
+    :config
+    (setq projectile-completion-system 'ivy)
     (projectile-mode +1)
     :bind-keymap
     ("C-c p" . projectile-command-map))
@@ -128,6 +133,47 @@ Run setup function when entering a Emacs lisp buffer.
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'emacs-lisp-mode-hook 'tassos/elisp-mode-setup)
+#+END_SRC
+
+*** Term
+Setup for normal shell / terminal usage includes:
+1. Configure and activate auto completion with company.
+2. More to come...
+
+#+BEGIN_SRC emacs-lisp
+  (defun tassos/term-mode-setup ()
+    "Setup emacs programming utilities for emacs-lisp-mode"
+    (setq company-backends '((company-shell
+                              company-files
+                              company-anaconda)))
+    (company-mode 1))
+#+END_SRC
+
+Run setup function when entering a shell script buffer.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'term-mode-hook 'tassos/term-mode-setup)
+#+END_SRC
+
+*** Shell Scripting
+Setup for shell scripting includes:
+1. Configure and activate auto completion with company.
+2. More to come...
+
+#+BEGIN_SRC emacs-lisp
+  (defun tassos/sh-mode-setup ()
+    "Setup emacs programming utilities for emacs-lisp-mode"
+    (setq company-backends '((company-files
+                              company-keywords
+                              company-yasnippet
+                              company-dabbrev-code)))
+    (company-mode 1))
+#+END_SRC
+
+Run setup function when entering a shell script buffer.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'sh-mode-hook 'tassos/sh-mode-setup)
 #+END_SRC
 
 *** Haskell
@@ -242,10 +288,38 @@ Add a directory for info documentation on personally selected topics.
 
 * Visual
 ** Mode-Line
+The mode line has the following form:
+
 #+BEGIN_SRC emacs-lisp
   (use-package telephone-line
     :ensure t
     :config
+    ;; Content
+    (setq telephone-line-lhs
+          '((accent . (telephone-line-vc-segment))
+            (nil    . (telephone-line-projectile-segment
+                       telephone-line-buffer-segment))))
+    (setq telephone-line-rhs
+          '((nil    . (telephone-line-flycheck-segment
+                       telephone-line-misc-info-segment))
+            (accent . (telephone-line-major-mode-segment
+                       telephone-line-process-segment))
+            (evil   . (telephone-line-airline-position-segment))))
+          ;;          '((accent . (telephone-line-vc-segment
+          ;;                       telephone-line-projectile-segment))
+          ;;            (nil    . (telephone-line-buffer-name-segment
+          ;;                       telephone-line-airline-position-segment))))
+          ;;    (setq telephone-line-rhs
+          ;;          '((nil    . (telephone-line-misc-info-segment))
+          ;;            (accent . (telephone-line-input-info-segment
+          ;;                       telephone-line-major-mode-segment
+          ;;                       telephone-line-process-segment))))
+          ;;    ;; Appearance
+          ;;    (setq telephone-line-primary-left-separator 'telephone-line-tan-left
+          ;;          telephone-line-secondary-left-separator 'telephone-line-tan-left
+          ;;          telephone-line-primary-right-separator 'telephone-line-tan-right
+          ;;          telephone-line-secondary-right-separator 'telephone-line-tan-right)
+          ;;    (setq telephone-line-height 24)
     (telephone-line-mode 1))
 #+END_SRC
 

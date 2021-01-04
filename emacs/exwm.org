@@ -9,35 +9,31 @@
 
 * Notes
 
-EXWM is a window manager. A normal window is displayed in an Emacs
-buffer using =exwm-mode=. =exwm-mode= has two input modes: =line-mode=
-and =char-mode=.
+EXWM is a window manager. A normal window is displayed in an Emacs buffer using
+=exwm-mode=. =exwm-mode= has two input modes: =line-mode= and =char-mode=.
 
-To review, Emacs handles input events by looking up the input event in
-currently loaded key maps. First it checks specific keymaps associated
-to regions of the current buffer. Next are minor-mode keymaps. Then
-major-mode keymaps. Finally the global key-map. So more specific
-keymaps have greater precedence.
+To review, Emacs handles input events by looking up the input event in currently
+loaded key maps. First it checks specific keymaps associated to regions of the
+current buffer. Next are minor-mode keymaps. Then major-mode keymaps. Finally
+the global key-map. So more specific keymaps have greater precedence.
 
-The EXWM keymap is conceptually distinct and the most
-general. Therefore, it has the lowest precedence. However, keybindings
-made in the EXWM global map (that are not blocked by a keybinding in a
-lower-level map) can be used in any Emacs buffer (like for the global
-key map) and in all EXWM buffers, as well.
+The EXWM keymap is conceptually distinct and the most general. Therefore, it has
+the lowest precedence. However, keybindings made in the EXWM global map (that
+are not blocked by a keybinding in a lower-level map) can be used in any Emacs
+buffer (like for the global key map) and in all EXWM buffers, as well.
 
-In =char-mode=, Emacs only intercepts keys defined in the EXWM global
-map.
+In =char-mode=, Emacs only intercepts keys defined in the EXWM global map.
 
-In =line-mode=, Emacs intercepts every keybinding defined in
-minor-mode maps, the =exwm-mode-map=, the emacs global key map (C-x,
-C-h, etc.), and the EXWM global map.
+In =line-mode=, Emacs intercepts every keybinding defined in minor-mode maps,
+the =exwm-mode-map=, the emacs global key map (C-x, C-h, etc.), and the EXWM
+global map. Also, key bindings defined in =exwm-input-simulation-keys= take
+effect.
 
-In both modes, if a keystroke like =self-insert-command= (like when
-pressing 'a', 'b', 'c', etc.) or "C-f" is called, they are passed to
-the application normally. I believe it can be assumed that commands
-like these, where they must operate on a normal Emacs buffer, are
-always passed straight to the application. Otherwise, they'd do
-nothing / send an error.
+In both modes, if a keystroke like =self-insert-command= (like when pressing
+'a', 'b', 'c', etc.) or "C-f" is called, they are passed to the application
+normally. I believe it can be assumed that commands like these, where they must
+operate on a normal Emacs buffer, are always passed straight to the
+application. Otherwise, they'd do nothing / send an error.
 
 * Loading EXWM
 
@@ -114,13 +110,42 @@ chosen shell is zsh. This may change.
       (split-window-right)))
 
   (defun tassos/open-terminal ()
-    "Open ansi-term with zsh in newly created window."
+    "Open term/ansi-term with zsh in newly created window. If in a
+  projectile project, open at the root. Still to be improved."
     (interactive)
     (tassos/auto-split-window)
     (other-window 1)
-    (ansi-term "/bin/zsh"))
+    (if (projectile-project-p)
+        (projectile-run-term nil)
+      (ansi-term "/bin/zsh")))
 
   (exwm-input-set-key (kbd "<s-return>") #'tassos/open-terminal)
+#+END_SRC
+
+** Simulation
+Simulation keys, to have Emacs-like key binds for normal functionality in X
+windows.
+
+#+BEGIN_SRC emacs-lisp
+  (setq exwm-input-simulation-keys
+        '(;; movement
+          ([?\C-b] . [left])
+          ([?\M-b] . [C-left])
+          ([?\C-f] . [right])
+          ([?\M-f] . [C-right])
+          ([?\C-p] . [up])
+          ([?\C-n] . [down])
+          ([?\C-a] . [home])
+          ([?\C-e] . [end])
+          ([?\M-v] . [prior])
+          ([?\C-v] . [next])
+          ([?\C-d] . [delete])
+          ([?\C-k] . [S-end delete])
+          ;; copy/paste. No cut, because of conflict.
+          ([?\M-w] . [?\C-c])
+          ([?\C-y] . [?\C-v])
+          ;; search
+          ([?\C-s] . [?\C-f])))
 #+END_SRC
 
 ** Windows
@@ -153,7 +178,7 @@ contained in "kill-buffer" with EXWM.
           (parent (window-parent window)))
       (and
        (not (null parent)) ;; I know this can be simplified, but its
-                           ;; easier to read.
+       ;; easier to read.
        (not (eq window (window-main-window frame))))))
 
   (defun tassos/close-window (&optional window)
@@ -164,7 +189,7 @@ contained in "kill-buffer" with EXWM.
     (kill-buffer (current-buffer))
     (if (tassos/window-deletablep window)
         (delete-window)))
-  
+
   (exwm-input-set-key (kbd "s-w") #'tassos/close-window)
 #+END_SRC
 
@@ -174,6 +199,11 @@ For killing a process:
   (exwm-input-set-key (kbd "s-W") #'(lambda ()
                                       (interactive)
                                       (exwm-manage--kill-client)))
+#+END_SRC
+
+*** Change Window State
+#+BEGIN_SRC emacs-lisp
+  (exwm-input-set-key (kbd "s-f") #'exwm-floating-toggle-floating)
 #+END_SRC
 
 ** Workspaces
@@ -267,6 +297,15 @@ With hacky fix for dashboard after finished initializing:
     (add-hook 'exwm-init-hook 'dashboard-refresh-buffer))
 #+END_SRC
 
+** Screenshot
+#+BEGIN_SRC emacs-lisp
+  (defun tassos/gui-screenshot ()
+    (interactive)
+    (shell-command "flameshot gui"))
+
+  (exwm-input-set-key (kbd "s-<print>") #'tassos/gui-screenshot)
+#+END_SRC
+
 ** Sudo-Edit
 #+BEGIN_SRC emacs-lisp
   (use-package sudo-edit
@@ -304,3 +343,4 @@ With hacky fix for dashboard after finished initializing:
 #+BEGIN_SRC emacs-lisp
   (exwm-enable)
 #+END_SRC
+

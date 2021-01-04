@@ -8,6 +8,7 @@
         TeX-insert-backslash
         TeX-insert-dollar
         TeX-insert-sub-or-superscript
+        backward-sexp
         c-electric-brace
         c-electric-colon
         c-electric-paren
@@ -43,6 +44,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        calc-dispatch
         handle-switch-frame
         indent-region
         ))
