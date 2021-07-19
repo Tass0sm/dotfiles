@@ -1,2 +1,0 @@
-;;; Generated package description from /home/tassos/.config/emacs/elpa/projectile-20200506.1033/projectile.el  -*- no-byte-compile: t -*-
-(define-package "projectile" "20200506.1033" "Manage and navigate projects in Emacs easily" '((emacs "25.1") (pkg-info "0.4")) :commit "fcd5de979a007d5d1840dfcf09fa1ca0d44db12d" :keywords '("project" "convenience") :authors '(("Bozhidar Batsov" . "bozhidar@batsov.com")) :maintainer '("Bozhidar Batsov" . "bozhidar@batsov.com") :url "https://github.com/bbatsov/projectile")

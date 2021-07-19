@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: exists
-# key: exists
-# --
-(\exists ${1:x} \in \mathbbm{${2:Z}})($3)

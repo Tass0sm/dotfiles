@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: let
-# key: let
-# --
-(let (${1:(name value)})
-     (${2:body}))

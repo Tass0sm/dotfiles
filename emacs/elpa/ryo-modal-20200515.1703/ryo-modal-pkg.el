@@ -1,2 +1,0 @@
-;;; Generated package description from /home/tassos/.config/emacs/elpa/ryo-modal-20200515.1703/ryo-modal.el  -*- no-byte-compile: t -*-
-(define-package "ryo-modal" "20200515.1703" "Roll your own modal mode" '((emacs "25.1")) :commit "5d988e8b3a5d3d6f2f58d97031d2f500ef55473b" :keywords '("convenience" "modal" "keys") :authors '(("Erik Sjöstrand" . "sjostrand.erik@gmail.com")) :maintainer '("Erik Sjöstrand" . "sjostrand.erik@gmail.com") :url "http://github.com/Kungsgeten/ryo-modal")

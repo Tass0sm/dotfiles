@@ -1,2 +1,0 @@
-;;; Generated package description from /home/tassos/.config/emacs/elpa/runner-20160524.743/runner.el  -*- no-byte-compile: t -*-
-(define-package "runner" "20160524.743" "Improved \"open with\" suggestions for dired" 'nil :commit "a211d57ddc600410d07a8b534920ba905b093d87" :keywords '("shell command" "dired" "file extension" "open with") :authors '(("Thamer Mahmoud" . "thamer.mahmoud@gmail.com")) :maintainer '("Thamer Mahmoud" . "thamer.mahmoud@gmail.com") :url "https://github.com/thamer/runner")
