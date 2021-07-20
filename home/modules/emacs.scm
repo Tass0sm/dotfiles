@@ -14,6 +14,8 @@
 	 "emacs-which-key"
 	 "emacs-use-package"
 
+	 "emacs-multiple-cursors"
+
 	 "emacs-org-journal"
 	 
 	 "emacs-dashboard"
