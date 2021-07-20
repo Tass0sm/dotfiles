@@ -17,7 +17,10 @@
 	      (environment-variables
 	       '(("XDG_DATA_DIRS" . "${XDG_DATA_DIRS:-/usr/local/share/:/usr/share/}")
 		 ("XDG_CONFIG_DIRS" . "${XDG_CONFIG_DIRS:-/etc/xdg/}")
-		 ("EDITOR" . "\"emacsclient -a ''\"")))
+		 ("EDITOR" . "\"emacsclient -a ''\"")
+		 ("SSL_CERT_DIR" . "$HOME/.guix-home/profile/etc/ssl/certs")
+		 ("SSL_CERT_FILE" . "$HOME/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")
+		 ("GIT_SSL_CAINFO" . "$SSL_CERT_FILE")))
 	      (zlogin
 	       '("GUIX_PROFILE=\"$HOME/.guix-profile\""
 		 "[ -f \"$GUIX_PROFILE/etc/profile\" ] && . \"$GUIX_PROFILE/etc/profile\""))))))

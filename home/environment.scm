@@ -10,6 +10,7 @@
   #:use-module (gnu home-services)
   ;; personal modules
   #:use-module (home modules shell)
+  #:use-module (home modules git)
   #:use-module (home modules emacs)
   #:use-module (home modules clojure)
   #:use-module (home modules guile))
@@ -18,7 +19,7 @@
   (map specification->package
        (list
 	;; terminal emulator + ???
-	"glibc-locales")))
+	"nss-certs")))
 
 (home-environment
   (packages
@@ -27,5 +28,6 @@
      ,@clojure-packages
      ,@guile-packages))
   (services
-   `(,@emacs-services
-     ,@zsh-services)))
+   `(,@zsh-services
+     ,@git-services
+     ,@emacs-services)))
