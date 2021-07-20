@@ -9,6 +9,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu home-services)
   ;; personal modules
+  #:use-module (home modules xdg)
   #:use-module (home modules shell)
   #:use-module (home modules git)
   #:use-module (home modules emacs)
@@ -28,6 +29,7 @@
      ,@clojure-packages
      ,@guile-packages))
   (services
-   `(,@zsh-services
+   `(,@xdg-services
+     ,@zsh-services
      ,@git-services
      ,@emacs-services)))
