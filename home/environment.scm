@@ -13,8 +13,7 @@
   #:use-module (home modules shell)
   #:use-module (home modules git)
   #:use-module (home modules emacs)
-  #:use-module (home modules clojure)
-  #:use-module (home modules guile))
+  #:use-module (home modules flameshot))
 
 (define base-packages
   (map specification->package
@@ -26,10 +25,10 @@
   (packages
    `(,@base-packages
      ;; Development
-     ,@clojure-packages
-     ,@guile-packages))
+     ))
   (services
    `(,@xdg-services
      ,@zsh-services
      ,@git-services
-     ,@emacs-services)))
+     ,@emacs-services
+     ,@flameshot-services)))
