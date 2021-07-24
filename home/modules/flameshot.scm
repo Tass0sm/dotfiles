@@ -10,7 +10,7 @@
   #:use-module (guix gexp)
   #:use-module (guix utils)
 
-  #:use-module (tassos home-services flameshot))
+  #:use-module (tassos-guix home-services flameshot))
 
 (define-public flameshot-services
   (list
