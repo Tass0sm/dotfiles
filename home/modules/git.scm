@@ -14,9 +14,4 @@
 		 ((name . "Tassos Manganaris")
                   (email . "tassos.manganaris@gmail.com")))
 		(github
-		 ((user . "Tass0sm")))
-		(credential
-		 ((helper . "/usr/share/git/credential/libsecret/git-credential-libsecret")))))
-	     (credentials
-
-))))
+		 ((user . "Tass0sm")))))))))
