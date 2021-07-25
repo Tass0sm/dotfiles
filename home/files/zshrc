@@ -1,0 +1,43 @@
+# -*- mode: shell; -*-
+
+# History
+HISTFILE=$HOME/.config/zsh/histfile
+HISTSIZE=1000
+SAVEHIST=1000
+
+setopt autocd extendedglob nomatch notify
+unsetopt beep
+bindkey -e
+
+# X clipboard integration for kill / yank functions.
+x-copy-region-as-kill () {
+  zle copy-region-as-kill
+  [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
+}
+
+x-kill-region () {
+  zle kill-region
+  [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
+}
+
+x-kill-line () {
+  zle kill-line
+  [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
+}
+
+x-yank () {
+  CUTBUFFER=$(xsel -o -b </dev/null)
+  [[ $DISPLAY ]] && zle yank
+}
+
+# Add X integrated modules to the zsh line editor.
+zle -N x-copy-region-as-kill
+zle -N x-kill-region
+zle -N x-kill-line
+zle -N x-yank
+
+# Bind keys in the line editor to the correct modules.
+bindkey -e '\ew' x-copy-region-as-kill
+bindkey -e '^W' x-kill-region
+bindkey -e '^K' x-kill-line
+bindkey -e '^Y' x-yank
