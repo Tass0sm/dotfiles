@@ -13,6 +13,7 @@
        '("emacs-ivy"
 	 "emacs-which-key"
 	 "emacs-use-package"
+	 "emacs-sudo-edit"
 
 	 "emacs-multiple-cursors"
 

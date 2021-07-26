@@ -10,11 +10,10 @@
   #:use-module (gnu home-services)
   ;; personal modules
   #:use-module (home modules xdg)
-  #:use-module (home modules xdg)
   #:use-module (home modules shell)
   #:use-module (home modules emacs)
   #:use-module (home modules git)
-  #:use-module (home modules flameshot))
+  #:use-module (home modules desktop))
 
 (define base-packages
   (map specification->package
@@ -22,14 +21,26 @@
 	;; terminal emulator + ???
 	"nss-certs")))
 
+(define xfce-packages
+  (map specification->package
+       (list
+	"xfce"
+	"xfce4-session"
+	"xfconf"
+	"xfce4-battery-plugin"
+	"xfce4-volumed-pulse"
+	"xfce4-notifyd"
+	"pulseaudio"
+	"xbacklight"
+	"pavucontrol")))
+
 (home-environment
   (packages
    `(,@base-packages
-     ;; Development
-     ))
+     ,@xfce-packages))
   (services
    `(,@xdg-services
      ,@zsh-services
      ,@git-services
      ,@emacs-services
-     ,@flameshot-services)))
+     ,@desktop-services)))

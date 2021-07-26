@@ -1,5 +1,8 @@
 export XDG_DATA_DIRS="/usr/local/share/:/usr/share/"
 export XDG_CONFIG_DIRS="/etc/xdg/"
 
+export XDG_DATA_DIRS="$HOME/.guix-home/profile/share:$XDG_DATA_DIRS"
+export XDG_CONFIG_DIRS="$HOME/.guix-home/profile/etc/xdg:$XDG_CONFIG_DIRS"
+
 GUIX_PROFILE="$HOME/.guix-profile"
 [ -f "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
