@@ -18,8 +18,7 @@
 (define base-packages
   (map specification->package
        (list
-	;; terminal emulator + ???
-	"nss-certs")))
+	"glibc-locales" "nss-certs")))
 
 (define xfce-packages
   (map specification->package
