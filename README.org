@@ -1,0 +1,7 @@
+#+title: A Guix Home Environment
+
+This is a work in progress reproducible home environment managed with [[https://sr.ht/~abcdw/rde/][Guix Home]]
+by Andrew Tropin. Guix Home is set to be included with Guix 1.4, and I think
+it's really neat.
+
+I'll include a screenshot here soon.
