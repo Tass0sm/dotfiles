@@ -1,13 +1,13 @@
 #! /bin/sh
 
 # Launch all the background programs.
-# pidof sxhkd || sxhkd &
+pidof sxhkd || sxhkd &
 # pidof dunst || dunst &
 # pidof picom || picom &
 # pidof emacs || emacs --daemon &
 # pidof bspswallow || bspswallow &
-# pidof polybar && killall polybar
-# polybar bar0 &
+pidof polybar && killall polybar
+polybar bar0 &
 
 # Disable Trackpad
 # touchPadID=$(xinput | grep "TouchPad" | awk '{print substr($6,4,2)}')
