@@ -22,6 +22,8 @@
 
 ;; (use-package all-the-icons)
 
+(load-theme 'nord)
+
 					; Text Editing
 
 (use-package multiple-cursors

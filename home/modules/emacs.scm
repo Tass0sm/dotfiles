@@ -15,6 +15,8 @@
 	 "emacs-use-package"
 	 "emacs-sudo-edit"
 
+	 "emacs-yaml-mode"
+
 	 "emacs-multiple-cursors"
 
 	 "emacs-org-journal"
@@ -23,7 +25,9 @@
 	 "emacs-magit"
 	 "emacs-guix"
 	 "emacs-projectile"
-	 "emacs-company")))
+	 "emacs-company"
+
+	 "emacs-nord-theme")))
 
 (define-public emacs-services
   (list
