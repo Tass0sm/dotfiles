@@ -13,12 +13,15 @@
   #:use-module (home modules shell)
   #:use-module (home modules emacs)
   #:use-module (home modules git)
+  #:use-module (home modules gtk)
   #:use-module (home modules desktop))
 
 (define base-packages
   (map specification->package
        (list
-	"glibc-locales" "nss-certs")))
+	"alacritty"
+	"glibc-locales"
+	"nss-certs")))
 
 (define xfce-packages
   (map specification->package
@@ -41,5 +44,6 @@
    `(,@xdg-services
      ,@zsh-services
      ,@git-services
+     ,@gtk-services
      ,@emacs-services
      ,@desktop-services)))
