@@ -1,27 +1,52 @@
 #! /bin/sh
 
+# set wallpaper
+xwallpaper --zoom "$HOME/pictures/genome-wallpaper.png"
+
+# set x resources
+xrdb "$HOME/.Xresources"
+
 # Launch all the background programs.
 pidof sxhkd || sxhkd &
-# pidof dunst || dunst &
+pidof dunst || dunst &
+pidof dunst || powerkit &
+pidof emacs || emacs --daemon &
 # pidof picom || picom &
-# pidof emacs || emacs --daemon &
 # pidof bspswallow || bspswallow &
 pidof polybar && killall polybar
-polybar bar0 &
+polybar bar &
 
 # Disable Trackpad
 # touchPadID=$(xinput | grep "TouchPad" | awk '{print substr($6,4,2)}')
 # xinput set-prop $touchPadID "Device Enabled" 1
 
-bspc monitor -d web-p web-s mail dev dsc img vid conf
+bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
 
-bspc config border_width         2
-bspc config window_gap          12
+bspc config border_width                3
+bspc config top_padding                 68
+bspc config right_padding               9
+bspc config left_padding                9
+bspc config bottom_padding              9
+bspc config window_gap                  18
+bspc config top_monocle_padding         0
+bspc config right_monocle_padding       0
+bspc config left_monocle_padding        0
+bspc config bottom_monocle_padding      0
 
-bspc config split_ratio          0.52
-bspc config borderless_monocle   true
-bspc config gapless_monocle      true
+bspc config focused_border_color        $(xrdb -query | grep "color4" | cut -f 2)
+bspc config normal_border_color         $(xrdb -query | grep "color0" | cut -f 2)
+bspc config active_border_color         $(xrdb -query | grep "color0" | cut -f 2)
+bspc config presel_feedback_color       $(xrdb -query | grep "color4" | cut -f 2)
+bspc config split_ratio                 0.50
+bspc config borderless_monocle          false
+bspc config gapless_monocle             false
+bspc config focus_follows_pointer       false
 
+###Rules
+# Cleanup
+bspc rule -r '*'
+
+# State rules
 bspc rule -a Emacs state=tiled
 bspc rule -a Thunderbird desktop='mail'
 bspc rule -a discord desktop='dsc'

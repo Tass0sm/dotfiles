@@ -2,17 +2,18 @@
 # wm independent hotkeys
 #
 
-# test
-super + shift + k
-      notify-send $(emacsclient -e "global-current-buffer")
-
 # terminal emulator
 super + Return
-	st
+	alacritty
 
 # program launcher
 super + @space
 	dmenu_run
+
+# emacs launcher
+super + e
+	$HOME/.local/bin/ec
+
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -78,7 +79,7 @@ super + shift + a
 # super + bracket{left,right}
 #	bspc desktop -f {prev,next}.local
 
-focus the last node/desktop
+# focus the last node/desktop
 super + {grave,Tab}
       	bspc {node,desktop} -f last
 
