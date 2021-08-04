@@ -10,23 +10,35 @@
 
 (define emacs-packages
   (map specification->package
-       '("emacs-ivy"
+       '(;; Utility
+	 "emacs-ivy"
 	 "emacs-which-key"
 	 "emacs-use-package"
 	 "emacs-sudo-edit"
-
-	 "emacs-yaml-mode"
-
-	 "emacs-multiple-cursors"
-
-	 "emacs-org-journal"
-	 
-	 "emacs-dashboard"
 	 "emacs-magit"
 	 "emacs-guix"
 	 "emacs-projectile"
 	 "emacs-company"
-
+	 ;; Modes
+	 "emacs-yaml-mode"
+	 ;; Racket
+	 "emacs-racket-mode"
+	 "emacs-geiser-racket"
+	 ;; Haskell
+	 "emacs-haskell-mode"
+	 "emacs-dante"
+	 ;; Clojure
+	 "emacs-clojure-mode"
+	 "emacs-cider"
+	 ;; Text Editing
+	 "emacs-expand-region"
+	 "emacs-multiple-cursors"
+	 "emacs-ws-butler"
+	 "emacs-yasnippet"
+	 "emacs-yasnippet-snippets"
+	 ;; Org
+	 "emacs-org-journal"
+	 ;; Appearance
 	 "emacs-nord-theme")))
 
 (define-public emacs-services

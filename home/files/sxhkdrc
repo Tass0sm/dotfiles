@@ -14,6 +14,9 @@ super + @space
 super + e
 	$HOME/.local/bin/ec
 
+# Screen Shot
+super + Print
+	flameshot gui
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -157,11 +160,3 @@ XF86MonBrightnessDown
 # increase brightness
 XF86MonBrightnessUp
 	lightctl 40
-	
-#
-# Misc Utilities
-#
-
-# Screen shot
-super + Print
-	flameshot gui

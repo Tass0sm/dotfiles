@@ -15,6 +15,42 @@
 (global-set-key (kbd "C-z") 'ignore)
 (global-set-key (kbd "C-x C-z") 'ignore)
 
+(setq inhibit-startup-screen t)
+
+					; Utility
+
+(use-package ivy
+  :config
+  (ivy-mode 1))
+
+(use-package dired
+  :config
+  (setq dired-listing-switches "--group-directories-first -al")
+  (setq dired-auto-revert-buffer t
+        dired-dwim-target t)
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode))
+
+(use-package magit
+  :bind
+  ("\C-x g" . magit-status))
+
+(use-package projectile
+  :config
+  (setq projectile-completion-system 'ivy)
+  (projectile-mode +1)
+  :bind-keymap
+  ("C-c p" . projectile-command-map))
+
+(use-package company
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2))
+
+;; (use-package company-posframe
+;;   :config
+;;   (setq company-posframe-quickhelp-delay nil)
+;;   (company-posframe-mode 1))
+
 					; Appearance
 
 (setq-default truncate-lines t)
@@ -22,9 +58,18 @@
 
 ;; (use-package all-the-icons)
 
-(load-theme 'nord)
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+        (lambda (frame)
+            (select-frame frame)
+            (load-theme 'nord)))
+    (load-theme 'nord))
 
 					; Text Editing
+
+(use-package expand-region
+  :bind
+  ("C-=" . er/expand-region))
 
 (use-package multiple-cursors
   :bind
@@ -32,6 +77,13 @@
   ("C->" . mc/mark-next-like-this)
   ("C-<" . mc/mark-previous-like-this)
   ("C-c C-<" . mc/mark-all-like-this))
+
+(use-package ws-butler
+  :config
+  (ws-butler-global-mode))
+
+(use-package yasnippet
+  :config (yas-global-mode 1))
 
 					; Markup
 
@@ -52,46 +104,10 @@
 
 					; Programming
 
-(use-package magit
-  :bind
-  ("\C-x g" . magit-status))
-
-(use-package projectile
-  :config
-  (setq projectile-completion-system 'ivy)
-  (projectile-mode +1)
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
-
-(use-package company
-  :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 2))
-
-;; (use-package company-posframe
-;;   :ensure t
-;;   :config
-;;   (setq company-posframe-quickhelp-delay nil)
-;;   (company-posframe-mode 1))
-
-					; Utility
-
-(use-package ivy
-  :config
-  (ivy-mode 1))
-
-(use-package dired
-  :config
-  (setq dired-listing-switches "--group-directories-first -al")
-  (setq dired-auto-revert-buffer t
-        dired-dwim-target t)
-  (add-hook 'dired-mode-hook 'dired-hide-details-mode))
-
-(use-package dashboard
-  :config
-  (setq dashboard-items
-        '((recents . 5)
-          (projects . 5)
-          (agenda . 10)))
-  (setq dashboard-set-footer nil)
-  (dashboard-setup-startup-hook))
+;;(use-package dante
+;;  :after haskell-mode
+;;  :commands 'dante-mode
+;;  :init
+;;  (add-hook 'haskell-mode-hook 'flymake-mode)
+;;  (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
+;;  (add-hook 'haskell-mode-hook 'dante-mode))
