@@ -80,10 +80,11 @@
 
 (use-package ws-butler
   :config
-  (ws-butler-global-mode))
+  (ws-butler-global-mode 1))
 
 (use-package yasnippet
-  :config (yas-global-mode 1))
+  :config
+  (yas-global-mode 1))
 
 					; Markup
 

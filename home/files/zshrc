@@ -1,4 +1,4 @@
-# -*- mode: shell; -*-
+# -*- mode: shell-script; -*-
 
 # History
 HISTFILE=$HOME/.config/zsh/histfile
@@ -41,3 +41,10 @@ bindkey -e '\ew' x-copy-region-as-kill
 bindkey -e '^W' x-kill-region
 bindkey -e '^K' x-kill-line
 bindkey -e '^Y' x-yank
+
+# Prompt
+fpath+=$HOME/.config/zsh/pure
+autoload -U promptinit; promptinit
+prompt pure
+
+TYPEWRITTEN_PROMPT_LAYOUT="pure"
