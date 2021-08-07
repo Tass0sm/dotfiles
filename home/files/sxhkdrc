@@ -38,6 +38,10 @@ super + {_,shift + }{1-8}
 super + {period,comma}
       	bspc desktop -f '{next,prev}'
 
+# move incrementally through desktops
+super + shift + {period,comma}
+      	bspc desktop -f '{next,prev}.occupied'
+
 #
 # bspwm states
 #
@@ -137,26 +141,24 @@ super + r
 # Audio Controls
 #
 
-# decrease volume
-XF86AudioLowerVolume
-	volctl 3%-
-
-# increase volume
-XF86AudioRaiseVolume
-	volctl 3%+
-
-# mute playback
 XF86AudioMute
-	pactl set-sink-mute 0 toggle
+	pamixer -t
 
-# mute capture
+XF86AudioLowerVolume
+	pamixer -d 3
+
+XF86AudioRaiseVolume
+	pamixer -i 3
+
 XF86AudioMicMute
-	amixer sset 'Capture' toggle
+	pamixer --default-source -t
 
-# decrease brightness
+#
+# Audio Controls
+#
+
 XF86MonBrightnessDown
-	lightctl -40
+	light -U 5
 
-# increase brightness
 XF86MonBrightnessUp
-	lightctl 40
+	light -A 5

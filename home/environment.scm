@@ -20,6 +20,8 @@
   (map specification->package
        (list
 	"alacritty"
+	"hunspell"
+	"hunspell-dict-en"
 	"glibc-locales"
 	"nss-certs")))
 

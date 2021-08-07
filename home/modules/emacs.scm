@@ -18,6 +18,7 @@
 	 "emacs-magit"
 	 "emacs-guix"
 	 "emacs-projectile"
+	 "emacs-wucuo"
 	 "emacs-company"
 	 ;; Modes
 	 "emacs-yaml-mode"
