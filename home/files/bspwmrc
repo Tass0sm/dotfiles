@@ -14,19 +14,19 @@ pidof emacs || emacs --daemon &
 # pidof picom || picom &
 # pidof bspswallow || bspswallow &
 pidof polybar && killall polybar
-polybar bar &
+polybar main &
 
 # Disable Trackpad
 # touchPadID=$(xinput | grep "TouchPad" | awk '{print substr($6,4,2)}')
 # xinput set-prop $touchPadID "Device Enabled" 1
 
-bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9 10
+bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8
 
 bspc config border_width                3
-bspc config top_padding                 68
-bspc config right_padding               9
-bspc config left_padding                9
-bspc config bottom_padding              9
+bspc config top_padding                 18
+bspc config right_padding               0
+bspc config left_padding                0
+bspc config bottom_padding              0
 bspc config window_gap                  18
 bspc config top_monocle_padding         0
 bspc config right_monocle_padding       0

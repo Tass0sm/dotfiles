@@ -4,4 +4,12 @@ This is a work in progress reproducible home environment managed with [[https://
 by Andrew Tropin. Guix Home is set to be included with Guix 1.4, and I think
 it's really neat.
 
-I'll include a screenshot here soon.
+* Screenshot
+[[file:screenshot.png]]
+
+* Todos
+- Make home-service for polybar
+
+* References
+- https://github.com/Barbarossa93/Genome
+- https://github.com/skalpasi/bspwm-dotfiles
