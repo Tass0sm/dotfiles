@@ -20,6 +20,7 @@
   (map specification->package
        (list
 	"alacritty"
+	"exa"
 	"hunspell"
 	"hunspell-dict-en"
 	"glibc-locales"
@@ -39,13 +40,12 @@
 	"pavucontrol")))
 
 (home-environment
-  (packages
-   `(,@base-packages
-     ,@xfce-packages))
-  (services
-   `(,@xdg-services
-     ,@zsh-services
-     ,@git-services
-     ,@gtk-services
-     ,@emacs-services
-     ,@desktop-services)))
+ (packages
+  `(,@base-packages))
+ (services
+  `(,@xdg-services
+    ,@zsh-services
+    ,@git-services
+    ,@gtk-services
+    ,@emacs-services
+    ,@desktop-services)))

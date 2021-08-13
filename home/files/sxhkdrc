@@ -145,10 +145,10 @@ XF86AudioMute
 	pamixer -t
 
 XF86AudioLowerVolume
-	pamixer -d 3
+	pamixer -d 3 --allow-boost
 
 XF86AudioRaiseVolume
-	pamixer -i 3
+	pamixer -i 3 --allow-boost
 
 XF86AudioMicMute
 	pamixer --default-source -t

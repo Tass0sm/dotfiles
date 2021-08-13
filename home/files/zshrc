@@ -48,3 +48,6 @@ autoload -U promptinit; promptinit
 prompt pure
 
 TYPEWRITTEN_PROMPT_LAYOUT="pure"
+
+# alias
+alias ls="exa"
