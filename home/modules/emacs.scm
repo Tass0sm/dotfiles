@@ -31,7 +31,10 @@
 	 ;; Clojure
 	 "emacs-clojure-mode"
 	 "emacs-cider"
+	 ;; Rust
+	 "emacs-rust-mode"
 	 ;; Text Editing
+	 "emacs-aggressive-indent"
 	 "emacs-expand-region"
 	 "emacs-multiple-cursors"
 	 "emacs-ws-butler"

@@ -7,6 +7,7 @@
 (setq backup-directory-alist
       '(("." . "~/.local/share/emacs/saves/")))
 
+
 (setq custom-file (concat user-emacs-directory "custom.el"))
 (load custom-file)
 
@@ -22,6 +23,10 @@
 (use-package ivy
   :config
   (ivy-mode 1))
+
+(use-package which-key
+  :config
+  (which-key-mode 1))
 
 (use-package dired
   :config
@@ -66,6 +71,11 @@
     (load-theme 'nord))
 
 					; Text Editing
+
+(use-package aggressive-indent
+  :config
+  (global-aggressive-indent-mode 1)
+  (add-to-list 'aggressive-indent-excluded-modes 'org-mode))
 
 (use-package expand-region
   :bind
