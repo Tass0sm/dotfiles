@@ -28,6 +28,11 @@
   :config
   (which-key-mode 1))
 
+(use-package wucuo
+  :config
+  (add-hook 'prog-mode-hook #'wucuo-start)
+  (add-hook 'text-mode-hook #'wucuo-start))
+
 (use-package dired
   :config
   (setq dired-listing-switches "--group-directories-first -al")
@@ -37,7 +42,7 @@
 
 (use-package magit
   :bind
-  ("\C-x g" . magit-status))
+  ("C-x g" . magit-status))
 
 (use-package projectile
   :config
@@ -55,6 +60,9 @@
 ;;   :config
 ;;   (setq company-posframe-quickhelp-delay nil)
 ;;   (company-posframe-mode 1))
+
+(use-package pdf-tools
+  :hook (doc-view-mode . pdf-view-mode))
 
 					; Appearance
 
@@ -105,7 +113,10 @@
                            "~/org/projects.org"
                            "~/org/personal.org"))
   (setq org-todo-keywords
-        '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL"))))
+        '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
+  :bind
+  ("C-c a" . org-agenda)
+  ("C-c l" . org-agenda-list))
 
 (use-package org-journal
   :config

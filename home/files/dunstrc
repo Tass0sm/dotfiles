@@ -9,18 +9,16 @@
     monitor = 0
     follow = keyboard
 
-    #geometry = "262x5-829-46"
-    #geometry = "262x3-14+46"
-    geometry = "800x4-14+74"    
+    geometry = "500x1-10+50"
     indicate_hidden = yes
     shrink = true
     transparency = 0
     notification_height = 0
     separator_height = 2
-    padding = 44
-    horizontal_padding = 44
+    padding = 22
+    horizontal_padding = 22
     frame_width = 3
-    corner_radius = 12
+    corner_radius = 6
 
     #frame_color = 
     separator_color = auto
@@ -109,11 +107,11 @@
     summary = giph
     new_icon = /usr/share/icons/Nord-Icon/48x48/apps/simplescreenrecorder.svg
     
-#[shortcuts]
-#    close = ctrl+space
-#    close_all = ctrl+shift+space
-#    #context = ctrl+shift+period
-#    history = ctrl+grave
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    #context = ctrl+shift+period
+    history = ctrl+grave
 
 [urgency_low]
     background = colors.background
@@ -132,5 +130,3 @@
     foreground = "#bf616a"
     frame_color = "#3b4252"
     timeout = 0
-
-# vim: ft=conf

@@ -20,6 +20,7 @@
 	 "emacs-projectile"
 	 "emacs-wucuo"
 	 "emacs-company"
+	 "emacs-pdf-tools"
 	 ;; Modes
 	 "emacs-yaml-mode"
 	 ;; Racket
@@ -40,8 +41,10 @@
 	 "emacs-ws-butler"
 	 "emacs-yasnippet"
 	 "emacs-yasnippet-snippets"
+	 "emacs-ivy-yasnippet"
 	 ;; Org
 	 "emacs-org-journal"
+	 "emacs-org-roam"
 	 ;; Appearance
 	 "emacs-nord-theme")))
 

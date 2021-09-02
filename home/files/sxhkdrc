@@ -36,11 +36,11 @@ super + {_,shift + }{1-8}
 
 # move incrementally through desktops
 super + {period,comma}
-      	bspc desktop -f '{next,prev}'
+      	bspc desktop -f '{next,prev}.occupied'
 
 # move incrementally through desktops
 super + shift + {period,comma}
-      	bspc desktop -f '{next,prev}.occupied'
+      	bspc desktop -f '{next,prev}'
 
 #
 # bspwm states
