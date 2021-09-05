@@ -18,6 +18,32 @@
 
 (setq inhibit-startup-screen t)
 
+;; (setq pop-up-frames t)
+
+					; Server
+
+(defun server-new-frame-buffer ()
+  "Get the buffer to be used when making a new frame for the emacs
+server."
+  (let* ((oldframe (selected-frame))
+	 (oldwindow (frame-selected-window oldframe))
+	 (oldbuffer (window-buffer oldwindow)))
+    (cond
+     ((null oldbuffer) (get-buffer-create "*scratch*"))
+     (t oldbuffer))))
+
+(defun server-new-terminal-file ()
+  "Get the file to be used when making a new terminal while using
+the emacs server."
+  (let* ((oldframe (selected-frame))
+	 (oldwindow (frame-selected-window oldframe))
+	 (oldbuffer (window-buffer oldwindow))
+	 (dir (cdr (assq 'default-directory
+			 (buffer-local-variables oldbuffer)))))
+    (cond
+     ((stringp dir) (expand-file-name dir))
+     (t "/home/tassos"))))
+
 					; Utility
 
 (use-package ivy

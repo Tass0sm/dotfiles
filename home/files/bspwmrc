@@ -48,8 +48,6 @@ bspc rule -r '*'
 
 # State rules
 bspc rule -a Emacs state=tiled
-bspc rule -a Thunderbird desktop='mail'
-bspc rule -a discord desktop='dsc'
-bspc rule -a Gimp desktop='img'
-bspc rule -a mpv desktop='vid' follow=on
-bspc rule -a zoom desktop='conf' follow=on
+bspc rule -a discord desktop='5'
+bspc rule -a Gimp desktop='7'
+bspc rule -a zoom desktop='8' follow=on
