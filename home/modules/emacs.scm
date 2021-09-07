@@ -22,6 +22,7 @@
 	 "emacs-company"
 	 "emacs-pdf-tools"
 	 ;; Modes
+	 "emacs-ledger-mode"
 	 "emacs-yaml-mode"
 	 ;; Racket
 	 "emacs-racket-mode"
@@ -34,6 +35,8 @@
 	 "emacs-cider"
 	 ;; Rust
 	 "emacs-rust-mode"
+	 ;; Lisp
+	 "emacs-macrostep"
 	 ;; Text Editing
 	 "emacs-aggressive-indent"
 	 "emacs-expand-region"

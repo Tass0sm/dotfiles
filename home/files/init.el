@@ -90,6 +90,9 @@ the emacs server."
 (use-package pdf-tools
   :hook (doc-view-mode . pdf-view-mode))
 
+(use-package ibuffer
+  :bind ("C-x C-b" . ibuffer))
+
 					; Appearance
 
 (setq-default truncate-lines t)
@@ -151,6 +154,12 @@ the emacs server."
   ("C-c j" . org-journal-new-entry))
 
 					; Programming
+
+(use-package macrostep
+  :bind ((:map emacs-lisp-mode-map
+               ("C-c C-e" . macrostep-expand))
+	 (:map lisp-interaction-mode-map
+               ("C-c C-e" . macrostep-expand))))
 
 ;;(use-package dante
 ;;  :after haskell-mode
