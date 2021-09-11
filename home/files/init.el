@@ -1,6 +1,6 @@
 (require 'use-package)
 
-					; Misc
+					; Misc hello world
 
 (column-number-mode)
 
@@ -54,10 +54,18 @@ the emacs server."
   :config
   (which-key-mode 1))
 
-(use-package wucuo
+(use-package flyspell
   :config
-  (add-hook 'prog-mode-hook #'wucuo-start)
-  (add-hook 'text-mode-hook #'wucuo-start))
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map
+	      (("C-,"   . flyspell-auto-correct-word)
+	       ("C-."   . flyspell-goto-next-error)
+	       ("C-;"   . flyspell-correct-next)
+	       ("C-M-;" . flyspell-buffer))))
 
 (use-package dired
   :config
@@ -72,6 +80,7 @@ the emacs server."
 
 (use-package projectile
   :config
+  (require 'subr-x)
   (setq projectile-completion-system 'ivy)
   (projectile-mode +1)
   :bind-keymap
@@ -102,10 +111,10 @@ the emacs server."
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
-        (lambda (frame)
-            (select-frame frame)
-            (load-theme 'nord)))
-    (load-theme 'nord))
+              (lambda (frame)
+		(select-frame frame)
+		(load-theme 'nord)))
+  (load-theme 'nord))
 
 					; Text Editing
 
@@ -157,9 +166,9 @@ the emacs server."
 
 (use-package macrostep
   :bind ((:map emacs-lisp-mode-map
-               ("C-c C-e" . macrostep-expand))
+	       ("C-c C-e" . macrostep-expand))
 	 (:map lisp-interaction-mode-map
-               ("C-c C-e" . macrostep-expand))))
+	       ("C-c C-e" . macrostep-expand))))
 
 ;;(use-package dante
 ;;  :after haskell-mode

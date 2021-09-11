@@ -3,8 +3,7 @@
   #:use-module (gnu home)
   #:use-module (gnu packages)
   #:use-module (gnu services)
-  #:use-module (gnu home-services)
-  #:use-module (gnu home-services files))
+  #:use-module (gnu home-services))
 
 (define-public gtk-services
   (list

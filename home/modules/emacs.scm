@@ -5,7 +5,6 @@
   #:use-module (gnu packages emacs)
   #:use-module (gnu services)
   #:use-module (gnu home-services)
-  #:use-module (gnu home-services files)
   #:use-module (gnu home-services emacs))
 
 (define emacs-packages
@@ -18,7 +17,7 @@
 	 "emacs-magit"
 	 "emacs-guix"
 	 "emacs-projectile"
-	 "emacs-wucuo"
+	 "emacs-flyspell-correct"
 	 "emacs-company"
 	 "emacs-pdf-tools"
 	 ;; Modes

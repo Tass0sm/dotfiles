@@ -6,8 +6,7 @@
   #:use-module (gnu home-services)
   #:use-module (gnu home-services-utils)
   #:use-module (gnu home-services shells)
-  #:use-module (gnu home-services shellutils)
-  #:use-module (gnu home-services files))
+  #:use-module (gnu home-services shellutils))
 
 (define-public zsh-services
   (list
