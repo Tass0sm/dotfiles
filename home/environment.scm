@@ -13,7 +13,6 @@
   #:use-module (home modules shell)
   #:use-module (home modules emacs)
   #:use-module (home modules git)
-  #:use-module (home modules gtk)
   #:use-module (home modules desktop))
 
 (define base-packages
@@ -23,7 +22,6 @@
 	"exa"
 	"hunspell"
 	"hunspell-dict-en"
-	"glibc-locales"
 	"nss-certs")))
 
 (define xfce-packages
@@ -41,11 +39,11 @@
 
 (home-environment
  (packages
-  `(,@base-packages))
+  `(,@base-packages
+    ,@desktop-packages))
  (services
   `(,@xdg-services
     ,@zsh-services
     ,@git-services
-    ,@gtk-services
     ,@emacs-services
     ,@desktop-services)))

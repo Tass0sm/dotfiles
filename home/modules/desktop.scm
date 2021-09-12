@@ -7,8 +7,14 @@
   #:use-module (gnu home-services xorg)
 
   #:use-module (guix gexp)
+  #:use-module (tassos-guix packages xorg)
   #:use-module (tassos-guix home-services wm)
   #:use-module (tassos-guix home-services notifications))
+
+(define-public desktop-packages
+  (map specification->package
+       (list
+	"xcursor-nordzy")))
 
 (define-public desktop-services
   (list
@@ -35,4 +41,10 @@
 	    (home-bspwm-configuration
 	     (bspwmrc (list
 		       (slurp-file-gexp
-			(local-file "../files/bspwmrc"))))))))
+			(local-file "../files/bspwmrc"))))))
+   (simple-service 'gtk-config
+ 		   home-files-service-type
+ 		   `(("config/gtk-3.0/settings.ini"
+                      ,(local-file "../files/gtk3.ini"))
+		     ("config/gtk-3.0/gtk.css"
+                      ,(local-file "../files/gtk3.css"))))))
