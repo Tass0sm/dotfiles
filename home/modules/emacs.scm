@@ -9,44 +9,47 @@
 
 (define emacs-packages
   (map specification->package
-       '(;; Utility
+       '(;; Emacs-Lisp
+	 "emacs-use-package"
+	 ;; Basic Tools
 	 "emacs-ivy"
 	 "emacs-which-key"
-	 "emacs-use-package"
-	 "emacs-sudo-edit"
+	 "emacs-projectile"
+	 "emacs-company"
+	 "emacs-company-posframe"
+	 "emacs-perspective"
+	 ;; Tool Modes
 	 "emacs-magit"
 	 "emacs-guix"
-	 "emacs-projectile"
-	 "emacs-flyspell-correct"
-	 "emacs-company"
+	 "emacs-vterm"
 	 "emacs-pdf-tools"
-	 ;; Modes
+	 "emacs-notmuch"
+	 ;; Specific Editing Modes
 	 "emacs-ledger-mode"
 	 "emacs-yaml-mode"
-	 ;; Racket
 	 "emacs-racket-mode"
 	 "emacs-geiser-racket"
-	 ;; Haskell
 	 "emacs-haskell-mode"
 	 "emacs-dante"
-	 ;; Clojure
 	 "emacs-clojure-mode"
 	 "emacs-cider"
-	 ;; Rust
 	 "emacs-rust-mode"
-	 ;; Lisp
 	 "emacs-macrostep"
-	 ;; Text Editing
-	 "emacs-aggressive-indent"
+	 "emacs-web-mode"
+	 ;; General Editing Modes
+	 "emacs-sudo-edit"
 	 "emacs-expand-region"
+	 "emacs-aggressive-indent"
 	 "emacs-multiple-cursors"
 	 "emacs-ws-butler"
 	 "emacs-yasnippet"
 	 "emacs-yasnippet-snippets"
 	 "emacs-ivy-yasnippet"
+	 "emacs-flyspell-correct"
 	 ;; Org
 	 "emacs-org-journal"
 	 "emacs-org-roam"
+	 "emacs-org-download"
 	 ;; Appearance
 	 "emacs-nord-theme")))
 

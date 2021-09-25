@@ -36,6 +36,10 @@ zle -N x-kill-region
 zle -N x-kill-line
 zle -N x-yank
 
+# Better word separation
+autoload -U select-word-style
+select-word-style bash
+
 # Bind keys in the line editor to the correct modules.
 bindkey -e '\ew' x-copy-region-as-kill
 bindkey -e '^W' x-kill-region

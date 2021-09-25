@@ -10,7 +10,6 @@
 
 (define-public zsh-services
   (list
-   (service home-zsh-autosuggestions-service-type)
    (service home-zsh-service-type
 	    (home-zsh-configuration
 	     (xdg-flavor? #t)
@@ -21,9 +20,12 @@
 		("SSL_CERT_DIR" . "$HOME/.guix-home/profile/etc/ssl/certs")
 		("SSL_CERT_FILE" . "$HOME/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")
 		("GIT_SSL_CAINFO" . "$SSL_CERT_FILE")
-		("GEM_PATH" . "$HOME/.local/share/gem")))
+		("GEM_PATH" . "$HOME/.local/share/gem")
+		("_JAVA_AWT_WM_NONREPARENTING" . "1")))
 	     (zshrc
 	      (list (slurp-file-gexp (local-file "../files/zshrc"))))))
+   (service home-zsh-autosuggestions-service-type)
+   (service home-zsh-direnv-service-type)
    (simple-service 'login-variables
 		   home-environment-variables-service-type
 		   `(;; ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/usr/local/share/:/usr/share/")

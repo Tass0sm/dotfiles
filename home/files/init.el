@@ -44,7 +44,7 @@ the emacs server."
      ((stringp dir) (expand-file-name dir))
      (t "/home/tassos"))))
 
-					; Utility
+					; Basic Tools
 
 (use-package ivy
   :config
@@ -54,30 +54,6 @@ the emacs server."
   :config
   (which-key-mode 1))
 
-(use-package flyspell
-  :config
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
-
-(use-package flyspell-correct
-  :after flyspell
-  :bind (:map flyspell-mode-map
-	      (("C-,"   . flyspell-auto-correct-word)
-	       ("C-."   . flyspell-goto-next-error)
-	       ("C-;"   . flyspell-correct-next)
-	       ("C-M-;" . flyspell-buffer))))
-
-(use-package dired
-  :config
-  (setq dired-listing-switches "--group-directories-first -al")
-  (setq dired-auto-revert-buffer t
-        dired-dwim-target t)
-  (add-hook 'dired-mode-hook 'dired-hide-details-mode))
-
-(use-package magit
-  :bind
-  ("C-x g" . magit-status))
-
 (use-package projectile
   :config
   (require 'subr-x)
@@ -86,46 +62,80 @@ the emacs server."
   :bind-keymap
   ("C-c p" . projectile-command-map))
 
+(use-package dired
+  :config
+  (setq dired-listing-switches "--group-directories-first -al")
+  (setq dired-auto-revert-buffer t
+        dired-dwim-target t)
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode))
+
 (use-package company
   :config
   (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 2))
+  (setq company-minimum-prefix-length 2)
+  (global-company-mode 1))
 
 ;; (use-package company-posframe
+;;   :hook (company-mode . company-posframe-mode)
 ;;   :config
-;;   (setq company-posframe-quickhelp-delay nil)
-;;   (company-posframe-mode 1))
+;;   (setq company-posframe-quickhelp-delay nil))
 
-(use-package pdf-tools
-  :hook (doc-view-mode . pdf-view-mode))
+;; (use-package company-box
+;;   :hook (company-mode . company-box-mode))
+
+					; Tool Modes
+
+(use-package magit
+  :bind
+  ("C-x g" . magit-status))
+
+(use-package guix-popup
+  :bind
+  ("C-x y" . guix-popup))
 
 (use-package ibuffer
-  :bind ("C-x C-b" . ibuffer))
+  :bind
+  ("C-x C-b" . ibuffer))
 
-					; Appearance
+(use-package pdf-tools
+  :magic ("%PDF" .  pdf-view-mode))
 
-(setq-default truncate-lines t)
-(setq-default fill-column 80)
+					; Specific Editing Modes
 
-;; (use-package all-the-icons)
+;;(use-package dante
+;;  :after haskell-mode
+;;  :commands 'dante-mode
+;;  :init
+;;  (add-hook 'haskell-mode-hook 'flymake-mode)
+;;  (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
+;;  (add-hook 'haskell-mode-hook 'dante-mode))
 
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-		(select-frame frame)
-		(load-theme 'nord)))
-  (load-theme 'nord))
+(use-package macrostep
+  :bind ((:map emacs-lisp-mode-map
+	       ("C-c C-e" . macrostep-expand))
+	 (:map lisp-interaction-mode-map
+	       ("C-c C-e" . macrostep-expand))))
 
-					; Text Editing
+(use-package web-mode
+  :mode ("\\.html" . web-mode)
+  :config
+  (defun set-company-backends-for-web ()
+    (setq-local company-backends '(company-capf
+				   company-files
+				   (company-dabbrev-code company-keywords)
+				   company-dabbrev)))
+  (add-hook 'web-mode-hook 'set-company-backends-for-web))
+
+					; General Editing Modes
+
+(use-package expand-region
+  :bind
+  ("C-=" . er/expand-region))
 
 (use-package aggressive-indent
   :config
   (global-aggressive-indent-mode 1)
   (add-to-list 'aggressive-indent-excluded-modes 'org-mode))
-
-(use-package expand-region
-  :bind
-  ("C-=" . er/expand-region))
 
 (use-package multiple-cursors
   :bind
@@ -141,6 +151,19 @@ the emacs server."
 (use-package yasnippet
   :config
   (yas-global-mode 1))
+
+(use-package flyspell
+  :config
+  (add-hook 'text-mode-hook #'flyspell-mode)
+  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+
+(use-package flyspell-correct
+  :after flyspell
+  :bind (:map flyspell-mode-map
+	      (("C-,"   . flyspell-auto-correct-word)
+	       ("C-."   . flyspell-goto-next-error)
+	       ("C-;"   . flyspell-correct-next)
+	       ("C-M-;" . flyspell-buffer))))
 
 					; Markup
 
@@ -162,18 +185,20 @@ the emacs server."
   :bind
   ("C-c j" . org-journal-new-entry))
 
-					; Programming
+(use-package org-download
+  :config
+  (setq org-download-screenshot-method "flameshot gui --raw > %s"))
 
-(use-package macrostep
-  :bind ((:map emacs-lisp-mode-map
-	       ("C-c C-e" . macrostep-expand))
-	 (:map lisp-interaction-mode-map
-	       ("C-c C-e" . macrostep-expand))))
+					; Appearance
 
-;;(use-package dante
-;;  :after haskell-mode
-;;  :commands 'dante-mode
-;;  :init
-;;  (add-hook 'haskell-mode-hook 'flymake-mode)
-;;  (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
-;;  (add-hook 'haskell-mode-hook 'dante-mode))
+(setq-default truncate-lines t)
+(setq-default fill-column 80)
+
+;; (use-package all-the-icons)
+
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              (lambda (frame)
+		(select-frame frame)
+		(load-theme 'nord)))
+  (load-theme 'nord))

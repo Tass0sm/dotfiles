@@ -11,6 +11,7 @@ pidof sxhkd || sxhkd &
 pidof dunst || dunst &
 pidof dunst || powerkit &
 pidof emacs || emacs --daemon &
+pidof nm-applet || nm-applet &
 # pidof picom || picom &
 # pidof bspswallow || bspswallow &
 pidof polybar && killall polybar
