@@ -179,6 +179,23 @@ the emacs server."
   ("C-c a" . org-agenda)
   ("C-c l" . org-agenda-list))
 
+(use-package org-roam
+  :init
+  (setq org-roam-v2-ack t)
+  :bind (("C-c n f" . org-roam-node-find)
+	 ("C-c n g" . org-roam-graph)
+	 ("C-c n r" . org-roam-node-random)
+	 (:map org-mode-map
+	       (("C-c n i" . org-roam-node-insert)
+		("C-c n o" . org-id-get-create)
+		("C-c n t" . org-roam-tag-add)
+		("C-c n a" . org-roam-alias-add)
+		("C-c n l" . org-roam-buffer-toggle))))
+  :config
+  (setq org-roam-directory (file-truename
+			    (concat org-directory "/notes/")))
+  (org-roam-db-autosync-mode))
+
 (use-package org-journal
   :config
   (setq org-journal-dir "~/org/diary")

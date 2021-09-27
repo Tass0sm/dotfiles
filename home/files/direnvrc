@@ -1,0 +1,90 @@
+# Thanks <https://github.com/direnv/direnv/issues/73#issuecomment-152284914>
+export_function()
+{
+    local name=$1
+    local alias_dir=$PWD/.direnv/aliases
+    mkdir -p "$alias_dir"
+    PATH_add "$alias_dir"
+    local target="$alias_dir/$name"
+    if declare -f "$name" >/dev/null; then
+	echo "#!$SHELL" > "$target"
+	declare -f "$name" >> "$target" 2>/dev/null
+	# Notice that we add shell variables to the function trigger.
+	echo "$name \$*" >> "$target"
+	chmod +x "$target"
+    fi
+}
+
+use_guix()
+{
+    # Set GitHub token.
+    export GUIX_GITHUB_TOKEN="xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+
+    # Unset 'GUIX_PACKAGE_PATH'.
+    export GUIX_PACKAGE_PATH=""
+
+    # Recreate a garbage collector root.
+    gcroots="$HOME/.config/guix/gcroots"
+    mkdir -p "$gcroots"
+    gcroot="$gcroots/guix"
+    if [ -L "$gcroot" ]
+    then
+	rm -v "$gcroot"
+    fi
+
+    # Miscellaneous packages.
+    PACKAGES_MAINTENANCE=(
+	direnv
+	git
+	git:send-email
+	git-cal
+	gnupg
+	guile-colorized
+	guile-readline
+	less
+	ncurses
+	openssh
+	xdot
+    )
+
+    # Environment packages.
+    PACKAGES=(help2man guile-sqlite3 guile-gcrypt)
+
+    # Thanks <https://lists.gnu.org/archive/html/guix-devel/2016-09/msg00859.html>
+    eval "$(guix environment --search-paths --root="$gcroot" --pure guix --ad-hoc ${PACKAGES[@]} ${PACKAGES_MAINTENANCE[@]} "$@")"
+
+    # Predefine configure flags.
+    configure()
+    {
+	./configure --localstatedir=/var --prefix=
+    }
+    export_function configure
+
+    # Run make and optionally build something.
+    build()
+    {
+	make -j 2
+	if [ $# -gt 0 ]
+	then
+	    ./pre-inst-env guix build "$@"
+	fi
+    }
+    export_function build
+
+    # Predefine push Git command.
+    push()
+    {
+	git push --set-upstream origin
+    }
+    export_function push
+
+    clear                        # Clean up the screen.
+    git-cal --author='Your Name' # Show contributions calendar.
+
+    # Show commands help.
+    echo "
+build          build a package or just a project if no argument provided
+configure      run ./configure with predefined parameters
+push           push to upstream Git repository
+"
+}

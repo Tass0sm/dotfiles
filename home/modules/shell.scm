@@ -26,6 +26,10 @@
 	      (list (slurp-file-gexp (local-file "../files/zshrc"))))))
    (service home-zsh-autosuggestions-service-type)
    (service home-zsh-direnv-service-type)
+   (simple-service 'direnvrc
+		   home-files-service-type
+		   `(("config/direnv/direnvrc"
+		      ,(local-file "../files/direnvrc"))))
    (simple-service 'login-variables
 		   home-environment-variables-service-type
 		   `(;; ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/usr/local/share/:/usr/share/")
