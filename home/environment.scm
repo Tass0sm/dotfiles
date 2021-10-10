@@ -6,13 +6,14 @@
 
 (define-module (home environment)
   #:use-module (gnu home)
+  #:use-module (gnu home services)
   #:use-module (gnu packages)
-  #:use-module (gnu home-services)
   ;; personal modules
   #:use-module (home modules xdg)
-  #:use-module (home modules shell)
-  #:use-module (home modules emacs)
   #:use-module (home modules git)
+  #:use-module (home modules mail)
+  #:use-module (home modules emacs)
+  #:use-module (home modules shell)
   #:use-module (home modules desktop))
 
 (define base-packages
@@ -40,10 +41,12 @@
 (home-environment
  (packages
   `(,@base-packages
+    ,@mail-packages
     ,@desktop-packages))
  (services
   `(,@xdg-services
     ,@zsh-services
     ,@git-services
+    ,@mail-services
     ,@emacs-services
     ,@desktop-services)))

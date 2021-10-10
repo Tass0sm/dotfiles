@@ -1,6 +1,6 @@
 (define-module (home modules xdg)
-  #:use-module (gnu home-services)
-  #:use-module (gnu home-services xdg))
+  #:use-module (gnu home services)
+  #:use-module (gnu home services xdg))
 
 (define-public xdg-services
   (list

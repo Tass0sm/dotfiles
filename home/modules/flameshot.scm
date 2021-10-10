@@ -1,7 +1,7 @@
 (define-module (home modules flameshot)
-  #:use-module (gnu home-services)
-  #:use-module (gnu home-services-utils)
-  #:use-module (gnu home-services shepherd)
+  #:use-module (gnu home services)
+  #:use-module (gnu home services utils)
+  #:use-module (gnu home services shepherd)
   #:use-module (gnu packages image)
   #:use-module (gnu services configuration)
 

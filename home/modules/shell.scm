@@ -3,10 +3,10 @@
   #:use-module (gnu home)
   #:use-module (gnu packages)
   #:use-module (gnu services)
-  #:use-module (gnu home-services)
-  #:use-module (gnu home-services-utils)
-  #:use-module (gnu home-services shells)
-  #:use-module (gnu home-services shellutils))
+  #:use-module (gnu home services)
+  #:use-module (gnu home services utils)
+  #:use-module (gnu home services shells)
+  #:use-module (gnu home services shellutils))
 
 (define-public zsh-services
   (list
@@ -36,8 +36,8 @@
 		     ;; ("XDG_CONFIG_DIRS" . "$XDG_CONFIG_DIRS:/etc/xdg/")
 		     ;; ("XDG_DATA_DIRS" . "$HOME/.guix-home/profile/share:$XDG_DATA_DIRS")
 		     ;; ("XDG_CONFIG_DIRS" . "$HOME/.guix-home/profile/etc/xdg:$XDG_CONFIG_DIRS")
-		     ("GUILE_LOAD_PATH" . "$XDG_CONFIG_HOME/guix/current/share/guile/site/3.0:$GUILE_LOAD_PATH")
-		     ("GUILE_LOAD_COMPILED_PATH" . "$XDG_CONFIG_HOME/guix/current/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH")
+		     ;; ("GUILE_LOAD_PATH" . "$XDG_CONFIG_HOME/guix/current/share/guile/site/3.0:$GUILE_LOAD_PATH")
+		     ;; ("GUILE_LOAD_COMPILED_PATH" . "$XDG_CONFIG_HOME/guix/current/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH")
 		     ("PATH" . "$HOME/.local/bin/:$PATH")
 		     ;; ("GUIX_PROFILE=\"$HOME/.guix-profile\"" . #f)
 		     ;; [ -f "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"

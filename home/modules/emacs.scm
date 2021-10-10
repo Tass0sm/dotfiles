@@ -4,7 +4,8 @@
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
   #:use-module (gnu services)
-  #:use-module (gnu home-services)
+  #:use-module (gnu home services)
+  ;; from rde
   #:use-module (gnu home-services emacs))
 
 (define emacs-packages

@@ -2,8 +2,8 @@
   #:use-module (gnu home)
   #:use-module (gnu packages)
   #:use-module (gnu services)
-  #:use-module (gnu home-services)
-  #:use-module (gnu home-services version-control))
+  #:use-module (gnu home services)
+  #:use-module (gnu home services version-control))
 
 (define-public git-services
   (list

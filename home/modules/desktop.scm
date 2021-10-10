@@ -2,9 +2,9 @@
   #:use-module (gnu home)
   #:use-module (gnu packages)
   #:use-module (gnu services)
-  #:use-module (gnu home-services)
-  #:use-module (gnu home-services-utils)
-  #:use-module (gnu home-services xorg)
+  #:use-module (gnu home services)
+  #:use-module (gnu home services utils)
+  #:use-module (gnu home services xorg)
 
   #:use-module (guix gexp)
   #:use-module (tassos-guix packages xorg)
