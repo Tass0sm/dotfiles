@@ -107,11 +107,11 @@
     summary = giph
     new_icon = /usr/share/icons/Nord-Icon/48x48/apps/simplescreenrecorder.svg
     
-[shortcuts]
-    close = ctrl+space
-    close_all = ctrl+shift+space
-    #context = ctrl+shift+period
-    history = ctrl+grave
+# [shortcuts]
+#     close = ctrl+space
+#     close_all = ctrl+shift+space
+#     context = ctrl+shift+period
+#     history = ctrl+grave
 
 [urgency_low]
     background = colors.background

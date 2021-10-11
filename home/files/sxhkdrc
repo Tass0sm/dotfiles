@@ -22,6 +22,10 @@ super + Print
 super + Escape
 	pkill -USR1 -x sxhkd
 
+# dock current window
+super + shift + d
+      	kdocker -f &
+
 #
 # bspwm movement
 #
@@ -157,3 +161,13 @@ XF86MonBrightnessDown
 
 XF86MonBrightnessUp
 	light -A 5
+
+#
+# Notifications
+#
+
+super + minus
+        dunstctl close
+
+super + equal
+        dunstctl history-pop

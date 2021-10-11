@@ -83,6 +83,28 @@ the emacs server."
 ;; (use-package company-box
 ;;   :hook (company-mode . company-box-mode))
 
+(use-package helpful
+  :bind
+  (("C-h f" . #'helpful-callable)
+   ("C-h v" . #'helpful-variable)
+   ("C-h k" . #'helpful-key)))
+
+(use-package popper
+  :bind
+  (("C-`"   . popper-toggle-latest)
+   ("M-`"   . popper-cycle)
+   ("C-M-`" . popper-toggle-type))
+  :config
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          helpful-mode
+          compilation-mode))
+  (popper-mode 1)
+  (popper-echo-mode 1))
+
 					; Tool Modes
 
 (use-package magit
@@ -128,6 +150,8 @@ the emacs server."
 
 					; General Editing Modes
 
+(setq-default indent-tabs-mode nil)
+
 (use-package expand-region
   :bind
   ("C-=" . er/expand-region))
@@ -143,6 +167,11 @@ the emacs server."
   ("C->" . mc/mark-next-like-this)
   ("C-<" . mc/mark-previous-like-this)
   ("C-c C-<" . mc/mark-all-like-this))
+
+(use-package phi-search
+  :bind
+  (("C-s" . phi-search)
+   ("C-r" . phi-search-backward)))
 
 (use-package ws-butler
   :config
