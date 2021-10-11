@@ -19,4 +19,12 @@
 (define-public mail-services
   (list
    (service home-notmuch-service-type
-	    (home-notmuch-configuration))))
+	    (home-notmuch-configuration
+             (config
+              `((user
+                 ((name . "Anastasios Manganaris")
+                  (primary_email . "tassos.manganaris@gmail.com")))
+                (database
+                 ((path . "/home/tassos/.thunderbird/paws4vo9.default-release/ImapMail")))
+                (new
+                 ())))))))

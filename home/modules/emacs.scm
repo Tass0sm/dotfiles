@@ -19,6 +19,8 @@
 	 "emacs-company"
 	 "emacs-company-posframe"
 	 "emacs-perspective"
+	 "emacs-helpful"
+         "emacs-popper"
 	 ;; Tool Modes
 	 "emacs-magit"
 	 "emacs-guix"
@@ -26,6 +28,7 @@
 	 "emacs-pdf-tools"
 	 "emacs-notmuch"
 	 ;; Specific Editing Modes
+	 "emacs-markdown-mode"
 	 "emacs-ledger-mode"
 	 "emacs-yaml-mode"
 	 "emacs-racket-mode"
@@ -42,6 +45,7 @@
 	 "emacs-expand-region"
 	 "emacs-aggressive-indent"
 	 "emacs-multiple-cursors"
+	 "emacs-phi-search"
 	 "emacs-ws-butler"
 	 "emacs-yasnippet"
 	 "emacs-yasnippet-snippets"

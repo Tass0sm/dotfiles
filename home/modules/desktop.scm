@@ -3,8 +3,7 @@
   #:use-module (gnu packages)
   #:use-module (gnu services)
   #:use-module (gnu home services)
-  #:use-module (gnu home services utils)
-  #:use-module (gnu home services xorg)
+  #:use-module (gnu home-services xorg)
 
   #:use-module (guix gexp)
   #:use-module (tassos-guix packages xorg)
@@ -23,28 +22,25 @@
 	     (config
 	      `((include . "\"/home/tassos/.config/guix/home/files/nord-xresources\"")))))
    (service home-dunst-service-type
-	    (home-dunst-configuration
-	     (dunstrc (list
-		       (slurp-file-gexp
-			(local-file "../files/dunstrc"))))))
+            (home-dunst-configuration
+             (dunstrc (list
+        	       (local-file "../files/dunstrc")))))
    ;; (service home-polybar-service-type
    ;; 	    (home-polybar-configuration
    ;; 	     (config (list
    ;; 		      (slurp-file-gexp
    ;; 		       (local-file "../files/polybar-config"))))))
    (service home-sxhkd-service-type
-	    (home-sxhkd-configuration
-	     (sxhkdrc (list
-		       (slurp-file-gexp
-			(local-file "../files/sxhkdrc"))))))
+            (home-sxhkd-configuration
+             (sxhkdrc (list
+        	       (local-file "../files/sxhkdrc")))))
    (service home-bspwm-service-type
-	    (home-bspwm-configuration
-	     (bspwmrc (list
-		       (slurp-file-gexp
-			(local-file "../files/bspwmrc"))))))
+            (home-bspwm-configuration
+             (bspwmrc (list
+        	       (local-file "../files/bspwmrc")))))
    (simple-service 'gtk-config
- 		   home-files-service-type
- 		   `(("config/gtk-3.0/settings.ini"
+        	   home-files-service-type
+        	   `(("config/gtk-3.0/settings.ini"
                       ,(local-file "../files/gtk3.ini"))
-		     ("config/gtk-3.0/gtk.css"
+        	     ("config/gtk-3.0/gtk.css"
                       ,(local-file "../files/gtk3.css"))))))
