@@ -171,3 +171,6 @@ super + minus
 
 super + equal
         dunstctl history-pop
+
+super + underscore
+        dunstctl set-paused toggle

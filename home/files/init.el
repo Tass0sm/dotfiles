@@ -1,6 +1,6 @@
 (require 'use-package)
 
-					; Misc hello world
+                                        ; Misc hello world
 
 (column-number-mode)
 
@@ -20,14 +20,14 @@
 
 ;; (setq pop-up-frames t)
 
-					; Server
+                                        ; Server
 
 (defun server-new-frame-buffer ()
   "Get the buffer to be used when making a new frame for the emacs
 server."
   (let* ((oldframe (selected-frame))
-	 (oldwindow (frame-selected-window oldframe))
-	 (oldbuffer (window-buffer oldwindow)))
+         (oldwindow (frame-selected-window oldframe))
+         (oldbuffer (window-buffer oldwindow)))
     (cond
      ((null oldbuffer) (get-buffer-create "*scratch*"))
      (t oldbuffer))))
@@ -36,15 +36,15 @@ server."
   "Get the file to be used when making a new terminal while using
 the emacs server."
   (let* ((oldframe (selected-frame))
-	 (oldwindow (frame-selected-window oldframe))
-	 (oldbuffer (window-buffer oldwindow))
-	 (dir (cdr (assq 'default-directory
-			 (buffer-local-variables oldbuffer)))))
+         (oldwindow (frame-selected-window oldframe))
+         (oldbuffer (window-buffer oldwindow))
+         (dir (cdr (assq 'default-directory
+                         (buffer-local-variables oldbuffer)))))
     (cond
      ((stringp dir) (expand-file-name dir))
      (t "/home/tassos"))))
 
-					; Basic Tools
+                                        ; Basic Tools
 
 (use-package ivy
   :config
@@ -99,13 +99,15 @@ the emacs server."
         '("\\*Messages\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"
+          "shell\\*$"
+          "^magit"
           help-mode
           helpful-mode
           compilation-mode))
   (popper-mode 1)
   (popper-echo-mode 1))
 
-					; Tool Modes
+                                        ; Tool Modes
 
 (use-package magit
   :bind
@@ -122,33 +124,54 @@ the emacs server."
 (use-package pdf-tools
   :magic ("%PDF" .  pdf-view-mode))
 
-					; Specific Editing Modes
+                                        ; Specific Editing Modes
 
-;;(use-package dante
-;;  :after haskell-mode
-;;  :commands 'dante-mode
-;;  :init
-;;  (add-hook 'haskell-mode-hook 'flymake-mode)
-;;  (remove-hook 'flymake-diagnostic-functions 'flymake-proc-legacy-flymake)
-;;  (add-hook 'haskell-mode-hook 'dante-mode))
-
+;; Lisp
 (use-package macrostep
   :bind ((:map emacs-lisp-mode-map
-	       ("C-c C-e" . macrostep-expand))
-	 (:map lisp-interaction-mode-map
-	       ("C-c C-e" . macrostep-expand))))
+               ("C-c C-e" . macrostep-expand))
+         (:map lisp-interaction-mode-map
+               ("C-c C-e" . macrostep-expand))))
 
+;; HTML + jS + CSS
 (use-package web-mode
   :mode ("\\.html" . web-mode)
   :config
   (defun set-company-backends-for-web ()
-    (setq-local company-backends '(company-capf
-				   company-files
-				   (company-dabbrev-code company-keywords)
-				   company-dabbrev)))
+    (setq-local company-backends '(company-yasnippet
+                                   company-capf
+                                   company-files
+                                   (company-dabbrev-code company-keywords)
+                                   company-dabbrev)))
   (add-hook 'web-mode-hook 'set-company-backends-for-web))
 
-					; General Editing Modes
+;; JavaScript
+
+(use-package javascript-mode
+  :config
+  (defun set-company-backends-for-js ()
+    (setq-local company-backends '(company-yasnippet
+                                   company-capf
+                                   company-files
+                                   (company-dabbrev-code company-keywords)
+                                   company-dabbrev)))
+  (add-hook 'javascript-mode-hook 'set-company-backends-for-js))
+
+;; Python
+(use-package python
+  :config
+  ;; (setq python-shell-interpreter "ipython"
+  ;;       python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True")
+
+  (defun set-company-backends-for-python ()
+    (setq-local company-backends '(company-yasnippet
+                                   company-capf
+                                   company-files
+                                   (company-dabbrev-code company-keywords)
+                                   company-dabbrev)))
+  (add-hook 'python-mode-hook 'set-company-backends-for-python))
+
+                                        ; General Editing Modes
 
 (setq-default indent-tabs-mode nil)
 
@@ -189,12 +212,12 @@ the emacs server."
 (use-package flyspell-correct
   :after flyspell
   :bind (:map flyspell-mode-map
-	      (("C-,"   . flyspell-auto-correct-word)
-	       ("C-."   . flyspell-goto-next-error)
-	       ("C-;"   . flyspell-correct-next)
-	       ("C-M-;" . flyspell-buffer))))
+              (("C-,"   . flyspell-auto-correct-word)
+               ("C-."   . flyspell-goto-next-error)
+               ("C-;"   . flyspell-correct-next)
+               ("C-M-;" . flyspell-buffer))))
 
-					; Markup
+                                        ; Markup
 
 (use-package org
   :config
@@ -212,17 +235,17 @@ the emacs server."
   :init
   (setq org-roam-v2-ack t)
   :bind (("C-c n f" . org-roam-node-find)
-	 ("C-c n g" . org-roam-graph)
-	 ("C-c n r" . org-roam-node-random)
-	 (:map org-mode-map
-	       (("C-c n i" . org-roam-node-insert)
-		("C-c n o" . org-id-get-create)
-		("C-c n t" . org-roam-tag-add)
-		("C-c n a" . org-roam-alias-add)
-		("C-c n l" . org-roam-buffer-toggle))))
+         ("C-c n g" . org-roam-graph)
+         ("C-c n r" . org-roam-node-random)
+         (:map org-mode-map
+               (("C-c n i" . org-roam-node-insert)
+                ("C-c n o" . org-id-get-create)
+                ("C-c n t" . org-roam-tag-add)
+                ("C-c n a" . org-roam-alias-add)
+                ("C-c n l" . org-roam-buffer-toggle))))
   :config
   (setq org-roam-directory (file-truename
-			    (concat org-directory "/notes/")))
+                            (concat org-directory "/notes/")))
   (org-roam-db-autosync-mode))
 
 (use-package org-journal
@@ -235,7 +258,7 @@ the emacs server."
   :config
   (setq org-download-screenshot-method "flameshot gui --raw > %s"))
 
-					; Appearance
+                                        ; Appearance
 
 (setq-default truncate-lines t)
 (setq-default fill-column 80)
@@ -245,6 +268,6 @@ the emacs server."
 (if (daemonp)
     (add-hook 'after-make-frame-functions
               (lambda (frame)
-		(select-frame frame)
-		(load-theme 'nord)))
+                (select-frame frame)
+                (load-theme 'nord)))
   (load-theme 'nord))
