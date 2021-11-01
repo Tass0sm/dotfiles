@@ -101,11 +101,20 @@ the emacs server."
           "\\*Async Shell Command\\*"
           "shell\\*$"
           "^magit"
+          org-agenda-mode
           help-mode
           helpful-mode
           compilation-mode))
   (popper-mode 1)
   (popper-echo-mode 1))
+
+(use-package consult-dir
+  :bind (("C-x C-d" . consult-dir)
+         :map minibuffer-local-completion-map
+         ("C-x C-d" . consult-dir))
+  :config
+  ;; (setq consult-dir-shadow-filenames nil)
+  (setq consult-dir-project-list-function #'consult-dir-projectile-dirs))
 
                                         ; Tool Modes
 
@@ -147,15 +156,27 @@ the emacs server."
 
 ;; JavaScript
 
-(use-package javascript-mode
+(use-package js2-mode
+  :mode ("\\.js\\'" . js2-mode)
   :config
+  (setq js2-basic-offset 2)
   (defun set-company-backends-for-js ()
     (setq-local company-backends '(company-yasnippet
                                    company-capf
                                    company-files
                                    (company-dabbrev-code company-keywords)
                                    company-dabbrev)))
-  (add-hook 'javascript-mode-hook 'set-company-backends-for-js))
+  (add-hook 'js2-mode-hook 'set-company-backends-for-js))
+
+(use-package add-node-modules-path
+  :after js2-mode
+  :config
+  (add-hook 'js2-mode-hook 'add-node-modules-path))
+
+(use-package prettier-js
+  :after (js2-mode add-node-modules-path)
+  :config
+  (add-hook 'js2-mode-hook 'prettier-js-mode))
 
 ;; Python
 (use-package python
@@ -231,6 +252,10 @@ the emacs server."
   ("C-c a" . org-agenda)
   ("C-c l" . org-agenda-list))
 
+(use-package ox-latex
+  :config
+  (setq org-latex-pdf-process (list "latexmk -f -pdf %f")))
+
 (use-package org-roam
   :init
   (setq org-roam-v2-ack t)
@@ -257,6 +282,24 @@ the emacs server."
 (use-package org-download
   :config
   (setq org-download-screenshot-method "flameshot gui --raw > %s"))
+
+
+
+(use-package org-notify
+  :config
+  ;; (defun tm/notify (plist)
+  ;;     "Do the following if the deadline hasn't already passed: For a
+  ;; graphics display, pop up a notification window, for a text
+  ;; terminal an emacs window."
+  ;;     (let ((time-left (plist-get plist :deadline)))
+  ;;       (if (> time-left 0)
+  ;;           (if (display-graphic-p)
+  ;;               (org-notify-action-notify plist)
+  ;;             (org-notify-action-window plist)))))
+
+  (org-notify-add 'default '(:time "1h" :actions -notify/window
+                                   :duration 30 :audible t))
+  (org-notify-start))
 
                                         ; Appearance
 

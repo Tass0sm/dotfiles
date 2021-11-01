@@ -16,4 +16,6 @@
 		(github
 		 ((user . "Tass0sm")))
 		(credential
-		 ((helper . "/usr/share/git/credential/libsecret/git-credential-libsecret")))))))))
+		 ((helper . "/usr/share/git/credential/libsecret/git-credential-libsecret")))))
+             (ignore
+ 	      '(".envrc"))))))

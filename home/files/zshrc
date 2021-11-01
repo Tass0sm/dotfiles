@@ -56,3 +56,6 @@ TYPEWRITTEN_PROMPT_LAYOUT="pure"
 # alias
 alias ls="exa --color=always --group-directories-first"
 alias ll="exa -lah --color=always --group-directories-first"
+
+# direnv
+eval "$(direnv hook zsh)"

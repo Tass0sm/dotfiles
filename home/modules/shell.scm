@@ -7,6 +7,10 @@
   #:use-module (gnu home services shells)
   #:use-module (gnu home-services shellutils))
 
+(define-public zsh-packages
+  (map specification->package
+       '("direnv")))
+
 (define-public zsh-services
   (list
    (service home-zsh-service-type
@@ -25,7 +29,6 @@
               (list
                (local-file "../files/zshrc")))))
    ;; (service home-zsh-autosuggestions-service-type)
-   ;; (service home-zsh-direnv-service-type)
    (simple-service 'direnvrc
 		   home-files-service-type
 		   `(("config/direnv/direnvrc"

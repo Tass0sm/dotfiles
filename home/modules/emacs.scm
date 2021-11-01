@@ -21,6 +21,7 @@
 	 "emacs-perspective"
 	 "emacs-helpful"
          "emacs-popper"
+         "emacs-consult-dir"
 	 ;; Tool Modes
 	 "emacs-magit"
 	 "emacs-guix"
@@ -40,6 +41,9 @@
 	 "emacs-rust-mode"
 	 "emacs-macrostep"
 	 "emacs-web-mode"
+         "emacs-js2-mode"
+         "emacs-add-node-modules-path"
+         "emacs-prettier"
 	 ;; General Editing Modes
 	 "emacs-sudo-edit"
 	 "emacs-expand-region"
@@ -55,6 +59,7 @@
 	 "emacs-org-journal"
 	 "emacs-org-roam"
 	 "emacs-org-download"
+         "emacs-org-contrib"
 	 ;; Appearance
 	 "emacs-nord-theme")))
 
