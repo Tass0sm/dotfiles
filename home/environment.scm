@@ -12,6 +12,7 @@
   #:use-module (home modules xdg)
   #:use-module (home modules git)
   #:use-module (home modules mail)
+  #:use-module (home modules herd)
   #:use-module (home modules emacs)
   #:use-module (home modules shell)
   #:use-module (home modules desktop))
@@ -41,6 +42,7 @@
 (home-environment
  (packages
   `(,@base-packages
+    ,@zsh-packages
     ,@mail-packages
     ,@desktop-packages))
  (services
@@ -48,5 +50,6 @@
     ,@zsh-services
     ,@git-services
     ,@mail-services
+    ,@herd-services
     ,@emacs-services
     ,@desktop-services)))
