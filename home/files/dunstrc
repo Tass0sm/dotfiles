@@ -1,26 +1,23 @@
-[colors]
-    background = "#2e3440"
-    frame = "#3b4252"
-    #foreground = "#e5e9f0"
-
 [global]
     ### Display ###
 
     monitor = 0
     follow = keyboard
 
-    geometry = "500x1-10+50"
+    origin = top-right
+    width = 500
+    height = 300
+    offset = 10x50
+
     indicate_hidden = yes
     shrink = true
     transparency = 0
-    notification_height = 0
     separator_height = 2
     padding = 22
     horizontal_padding = 22
     frame_width = 3
     corner_radius = 6
 
-    #frame_color = 
     separator_color = auto
     sort = yes
     idle_threshold = 120
@@ -66,7 +63,6 @@
     always_run_script = false
     title = Dunst
     class = Dunst
-    startup_notification = true
     force_xinerama = false
 
 [experimental]
@@ -114,19 +110,19 @@
 #     history = ctrl+grave
 
 [urgency_low]
-    background = colors.background
     foreground = "#81a1c1"
+    background = "#2e3440"
     frame_color = "#3b4252"
     timeout = 5
 
 [urgency_normal]
-    background = colors.background
-    foreground = "#e5e9f0"
+    foreground = "#81a1c1"
+    background = "#2e3440"
     frame_color = "#3b4252"
     timeout = 5
 
 [urgency_critical]
-    background = colors.background
-    foreground = "#bf616a"
-    frame_color = "#3b4252"
+    foreground = "#ffffff"
+    background = "#613440"
+    frame_color = "#824252"
     timeout = 0

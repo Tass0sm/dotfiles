@@ -97,6 +97,7 @@ the emacs server."
   :config
   (setq popper-reference-buffers
         '("\\*Messages\\*"
+          "\\*Backtrace\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"
           "shell\\*$"
@@ -115,6 +116,10 @@ the emacs server."
   :config
   ;; (setq consult-dir-shadow-filenames nil)
   (setq consult-dir-project-list-function #'consult-dir-projectile-dirs))
+
+(use-package direnv
+  :config
+  (direnv-mode))
 
                                         ; Tool Modes
 
@@ -200,11 +205,6 @@ the emacs server."
   :bind
   ("C-=" . er/expand-region))
 
-(use-package aggressive-indent
-  :config
-  (global-aggressive-indent-mode 1)
-  (add-to-list 'aggressive-indent-excluded-modes 'org-mode))
-
 (use-package multiple-cursors
   :bind
   ("C-S-c C-S-c" . mc/edit-lines)
@@ -214,8 +214,9 @@ the emacs server."
 
 (use-package phi-search
   :bind
-  (("C-s" . phi-search)
-   ("C-r" . phi-search-backward)))
+  ((:map mc/keymap
+         ("C-s" . phi-search)
+         ("C-r" . phi-search-backward))))
 
 (use-package ws-butler
   :config
@@ -287,18 +288,10 @@ the emacs server."
 
 (use-package org-notify
   :config
-  ;; (defun tm/notify (plist)
-  ;;     "Do the following if the deadline hasn't already passed: For a
-  ;; graphics display, pop up a notification window, for a text
-  ;; terminal an emacs window."
-  ;;     (let ((time-left (plist-get plist :deadline)))
-  ;;       (if (> time-left 0)
-  ;;           (if (display-graphic-p)
-  ;;               (org-notify-action-notify plist)
-  ;;             (org-notify-action-window plist)))))
-
   (org-notify-add 'default '(:time "1h" :actions -notify/window
-                                   :duration 30 :audible t))
+                                   :period "10m" :duration 30))
+  (org-notify-add 'class   '(:time "30m" :actions -notify/window
+                                   :period "10m" :duration 30))
   (org-notify-start))
 
                                         ; Appearance

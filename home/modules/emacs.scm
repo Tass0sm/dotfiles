@@ -12,6 +12,7 @@
   (map specification->package
        '(;; Emacs-Lisp
 	 "emacs-use-package"
+         "emacs-tree-sitter"
 	 ;; Basic Tools
 	 "emacs-ivy"
 	 "emacs-which-key"
@@ -22,6 +23,7 @@
 	 "emacs-helpful"
          "emacs-popper"
          "emacs-consult-dir"
+         "emacs-direnv"
 	 ;; Tool Modes
 	 "emacs-magit"
 	 "emacs-guix"
@@ -42,12 +44,12 @@
 	 "emacs-macrostep"
 	 "emacs-web-mode"
          "emacs-js2-mode"
+         "emacs-typescript-mode"
          "emacs-add-node-modules-path"
          "emacs-prettier"
 	 ;; General Editing Modes
 	 "emacs-sudo-edit"
 	 "emacs-expand-region"
-	 "emacs-aggressive-indent"
 	 "emacs-multiple-cursors"
 	 "emacs-phi-search"
 	 "emacs-ws-butler"
