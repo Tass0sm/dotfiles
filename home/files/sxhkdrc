@@ -12,7 +12,7 @@ super + @space
 
 # emacs launcher
 super + e
-	$HOME/.local/bin/ec
+	ec
 
 # Screen Shot
 super + Print

@@ -1,6 +1,6 @@
-(require 'use-package)
+;;; -*- lexical-binding: t -*-
 
-                                        ; Misc hello world
+                                        ; Misc
 
 (column-number-mode)
 
@@ -25,24 +25,14 @@
 (defun server-new-frame-buffer ()
   "Get the buffer to be used when making a new frame for the emacs
 server."
-  (let* ((oldframe (selected-frame))
-         (oldwindow (frame-selected-window oldframe))
-         (oldbuffer (window-buffer oldwindow)))
-    (cond
-     ((null oldbuffer) (get-buffer-create "*scratch*"))
-     (t oldbuffer))))
+  (window-buffer (selected-window)))
 
 (defun server-new-terminal-file ()
   "Get the file to be used when making a new terminal while using
 the emacs server."
-  (let* ((oldframe (selected-frame))
-         (oldwindow (frame-selected-window oldframe))
-         (oldbuffer (window-buffer oldwindow))
-         (dir (cdr (assq 'default-directory
-                         (buffer-local-variables oldbuffer)))))
-    (cond
-     ((stringp dir) (expand-file-name dir))
-     (t "/home/tassos"))))
+  (let ((buffer (server-new-frame-buffer)))
+    (expand-file-name (cdr (assq 'default-directory
+                                 (buffer-local-variables buffer))))))
 
                                         ; Basic Tools
 
@@ -73,6 +63,7 @@ the emacs server."
   :config
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
+  (push 'company-yasnippet company-backends)
   (global-company-mode 1))
 
 ;; (use-package company-posframe
@@ -299,11 +290,10 @@ the emacs server."
 (setq-default truncate-lines t)
 (setq-default fill-column 80)
 
-;; (use-package all-the-icons)
-
 (if (daemonp)
-    (add-hook 'after-make-frame-functions
-              (lambda (frame)
-                (select-frame frame)
-                (load-theme 'nord)))
-  (load-theme 'nord))
+    (cl-labels ((load-nord (frame)
+                           (with-selected-frame frame
+                             (load-theme 'nord t))
+                           (remove-hook 'after-make-frame-functions #'load-nord)))
+      (add-hook 'after-make-frame-functions #'load-nord))
+  (load-theme 'nord t))

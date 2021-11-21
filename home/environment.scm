@@ -8,6 +8,11 @@
   #:use-module (gnu home)
   #:use-module (gnu home services)
   #:use-module (gnu packages)
+  #:use-module (gnu packages emacs-xyz)
+  #:use-module (guix gexp)
+  #:use-module (guix packages)
+  #:use-module (guix build-system copy)
+  #:use-module ((guix licenses) #:prefix license:)
   ;; personal modules
   #:use-module (home modules xdg)
   #:use-module (home modules git)
@@ -39,12 +44,31 @@
 	"xbacklight"
 	"pavucontrol")))
 
+(define home-scripts
+  (package
+   (name "home-scripts")
+   (version "0.1")
+   (source (local-file "files/scripts"
+                       #:recursive? #t))
+   (build-system copy-build-system)
+   (arguments
+    `(#:install-plan
+      '(("ec.sh" "bin/ec")
+        ("term.sh" "bin/term"))))
+   (propagated-inputs
+    `(("epipe" ,epipe)))
+   (home-page "https://github.com/Tass0sm/dotfiles")
+   (synopsis "My personal scripts.")
+   (description "My personal scripts.")
+   (license license:expat)))
+
 (home-environment
  (packages
   `(,@base-packages
     ,@zsh-packages
     ,@mail-packages
-    ,@desktop-packages))
+    ,@desktop-packages
+    ,home-scripts))
  (services
   `(,@xdg-services
     ,@zsh-services
