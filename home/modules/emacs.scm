@@ -11,70 +11,70 @@
 (define emacs-packages
   (map specification->package
        '(;; Emacs-Lisp
-	 "emacs-use-package"
+         "emacs-use-package"
          "emacs-tree-sitter"
-	 ;; Basic Tools
-	 "emacs-ivy"
-	 "emacs-which-key"
-	 "emacs-projectile"
-	 "emacs-company"
-	 "emacs-company-posframe"
-	 "emacs-perspective"
-	 "emacs-helpful"
+         ;; Basic Tools
+         "emacs-ivy"
+         "emacs-which-key"
+         "emacs-projectile"
+         "emacs-company"
+         "emacs-company-posframe"
+         "emacs-perspective"
+         "emacs-helpful"
          "emacs-popper"
          "emacs-consult-dir"
          "emacs-direnv"
-	 ;; Tool Modes
-	 "emacs-magit"
-	 "emacs-guix"
-	 "emacs-vterm"
-	 "emacs-pdf-tools"
-	 "emacs-notmuch"
-	 ;; Specific Editing Modes
-	 "emacs-markdown-mode"
-	 "emacs-ledger-mode"
-	 "emacs-yaml-mode"
-	 "emacs-racket-mode"
-	 "emacs-geiser-racket"
-	 "emacs-haskell-mode"
-	 "emacs-dante"
-	 "emacs-clojure-mode"
-	 "emacs-cider"
-	 "emacs-rust-mode"
-	 "emacs-macrostep"
-	 "emacs-web-mode"
+         ;; Tool Modes
+         "emacs-magit"
+         "emacs-guix"
+         "emacs-vterm"
+         "emacs-pdf-tools"
+         "emacs-notmuch"
+         ;; Specific Editing Modes
+         "emacs-markdown-mode"
+         "emacs-ledger-mode"
+         "emacs-yaml-mode"
+         "emacs-racket-mode"
+         "emacs-geiser-racket"
+         "emacs-haskell-mode"
+         "emacs-dante"
+         "emacs-clojure-mode"
+         "emacs-cider"
+         "emacs-rust-mode"
+         "emacs-macrostep"
+         "emacs-web-mode"
          "emacs-js2-mode"
          "emacs-typescript-mode"
          "emacs-add-node-modules-path"
          "emacs-prettier"
-	 ;; General Editing Modes
-	 "emacs-sudo-edit"
-	 "emacs-expand-region"
-	 "emacs-multiple-cursors"
-	 "emacs-phi-search"
-	 "emacs-ws-butler"
-	 "emacs-yasnippet"
-	 "emacs-yasnippet-snippets"
-	 "emacs-ivy-yasnippet"
-	 "emacs-flyspell-correct"
-	 ;; Org
-	 "emacs-org-journal"
-	 "emacs-org-roam"
-	 "emacs-org-download"
+         ;; General Editing Modes
+         "emacs-sudo-edit"
+         "emacs-expand-region"
+         "emacs-multiple-cursors"
+         "emacs-phi-search"
+         "emacs-ws-butler"
+         "emacs-yasnippet"
+         "emacs-yasnippet-snippets"
+         "emacs-ivy-yasnippet"
+         "emacs-flyspell-correct"
+         ;; Org
+         "emacs-org-journal"
+         "emacs-org-roam"
+         "emacs-org-download"
          "emacs-org-contrib"
-	 ;; Appearance
-	 "emacs-nord-theme")))
+         ;; Appearance
+         "emacs-nord-theme")))
 
 (define-public emacs-services
   (list
    (simple-service 'emacs-init
- 		   home-files-service-type
- 		   `(("config/emacs/early-init.el"
+                   home-files-service-type
+                   `(("config/emacs/early-init.el"
                       ,(local-file "../files/early-init.el"))
-		     ("config/emacs/init.el"
+                     ("config/emacs/init.el"
                       ,(local-file "../files/init.el"))))
    (service home-emacs-service-type
-	    (home-emacs-configuration
+            (home-emacs-configuration
              (package emacs-next-pgtk)
              ;; (rebuild-elisp-packages? #t)
              ;; (server-mode? #t)
