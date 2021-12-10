@@ -15,10 +15,15 @@
 
 (global-set-key (kbd "C-z") 'ignore)
 (global-set-key (kbd "C-x C-z") 'ignore)
+(global-set-key (kbd "C-x k") 'kill-current-buffer)
 
 (setq inhibit-startup-screen t)
 
 ;; (setq pop-up-frames t)
+
+(use-package recentf
+  :config
+  (recentf-mode 1))
 
                                         ; Server
 
@@ -127,7 +132,8 @@ the emacs server."
   ("C-x C-b" . ibuffer))
 
 (use-package pdf-tools
-  :magic ("%PDF" .  pdf-view-mode))
+  :magic ("%PDF" .  pdf-view-mode)
+  :hook (pdf-view-mode . pdf-isearch-minor-mode))
 
                                         ; Specific Editing Modes
 

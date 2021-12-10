@@ -6,6 +6,9 @@
 super + Return
 	term
 
+super + shift + Return
+        alacritty
+
 # program launcher
 super + @space
 	dmenu_run

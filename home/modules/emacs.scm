@@ -24,6 +24,9 @@
          "emacs-popper"
          "emacs-consult-dir"
          "emacs-direnv"
+         "emacs-avy"
+         "emacs-embark"
+         "emacs-tree-edit"
          ;; Tool Modes
          "emacs-magit"
          "emacs-guix"
