@@ -1,0 +1,2 @@
+(specifications->manifest
+ '("minimap2"))

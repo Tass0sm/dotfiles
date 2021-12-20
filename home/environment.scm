@@ -66,6 +66,7 @@
  (packages
   `(,@base-packages
     ,@zsh-packages
+    ,((compose list specification->package+output) "git:send-email")
     ,@mail-packages
     ,@desktop-packages
     ,home-scripts))
