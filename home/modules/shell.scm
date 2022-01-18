@@ -9,7 +9,8 @@
 
 (define-public zsh-packages
   (map specification->package
-       '("direnv")))
+       '("direnv"
+         "zsh-autosuggestions@0.7.0")))
 
 (define-public zsh-services
   (list
@@ -29,7 +30,6 @@
              (zshrc
               (list
                (local-file "../files/zshrc")))))
-   ;; (service home-zsh-autosuggestions-service-type)
    (simple-service 'direnvrc
                    home-files-service-type
                    `(("config/direnv/direnvrc"
@@ -38,11 +38,7 @@
                    home-environment-variables-service-type
                    `(;; ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/usr/local/share/:/usr/share/")
                      ;; ("XDG_CONFIG_DIRS" . "$XDG_CONFIG_DIRS:/etc/xdg/")
-                     ;; ("XDG_DATA_DIRS" . "$HOME/.guix-home/profile/share:$XDG_DATA_DIRS")
                      ;; ("XDG_CONFIG_DIRS" . "$HOME/.guix-home/profile/etc/xdg:$XDG_CONFIG_DIRS")
                      ;; ("GUILE_LOAD_PATH" . "$XDG_CONFIG_HOME/guix/current/share/guile/site/3.0:$GUILE_LOAD_PATH")
                      ;; ("GUILE_LOAD_COMPILED_PATH" . "$XDG_CONFIG_HOME/guix/current/lib/guile/3.0/site-ccache:$GUILE_LOAD_COMPILED_PATH")
-                     ("PATH" . "$HOME/.local/bin/:$PATH")
-                     ;; ("GUIX_PROFILE=\"$HOME/.guix-profile\"" . #f)
-                     ;; [ -f "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"
-                     ))))
+                     ("PATH" . "$HOME/.local/bin/:$PATH")))))

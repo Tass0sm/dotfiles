@@ -11,23 +11,23 @@ bindkey -e
 
 # X clipboard integration for kill / yank functions.
 x-copy-region-as-kill () {
-  zle copy-region-as-kill
-  [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
+    zle copy-region-as-kill
+    [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
 }
 
 x-kill-region () {
-  zle kill-region
-  [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
+    zle kill-region
+    [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
 }
 
 x-kill-line () {
-  zle kill-line
-  [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
+    zle kill-line
+    [[ $DISPLAY ]] && echo -n $CUTBUFFER | xsel -i -b
 }
 
 x-yank () {
-  CUTBUFFER=$(xsel -o -b </dev/null)
-  [[ $DISPLAY ]] && zle yank
+    [[ $DISPLAY ]] && CUTBUFFER=$(xsel -o -b </dev/null)
+    zle yank
 }
 
 # Add X integrated modules to the zsh line editor.
@@ -59,3 +59,15 @@ alias ll="exa -lah --color=always --group-directories-first"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# autosuggestions
+source $HOME/.guix-home/profile/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# misc
+fpath+=$HOME/.guix-home/profile/share/zsh/site-functions
+
+# completion
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' menu select
