@@ -7,9 +7,6 @@ it's really neat.
 * Screenshot
 [[file:screenshot.png]]
 
-* Todos
-- Make home-service for polybar
-
 * References
 - https://github.com/Barbarossa93/Genome
 - https://github.com/skalpasi/bspwm-dotfiles

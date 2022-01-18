@@ -13,6 +13,7 @@
 (define-public desktop-packages
   (map specification->package
        (list
+        "polybar"
 	"xcursor-nordzy")))
 
 (define-public desktop-services
@@ -25,11 +26,6 @@
             (home-dunst-configuration
              (dunstrc (list
         	       (local-file "../files/dunstrc")))))
-   ;; (service home-polybar-service-type
-   ;; 	    (home-polybar-configuration
-   ;; 	     (config (list
-   ;; 		      (slurp-file-gexp
-   ;; 		       (local-file "../files/polybar-config"))))))
    (service home-sxhkd-service-type
             (home-sxhkd-configuration
              (sxhkdrc (list
@@ -38,6 +34,10 @@
             (home-bspwm-configuration
              (bspwmrc (list
         	       (local-file "../files/bspwmrc")))))
+   (service home-polybar-service-type
+	    (home-polybar-configuration
+	     (config (list
+		      (local-file "../files/polybar.ini")))))
    (simple-service 'gtk-config
         	   home-files-service-type
         	   `(("config/gtk-3.0/settings.ini"
