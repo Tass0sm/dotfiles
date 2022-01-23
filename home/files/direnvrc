@@ -2,3 +2,7 @@ use_guix-shell() {
   echo "$@"
   eval "$(guix shell "$@" --search-paths)"
 }
+
+use_guix-shell-locked() {
+  eval "$(guix time-machine -C ./channels-lock.scm -- shell "$@" --search-paths)"
+}

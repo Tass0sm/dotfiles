@@ -2,15 +2,15 @@
   #:use-module (guix gexp)
   #:use-module (gnu home)
   #:use-module (gnu packages)
+  #:use-module (gnu packages shellutils)
   #:use-module (gnu services)
   #:use-module (gnu home services)
   #:use-module (gnu home services shells)
   #:use-module (gnu home-services shellutils))
 
 (define-public zsh-packages
-  (map specification->package
-       '("direnv"
-         "zsh-autosuggestions@0.7.0")))
+  (list direnv
+        zsh-autosuggestions))
 
 (define-public zsh-services
   (list

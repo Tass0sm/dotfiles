@@ -27,8 +27,11 @@
        (list
 	"alacritty"
 	"exa"
+        "pamixer"
 	"hunspell"
 	"hunspell-dict-en"
+        "poweralertd"
+        "curl"
 	"nss-certs")))
 
 (define xfce-packages

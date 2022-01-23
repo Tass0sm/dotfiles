@@ -14,6 +14,7 @@
   (map specification->package
        (list
         "polybar"
+        "xwallpaper"
 	"xcursor-nordzy")))
 
 (define-public desktop-services

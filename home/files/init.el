@@ -279,9 +279,8 @@ the emacs server."
 
 (use-package org-download
   :config
-  (setq org-download-screenshot-method "flameshot gui --raw > %s"))
-
-
+  (setq org-download-display-inline-images nil
+        org-download-screenshot-method "flameshot gui --raw > %s"))
 
 (use-package org-notify
   :config

@@ -10,6 +10,7 @@ xrdb "$HOME/.Xresources"
 pidof sxhkd || sxhkd &
 pidof dunst || dunst &
 pidof blugon || blugon &
+pidof poweralertd || poweralertd &
 pidof emacs || emacs --daemon &
 pidof nm-applet || nm-applet &
 # pidof picom || picom &
