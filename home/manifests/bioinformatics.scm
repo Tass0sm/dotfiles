@@ -1,2 +1,6 @@
 (specifications->manifest
- '("minimap2"))
+ '("python"
+   "python-bsddb3"
+   "python-numpy"
+   "zlib"
+   "minimap2"))

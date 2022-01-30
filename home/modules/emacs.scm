@@ -17,9 +17,7 @@
          "emacs-ivy"
          "emacs-which-key"
          "emacs-projectile"
-         "emacs-company"
-         "emacs-company-posframe"
-         "emacs-perspective"
+         "emacs-corfu"
          "emacs-helpful"
          "emacs-popper"
          "emacs-consult-dir"
@@ -50,6 +48,7 @@
          "emacs-typescript-mode"
          "emacs-add-node-modules-path"
          "emacs-prettier"
+         "emacs-graphviz-dot-mode"
          ;; General Editing Modes
          "emacs-sudo-edit"
          "emacs-expand-region"

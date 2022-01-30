@@ -59,25 +59,20 @@ the emacs server."
 
 (use-package dired
   :config
-  (setq dired-listing-switches "--group-directories-first -al")
-  (setq dired-auto-revert-buffer t
+  (setq dired-listing-switches "-lahv --group-directories-first"
+        dired-auto-revert-buffer t
         dired-dwim-target t)
   (add-hook 'dired-mode-hook 'dired-hide-details-mode))
 
-(use-package company
+(use-package corfu
   :config
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 2)
-  (push 'company-yasnippet company-backends)
-  (global-company-mode 1))
-
-;; (use-package company-posframe
-;;   :hook (company-mode . company-posframe-mode)
-;;   :config
-;;   (setq company-posframe-quickhelp-delay nil))
-
-;; (use-package company-box
-;;   :hook (company-mode . company-box-mode))
+  (setq corfu-auto t
+        corfu-quit-at-boundary t
+        corfu-auto-delay 0
+        corfu-cycle t
+        corfu-preselect-first nil)
+  (unbind-key "RET" corfu-map)
+  (corfu-global-mode))
 
 (use-package helpful
   :bind
@@ -115,7 +110,8 @@ the emacs server."
 
 (use-package direnv
   :config
-  (direnv-mode))
+  (direnv-mode 1))
+
 
                                         ; Tool Modes
 
@@ -134,6 +130,10 @@ the emacs server."
 (use-package pdf-tools
   :magic ("%PDF" .  pdf-view-mode)
   :hook (pdf-view-mode . pdf-isearch-minor-mode))
+
+(use-package notmuch
+  :config
+  (setq-default notmuch-search-oldest-first nil))
 
                                         ; Specific Editing Modes
 
@@ -243,12 +243,28 @@ the emacs server."
   (setq org-startup-indented t)
   (setq org-agenda-files '("~/org/school.org"
                            "~/org/projects.org"
-                           "~/org/personal.org"))
+                           "~/org/personal.org"
+                           "~/org/work.org"))
   (setq org-todo-keywords
-        '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
+        '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))'
+  (setq org-edit-src-content-indentation 0)
   :bind
   ("C-c a" . org-agenda)
   ("C-c l" . org-agenda-list))
+
+(use-package ob
+  :after (org jupyter)
+  :config
+  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
+  (setq org-ditaa-jar-path "/usr/share/java/ditaa/ditaa-0.11.jar")
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . t)
+     (ditaa . t)
+     (dot . t)
+     (python . t)
+     ;;(jupyter . t)
+     )))
 
 (use-package ox-latex
   :config
