@@ -50,12 +50,12 @@ the emacs server."
   (which-key-mode 1))
 
 (use-package projectile
+  :bind-keymap
+  ("C-c p" . projectile-command-map)
   :config
   (require 'subr-x)
   (setq projectile-completion-system 'ivy)
-  (projectile-mode +1)
-  :bind-keymap
-  ("C-c p" . projectile-command-map))
+  (projectile-mode +1))
 
 (use-package dired
   :config
@@ -72,7 +72,11 @@ the emacs server."
         corfu-cycle t
         corfu-preselect-first nil)
   (unbind-key "RET" corfu-map)
-  (corfu-global-mode))
+  (corfu-global-mode)
+  :hook (shell-mode . (lambda ()
+                        (setq-local corfu-quit-at-boundary t
+                                    corfu-quit-no-match t
+                                    corfu-auto nil))))
 
 (use-package helpful
   :bind
@@ -112,6 +116,17 @@ the emacs server."
   :config
   (direnv-mode 1))
 
+(use-package avy
+  :bind
+  (("M-j" . avy-goto-word-1)))
+
+(use-package beacon
+  :config
+  (beacon-mode 1))
+
+(use-package unkillable-scratch
+  :config
+  (unkillable-scratch t))
 
                                         ; Tool Modes
 
@@ -135,6 +150,10 @@ the emacs server."
   :config
   (setq-default notmuch-search-oldest-first nil))
 
+(use-package message
+  :config
+  (setq message-send-mail-function 'mailclient-send-it))
+
                                         ; Specific Editing Modes
 
 ;; Lisp
@@ -143,6 +162,12 @@ the emacs server."
                ("C-c C-e" . macrostep-expand))
          (:map lisp-interaction-mode-map
                ("C-c C-e" . macrostep-expand))))
+
+;; Guile
+(use-package geiser-guile
+  :config
+  (add-to-list 'geiser-guile-load-path "~/.config/guix/current/share/guile/site/3.0"))
+
 
 ;; HTML + jS + CSS
 (use-package web-mode
@@ -194,6 +219,10 @@ the emacs server."
                                    company-dabbrev)))
   (add-hook 'python-mode-hook 'set-company-backends-for-python))
 
+(use-package graphviz-dot-mode
+  :config
+  (setq graphviz-dot-indent-width 4))
+
                                         ; General Editing Modes
 
 (setq-default indent-tabs-mode nil)
@@ -239,6 +268,8 @@ the emacs server."
                                         ; Markup
 
 (use-package org
+  :bind (("C-c a" . org-agenda)
+         ("C-c l" . org-agenda-list))
   :config
   (setq org-startup-indented t)
   (setq org-agenda-files '("~/org/school.org"
@@ -246,11 +277,8 @@ the emacs server."
                            "~/org/personal.org"
                            "~/org/work.org"))
   (setq org-todo-keywords
-        '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))'
-  (setq org-edit-src-content-indentation 0)
-  :bind
-  ("C-c a" . org-agenda)
-  ("C-c l" . org-agenda-list))
+        '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
+  (setq org-edit-src-content-indentation 0))
 
 (use-package ob
   :after (org jupyter)
@@ -288,10 +316,10 @@ the emacs server."
   (org-roam-db-autosync-mode))
 
 (use-package org-journal
-  :config
-  (setq org-journal-dir "~/org/diary")
   :bind
-  ("C-c j" . org-journal-new-entry))
+  ("C-c j" . org-journal-new-entry)
+  :config
+  (setq org-journal-dir "~/org/diary"))
 
 (use-package org-download
   :config
@@ -305,6 +333,10 @@ the emacs server."
   (org-notify-add 'class   '(:time "30m" :actions -notify/window
                                    :period "10m" :duration 30))
   (org-notify-start))
+
+(use-package org-fragtog
+  :hook
+  (org-mode . org-fragtog-mode))
 
                                         ; Appearance
 

@@ -12,19 +12,18 @@
   (map specification->package
        '(;; Emacs-Lisp
          "emacs-use-package"
-         "emacs-tree-sitter"
          ;; Basic Tools
          "emacs-ivy"
          "emacs-which-key"
          "emacs-projectile"
          "emacs-corfu"
          "emacs-helpful"
-         "emacs-popper"
          "emacs-consult-dir"
          "emacs-direnv"
          "emacs-avy"
          "emacs-embark"
-         "emacs-tree-edit"
+         "emacs-beacon"
+         "emacs-unkillable-scratch"
          ;; Tool Modes
          "emacs-magit"
          "emacs-guix"
@@ -36,6 +35,8 @@
          "emacs-ledger-mode"
          "emacs-yaml-mode"
          "emacs-racket-mode"
+         "emacs-geiser"
+         "emacs-geiser-guile"
          "emacs-geiser-racket"
          "emacs-haskell-mode"
          "emacs-dante"
@@ -64,8 +65,10 @@
          "emacs-org-roam"
          "emacs-org-download"
          "emacs-org-contrib"
+         "emacs-org-fragtog"
          ;; Appearance
-         "emacs-nord-theme")))
+         "emacs-nord-theme"
+         "emacs-olivetti")))
 
 (define-public emacs-services
   (list

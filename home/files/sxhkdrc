@@ -45,9 +45,14 @@ super + {_,shift + }{1-8}
 super + {period,comma}
       	bspc desktop -f '{next,prev}.occupied.local'
 
-# move incrementally through desktops
-super + shift + {period,comma}
+super + alt + {period,comma}
       	bspc desktop -f '{next,prev}.local'
+
+super + shift + {period,comma}
+      	bspc node -d '{next,prev}.occupied.local'
+
+super + shift + alt + {period,comma}
+      	bspc node -d '{next,prev}.local'
 
 #
 # bspwm states

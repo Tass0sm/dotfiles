@@ -50,6 +50,6 @@ bspc rule -r '*'
 
 # State rules
 bspc rule -a Emacs state=tiled
-bspc rule -a discord desktop='5'
+bspc rule -a discord desktop='5' follow=off
 bspc rule -a Gimp desktop='7'
 bspc rule -a zoom desktop='8' follow=on
