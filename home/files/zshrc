@@ -9,6 +9,10 @@ setopt autocd extendedglob nomatch notify
 unsetopt beep
 bindkey -e
 
+# Dir History
+setopt autopushd pushdminus pushdsilent pushdtohome
+alias dh='dirs -v'
+
 # X clipboard integration for kill / yank functions.
 x-copy-region-as-kill () {
     zle copy-region-as-kill

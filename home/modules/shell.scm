@@ -26,7 +26,8 @@
                 ("SSL_CERT_FILE" . "$HOME/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")
                 ("GIT_SSL_CAINFO" . "$SSL_CERT_FILE")
                 ("GEM_PATH" . "$HOME/.local/share/gem")
-                ("_JAVA_AWT_WM_NONREPARENTING" . "1")))
+                ("_JAVA_AWT_WM_NONREPARENTING" . "1")
+                ("DIRSTACKSIZE" . "8")))
              (zshrc
               (list
                (local-file "../files/zshrc")))))

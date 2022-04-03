@@ -1,9 +1,5 @@
 (cons*
  (channel
-  (name 'tassos-guix)
-  ;; "https://github.com/Tass0sm/tassos-guix"
-  (url "file:///home/tassos/software/tassos-guix"))
- (channel
   (name 'rde)
   (url "https://git.sr.ht/~abcdw/rde")
   (introduction

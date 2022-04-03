@@ -64,9 +64,20 @@ the emacs server."
         dired-dwim-target t)
   (add-hook 'dired-mode-hook 'dired-hide-details-mode))
 
+(use-package cape
+  :init
+  ;; This modifies the default value of completion-at-point-functions. This will
+  ;; be tried after the capfs in the buffer local value.
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-keyword)
+  (add-to-list 'completion-at-point-functions #'cape-file)
+  :config
+  (setq cape-dabbrev-check-other-buffers nil))
+
 (use-package corfu
   :config
   (setq corfu-auto t
+        corfu-auto-prefix 2
         corfu-quit-at-boundary t
         corfu-auto-delay 0
         corfu-cycle t
@@ -156,44 +167,24 @@ the emacs server."
 
                                         ; Specific Editing Modes
 
-;; Lisp
 (use-package macrostep
   :bind ((:map emacs-lisp-mode-map
                ("C-c C-e" . macrostep-expand))
          (:map lisp-interaction-mode-map
                ("C-c C-e" . macrostep-expand))))
 
-;; Guile
 (use-package geiser-guile
   :config
   (add-to-list 'geiser-guile-load-path "~/.config/guix/current/share/guile/site/3.0"))
 
 
-;; HTML + jS + CSS
 (use-package web-mode
-  :mode ("\\.html" . web-mode)
-  :config
-  (defun set-company-backends-for-web ()
-    (setq-local company-backends '(company-yasnippet
-                                   company-capf
-                                   company-files
-                                   (company-dabbrev-code company-keywords)
-                                   company-dabbrev)))
-  (add-hook 'web-mode-hook 'set-company-backends-for-web))
-
-;; JavaScript
+  :mode ("\\.html" . web-mode))
 
 (use-package js2-mode
   :mode ("\\.js\\'" . js2-mode)
   :config
-  (setq js2-basic-offset 2)
-  (defun set-company-backends-for-js ()
-    (setq-local company-backends '(company-yasnippet
-                                   company-capf
-                                   company-files
-                                   (company-dabbrev-code company-keywords)
-                                   company-dabbrev)))
-  (add-hook 'js2-mode-hook 'set-company-backends-for-js))
+  (setq js2-basic-offset 2))
 
 (use-package add-node-modules-path
   :after js2-mode
@@ -205,19 +196,11 @@ the emacs server."
   :config
   (add-hook 'js2-mode-hook 'prettier-js-mode))
 
-;; Python
 (use-package python
   :config
   ;; (setq python-shell-interpreter "ipython"
   ;;       python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True")
-
-  (defun set-company-backends-for-python ()
-    (setq-local company-backends '(company-yasnippet
-                                   company-capf
-                                   company-files
-                                   (company-dabbrev-code company-keywords)
-                                   company-dabbrev)))
-  (add-hook 'python-mode-hook 'set-company-backends-for-python))
+  )
 
 (use-package graphviz-dot-mode
   :config
@@ -263,7 +246,8 @@ the emacs server."
               (("C-,"   . flyspell-auto-correct-word)
                ("C-."   . flyspell-goto-next-error)
                ("C-;"   . flyspell-correct-next)
-               ("C-M-;" . flyspell-buffer))))
+               ("C-M-;" . flyspell-buffer)
+               ("C-M-i" . nil))))
 
                                         ; Markup
 
@@ -337,6 +321,8 @@ the emacs server."
 (use-package org-fragtog
   :hook
   (org-mode . org-fragtog-mode))
+
+(use-package markdown-mode)
 
                                         ; Appearance
 
