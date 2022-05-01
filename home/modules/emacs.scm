@@ -29,6 +29,7 @@
          "emacs-wgrep"
          ;; Tool Modes
          "emacs-magit"
+         "emacs-magit-todos"
          "emacs-guix"
          "emacs-vterm"
          "emacs-pdf-tools"

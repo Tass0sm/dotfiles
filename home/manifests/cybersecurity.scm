@@ -1,4 +1,5 @@
 (specifications->manifest
- '("nmap"
+ '("netcat"
+   "nmap"
    "radare2"
    "wireshark"))

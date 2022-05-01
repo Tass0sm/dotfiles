@@ -145,6 +145,10 @@ the emacs server."
   :bind
   ("C-x g" . magit-status))
 
+(use-package magit-todos
+  :config
+  (magit-todos-mode))
+
 (use-package guix-popup
   :bind
   ("C-x y" . guix-popup))
@@ -175,7 +179,8 @@ the emacs server."
 
 (use-package geiser-guile
   :config
-  (add-to-list 'geiser-guile-load-path "~/.config/guix/current/share/guile/site/3.0"))
+  (setq geiser-default-implementation 'guile)
+  (setq geiser-guile-load-path '("~/software/guix/")))
 
 
 (use-package web-mode
