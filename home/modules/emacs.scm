@@ -6,7 +6,8 @@
   #:use-module (gnu services)
   #:use-module (gnu home services)
   ;; from rde
-  #:use-module (gnu home-services emacs))
+  #:use-module (gnu home-services emacs)
+  #:use-module (gnu home-services-utils))
 
 (define emacs-packages
   (map specification->package
@@ -24,9 +25,10 @@
          "emacs-direnv"
          "emacs-avy"
          "emacs-embark"
-         "emacs-beacon"
          "emacs-unkillable-scratch"
          "emacs-wgrep"
+         ;; "emacs-bufler"
+         "emacs-jupyter"
          ;; Tool Modes
          "emacs-magit"
          "emacs-magit-todos"
@@ -76,15 +78,13 @@
 
 (define-public emacs-services
   (list
-   (simple-service 'emacs-init
-                   home-files-service-type
-                   `(("config/emacs/early-init.el"
-                      ,(local-file "../files/early-init.el"))
-                     ("config/emacs/init.el"
-                      ,(local-file "../files/init.el"))))
    (service home-emacs-service-type
             (home-emacs-configuration
              (package emacs-next-pgtk)
              ;; (rebuild-elisp-packages? #t)
              ;; (server-mode? #t)
-             (elisp-packages emacs-packages)))))
+             (elisp-packages emacs-packages)
+             (init-el
+              (list (slurp-file-gexp (local-file "../files/init.el"))))
+             (early-init-el
+              (list (slurp-file-gexp (local-file "../files/early-init.el"))))))))

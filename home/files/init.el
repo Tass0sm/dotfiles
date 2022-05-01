@@ -131,13 +131,12 @@ the emacs server."
   :bind
   (("M-j" . avy-goto-word-1)))
 
-(use-package beacon
-  :config
-  (beacon-mode 1))
-
 (use-package unkillable-scratch
   :config
   (unkillable-scratch t))
+
+
+(use-package jupyter)
 
                                         ; Tool Modes
 
@@ -280,8 +279,7 @@ the emacs server."
      (ditaa . t)
      (dot . t)
      (python . t)
-     ;;(jupyter . t)
-     )))
+     (jupyter . t))))
 
 (use-package ox-latex
   :config
