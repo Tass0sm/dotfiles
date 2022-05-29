@@ -138,6 +138,10 @@ the emacs server."
 
 (use-package jupyter)
 
+(use-package frames-only-mode
+  :config
+  (frames-only-mode 1))
+
                                         ; Tool Modes
 
 (use-package magit
@@ -149,6 +153,10 @@ the emacs server."
   (magit-todos-mode))
 
 (use-package guix-popup
+  :init
+  (global-guix-prettify-mode 1)
+  :hook
+  (scheme-mode . guix-devel-mode)
   :bind
   ("C-x y" . guix-popup))
 
@@ -179,8 +187,7 @@ the emacs server."
 (use-package geiser-guile
   :config
   (setq geiser-default-implementation 'guile)
-  (setq geiser-guile-load-path '("~/software/guix/")))
-
+  (setq geiser-active-implementations '(guile)))
 
 (use-package web-mode
   :mode ("\\.html" . web-mode))

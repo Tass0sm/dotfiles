@@ -34,7 +34,7 @@
                (local-file "../files/zshrc")))))
    (simple-service 'direnvrc
                    home-files-service-type
-                   `(("config/direnv/direnvrc"
+                   `((".config/direnv/direnvrc"
                       ,(local-file "../files/direnvrc"))))
    (simple-service 'login-variables
                    home-environment-variables-service-type

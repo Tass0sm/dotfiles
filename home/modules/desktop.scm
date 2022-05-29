@@ -14,6 +14,7 @@
   (map specification->package
        (list
         "polybar"
+        "flameshot"
         "xwallpaper"
 	"xcursor-nordzy")))
 
@@ -41,7 +42,7 @@
 		      (local-file "../files/polybar.ini")))))
    (simple-service 'gtk-config
         	   home-files-service-type
-        	   `(("config/gtk-3.0/settings.ini"
+        	   `((".config/gtk-3.0/settings.ini"
                       ,(local-file "../files/gtk3.ini"))
-        	     ("config/gtk-3.0/gtk.css"
+        	     (".config/gtk-3.0/gtk.css"
                       ,(local-file "../files/gtk3.css"))))))

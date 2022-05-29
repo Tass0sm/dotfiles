@@ -29,6 +29,7 @@
          "emacs-wgrep"
          ;; "emacs-bufler"
          "emacs-jupyter"
+         "emacs-frames-only-mode"
          ;; Tool Modes
          "emacs-magit"
          "emacs-magit-todos"
