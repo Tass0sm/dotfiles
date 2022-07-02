@@ -5,6 +5,9 @@
   #:use-module (gnu home services)
   #:use-module (gnu home-services version-control))
 
+(define-public git-packages
+  (list (specification->package+output "git:send-email")))
+
 (define-public git-services
   (list
    (service home-git-service-type

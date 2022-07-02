@@ -32,7 +32,8 @@
 	"hunspell-dict-en"
         "poweralertd"
         "curl"
-	"nss-certs")))
+	"nss-certs"
+        "gnome-keyring")))
 
 (define font-packages
   (map specification->package
@@ -75,7 +76,7 @@
  (packages
   `(,@base-packages
     ,@zsh-packages
-    ,((compose list specification->package+output) "git:send-email")
+    ,@git-packages
     ,@mail-packages
     ,@desktop-packages
     ,@font-packages
