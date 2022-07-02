@@ -16,6 +16,7 @@
         "polybar"
         "flameshot"
         "xwallpaper"
+        "nordic-theme"
 	"xcursor-nordzy")))
 
 (define-public desktop-services

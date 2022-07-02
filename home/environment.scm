@@ -34,6 +34,12 @@
         "curl"
 	"nss-certs")))
 
+(define font-packages
+  (map specification->package
+       (list
+	"font-iosevka"
+        "font-awesome")))
+
 (define xfce-packages
   (map specification->package
        (list
@@ -72,6 +78,7 @@
     ,((compose list specification->package+output) "git:send-email")
     ,@mail-packages
     ,@desktop-packages
+    ,@font-packages
     ,home-scripts))
  (services
   `(,@xdg-services

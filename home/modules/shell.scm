@@ -38,7 +38,7 @@
                       ,(local-file "../files/direnvrc"))))
    (simple-service 'login-variables
                    home-environment-variables-service-type
-                   `(;; ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/usr/local/share/:/usr/share/")
+                   `(("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/usr/local/share/:/usr/share/")
                      ;; ("XDG_CONFIG_DIRS" . "$XDG_CONFIG_DIRS:/etc/xdg/")
                      ;; ("XDG_CONFIG_DIRS" . "$HOME/.guix-home/profile/etc/xdg:$XDG_CONFIG_DIRS")
                      ("PATH" . "$HOME/.local/bin:$PATH")))))
