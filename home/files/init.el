@@ -19,8 +19,6 @@
 
 (setq inhibit-startup-screen t)
 
-;; (setq pop-up-frames t)
-
 (use-package recentf
   :init
   (recentf-mode 1))
@@ -42,6 +40,8 @@ the emacs server."
                                         ; Basic Tools
 
 (use-package vertico
+  :bind (:map minibuffer-local-map
+              ("C-j" . vertico-insert))
   :init
   (vertico-mode 1))
 
@@ -214,8 +214,13 @@ the emacs server."
   :bind-keymap
   ("C-c p" . projectile-command-map)
   :config
+  (defun store-path-p (path)
+    "Returns non-nil if path is in the guix store."
+    (s-prefix-p "/gnu/store/" path))
+
+  (setq projectile-ignored-project-function 'store-path-p)
+
   (require 'subr-x)
-  (setq projectile-completion-system 'ivy)
   (projectile-mode +1))
 
 (use-package dired

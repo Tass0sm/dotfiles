@@ -4,8 +4,21 @@ This is a work in progress reproducible home environment managed with [[https://
 by Andrew Tropin. Guix Home is set to be included with Guix 1.4, and I think
 it's really neat.
 
+* Elements
+- WM : bspwm
+- Bar : polybar
+- Terminal: alacritty
+- Shell : zsh
+- Editor : Emacs v29 with =pgtk=, =xwidgets=, and =tree-sitter=.
+
 * Screenshot
 [[file:screenshot.png]]
+
+* Extra Channels
+- [[https://github.com/Tass0sm/tassos-guix][My Channel]]
+- [[https://github.com/Tass0sm/guix-develop][Guix Develop]]
+- [[https://git.sr.ht/~abcdw/rde][RDE]]
+- [[https://gitlab.com/nonguix/nonguix][Non-Guix]]
 
 * References
 - https://github.com/Barbarossa93/Genome

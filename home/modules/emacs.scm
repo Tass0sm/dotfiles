@@ -5,6 +5,8 @@
   #:use-module (gnu packages emacs)
   #:use-module (gnu services)
   #:use-module (gnu home services)
+  #:use-module (tassos-guix packages emacs)
+  #:use-module (tassos-guix packages emacs-xyz)
   ;; from rde
   #:use-module (gnu home-services emacs)
   #:use-module (gnu home-services-utils))
@@ -84,9 +86,8 @@
   (list
    (service home-emacs-service-type
             (home-emacs-configuration
-             (package emacs-next-pgtk)
+             (package emacs-next-pgtk-treesitter)
              ;; (rebuild-elisp-packages? #t)
-             ;; (server-mode? #t)
              (elisp-packages emacs-packages)
              (init-el
               (list (slurp-file-gexp (local-file "../files/init.el"))))
