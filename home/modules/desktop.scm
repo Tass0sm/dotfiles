@@ -13,6 +13,7 @@
 (define-public desktop-packages
   (map specification->package
        (list
+        "cava"
         "polybar"
         "flameshot"
         "xwallpaper"
