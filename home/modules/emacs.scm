@@ -32,7 +32,7 @@
          "emacs-embark"
          "emacs-unkillable-scratch"
          "emacs-wgrep"
-         ;; "emacs-bufler"
+         "emacs-bufler"
          "emacs-jupyter"
          "emacs-frames-only-mode"
          ;; Tool Modes

@@ -240,6 +240,13 @@ the emacs server."
   :config
   (setq cape-dabbrev-check-other-buffers nil))
 
+(defun corfu-complete-or-expand ()
+  "docstring"
+  (interactive)
+  (if (yas-expand)
+      (corfu-quit)
+    (corfu-complete)))
+
 (use-package corfu
   :init
   (global-corfu-mode 1)
@@ -251,6 +258,7 @@ the emacs server."
         corfu-cycle t
         corfu-preselect-first nil)
   (unbind-key "RET" corfu-map)
+  (bind-key "<tab>" 'corfu-complete-or-expand corfu-map)
   :hook (shell-mode . (lambda ()
                         (setq-local corfu-quit-at-boundary t
                                     corfu-quit-no-match t
@@ -296,6 +304,9 @@ the emacs server."
   :config
   (unkillable-scratch t))
 
+(use-package bufler
+  :bind (("C-x C-b" . bufler)
+         ("C-x b" . bufler-switch-buffer)))
 
 (use-package jupyter)
 
@@ -320,10 +331,6 @@ the emacs server."
   (scheme-mode . guix-devel-mode)
   :bind
   ("C-x y" . guix-popup))
-
-(use-package ibuffer
-  :bind
-  ("C-x C-b" . ibuffer))
 
 (use-package pdf-tools
   :magic ("%PDF" .  pdf-view-mode)
