@@ -7,7 +7,8 @@
    (service home-xdg-mime-applications-service-type
             (home-xdg-mime-applications-configuration
              (added '(("application/pdf" . "firefox.desktop")
-                      ("application/pdf" . "emacsclient.desktop")))
+                      ("application/pdf" . "emacsclient.desktop")
+                      ("inode/directory" . "emacsclient.desktop")))
              (default '(("x-scheme-handler/http" . "firefox.desktop")
                         ("x-scheme-handler/https" . "firefox.desktop")
                         ("x-scheme-handler/mailto" . "userapp-Evolution-7C6SL1.desktop")

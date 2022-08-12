@@ -8,6 +8,7 @@
   #:use-module (tassos-guix packages emacs)
   #:use-module (tassos-guix packages emacs-xyz)
   ;; from rde
+  #:use-module (rde gexp)
   #:use-module (gnu home-services emacs)
   #:use-module (gnu home-services-utils))
 
@@ -73,6 +74,7 @@
          "emacs-ivy-yasnippet"
          "emacs-flyspell-correct"
          ;; Org
+         "emacs-org-analyzer"
          "emacs-org-journal"
          "emacs-org-roam"
          "emacs-org-download"
@@ -84,12 +86,12 @@
 
 (define-public emacs-services
   (list
-   (service home-emacs-service-type
-            (home-emacs-configuration
-             (package emacs-next-pgtk-treesitter)
-             ;; (rebuild-elisp-packages? #t)
-             (elisp-packages emacs-packages)
-             (init-el
-              (list (slurp-file-gexp (local-file "../files/init.el"))))
-             (early-init-el
-              (list (slurp-file-gexp (local-file "../files/early-init.el"))))))))
+    (service home-emacs-service-type
+             (home-emacs-configuration
+              (package emacs-next-pgtk-treesitter)
+              ;; (rebuild-elisp-packages? #t)
+              (elisp-packages emacs-packages)
+              (init-el
+               (list (slurp-file-like (local-file "../files/init.el"))))
+              (early-init-el
+               (list (slurp-file-like (local-file "../files/early-init.el"))))))))

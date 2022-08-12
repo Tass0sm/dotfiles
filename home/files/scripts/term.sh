@@ -1,10 +1,9 @@
 #!/usr/bin/env sh
 
-if [ $# -ne 0 ]; then
-    alacritty $@
-elif [ ! $(pidof emacs) ]; then
+if [ ! $(pidof emacs) ]; then
     alacritty
+elif [ $# -ne 0 ]; then
+    emacsclient -c -n -e "(tm/new-term $@)"
 else
-    BUF=$(emacsclient -e "(server-new-terminal-file)" | tr -d '"')
-    alacritty --working-directory $BUF
+    emacsclient -c -n -e "(tm/new-term)"
 fi

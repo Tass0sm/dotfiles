@@ -6,6 +6,9 @@
 super + Return
 	term
 
+super + alt + Return
+	term t
+
 super + shift + Return
         alacritty
 

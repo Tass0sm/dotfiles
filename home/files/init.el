@@ -25,17 +25,26 @@
 
                                         ; Server
 
-(defun server-new-frame-buffer ()
+(defun tm/desired-buffer ()
   "Get the buffer to be used when making a new frame for the emacs
 server."
   (window-buffer (selected-window)))
 
-(defun server-new-terminal-file ()
+(defun tm/desired-directory (&optional root)
   "Get the file to be used when making a new terminal while using
 the emacs server."
-  (let ((buffer (server-new-frame-buffer)))
-    (expand-file-name (cdr (assq 'default-directory
-                                 (buffer-local-variables buffer))))))
+  (let ((d (expand-file-name
+            (cdr (assq 'default-directory
+                       (buffer-local-variables (tm/desired-buffer)))))))
+    (if root
+        (projectile-project-root d)
+      d)))
+
+(defun tm/new-term (&optional root)
+  "Open a new terminal in the desired directory"
+  (interactive)
+  (let* ((default-directory (tm/desired-directory root)))
+    (vterm t)))
 
                                         ; Basic Tools
 
@@ -241,7 +250,7 @@ the emacs server."
   (setq cape-dabbrev-check-other-buffers nil))
 
 (defun corfu-complete-or-expand ()
-  "docstring"
+  "Try to complete current input unless there exists a snippet to expand."
   (interactive)
   (if (yas-expand)
       (corfu-quit)
@@ -250,15 +259,17 @@ the emacs server."
 (use-package corfu
   :init
   (global-corfu-mode 1)
+  :bind (:map corfu-map
+              ("RET" . nil)
+              ("C-j" . corfu-complete)
+              ("<tab>" . corfu-complete-or-expand))
   :config
   (setq corfu-auto t
         corfu-auto-prefix 2
         corfu-quit-at-boundary t
         corfu-auto-delay 0
         corfu-cycle t
-        corfu-preselect-first nil)
-  (unbind-key "RET" corfu-map)
-  (bind-key "<tab>" 'corfu-complete-or-expand corfu-map)
+        corfu-preselect-first t)
   :hook (shell-mode . (lambda ()
                         (setq-local corfu-quit-at-boundary t
                                     corfu-quit-no-match t
@@ -331,6 +342,10 @@ the emacs server."
   (scheme-mode . guix-devel-mode)
   :bind
   ("C-x y" . guix-popup))
+
+(use-package vterm
+  :config
+  (setq vterm-timer-delay 0.01))
 
 (use-package pdf-tools
   :magic ("%PDF" .  pdf-view-mode)
@@ -442,6 +457,8 @@ the emacs server."
   (setq org-todo-keywords
         '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
   (setq org-edit-src-content-indentation 0))
+
+(require 'org-analyzer)
 
 (use-package ob
   :after (org jupyter)
