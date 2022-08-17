@@ -82,6 +82,7 @@
          "emacs-org-fragtog"
          ;; Appearance
          "emacs-nord-theme"
+         "emacs-moody"
          "emacs-olivetti")))
 
 (define-public emacs-services

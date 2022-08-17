@@ -88,7 +88,10 @@ the emacs server."
   ;;              '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
   ;;                nil
   ;;                (window-parameters (mode-line-format . none))))
-  )
+  :custom
+  ;; Circumvents an error when using frames-only-mode
+  (embark-verbose-indicator-display-action
+   '(display-buffer-in-side-window (side . right))))
 
 ;; Consult users will also want the embark-consult package.
 ;; (use-package embark-consult
@@ -322,7 +325,7 @@ the emacs server."
 (use-package jupyter)
 
 (use-package frames-only-mode
-  :config
+  :init
   (frames-only-mode 1))
 
                                         ; Tool Modes
@@ -490,6 +493,7 @@ the emacs server."
                 ("C-c n a" . org-roam-alias-add)
                 ("C-c n l" . org-roam-buffer-toggle))))
   :config
+  (require 'ucs-normalize)
   (setq org-roam-directory (file-truename
                             (concat org-directory "/notes/")))
   (org-roam-db-autosync-mode))
@@ -524,10 +528,28 @@ the emacs server."
 (setq-default truncate-lines t)
 (setq-default fill-column 80)
 
-(if (daemonp)
-    (cl-labels ((load-nord (frame)
-                           (with-selected-frame frame
-                             (load-theme 'nord t))
-                           (remove-hook 'after-make-frame-functions #'load-nord)))
-      (add-hook 'after-make-frame-functions #'load-nord))
-  (load-theme 'nord t))
+(defun load-nord (&optional frame)
+  "Load nord theme for emacs."
+  (if frame
+      (progn
+        (with-selected-frame frame
+          (load-theme 'nord t))
+        (remove-hook 'after-make-frame-functions #'load-nord))
+    (load-theme 'nord t))
+  (let ((line          (face-attribute 'mode-line          :background))
+        (line-inactive (face-attribute 'mode-line-inactive :background)))
+    (set-face-attribute 'mode-line          nil :box line)
+    (set-face-attribute 'mode-line-inactive nil :box line-inactive)))
+
+(use-package nord-theme
+  :init
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions #'load-nord)
+    (load-nord)))
+
+(use-package moody
+  :config
+  (setq x-underline-at-descent-line t)
+  (moody-replace-mode-line-buffer-identification)
+  (moody-replace-vc-mode))
+
