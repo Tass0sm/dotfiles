@@ -60,10 +60,10 @@ the emacs server."
 
 (use-package orderless
   :init
-  (setq completion-styles '(orderless basic))
-  ;; completion-category-defaults nil
-  ;; completion-category-overrides '((file (styles partial-completion))))
-  )
+  (setq ;; completion-category-defaults nil
+        completion-styles '(orderless basic)
+        ;; For tramp:
+        completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package marginalia
   :init
@@ -317,10 +317,6 @@ the emacs server."
 (use-package unkillable-scratch
   :config
   (unkillable-scratch t))
-
-(use-package bufler
-  :bind (("C-x C-b" . bufler)
-         ("C-x b" . bufler-switch-buffer)))
 
 (use-package jupyter)
 

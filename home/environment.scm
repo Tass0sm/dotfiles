@@ -64,7 +64,8 @@
    (arguments
     `(#:install-plan
       '(("ec.sh" "bin/ec")
-        ("term.sh" "bin/term"))))
+        ("term.sh" "bin/term")
+        ("reconfigure.sh" "bin/reconfigure"))))
    (propagated-inputs
     `(("epipe" ,epipe)))
    (home-page "https://github.com/Tass0sm/dotfiles")
