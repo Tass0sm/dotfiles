@@ -8,20 +8,34 @@
   #:use-module (guix gexp)
   #:use-module (tassos-guix packages xorg)
   #:use-module (tassos-guix home-services wm)
-  #:use-module (tassos-guix home-services notifications))
+  #:use-module (tassos-guix home-services notifications)
+  ;; from rde
+  #:use-module (rde gexp)
+  #:use-module (gnu home-services-utils))
 
 (define-public desktop-packages
   (map specification->package
        (list
         "cava"
+        "light"
+        "dmenu"
+        "bemenu"
+        "waybar"
         "polybar"
         "flameshot"
+        "wl-clipboard"
         "xwallpaper"
         "nordic-theme"
 	"xcursor-nordzy")))
 
 (define-public desktop-services
   (list
+   (simple-service 'sx-config
+        	   home-files-service-type
+        	   `((".config/sx/sxrc"
+                      ,(mixed-executable-text-file
+                        "sxrc"
+                        (slurp-file-like (local-file "../files/sxrc"))))))
    (service home-xresources-service-type
 	    (home-xresources-configuration
 	     (config

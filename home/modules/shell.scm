@@ -6,10 +6,12 @@
   #:use-module (gnu services)
   #:use-module (gnu home services)
   #:use-module (gnu home services shells)
-  #:use-module (gnu home-services shellutils))
+  #:use-module (gnu home-services shellutils)
+  #:use-module (tassos-guix packages shellutils))
 
 (define-public zsh-packages
   (list direnv
+        zsh-pure
         zsh-autosuggestions))
 
 (define-public zsh-services
