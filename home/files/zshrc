@@ -50,19 +50,19 @@ bindkey -e '^W' x-kill-region
 bindkey -e '^K' x-kill-line
 bindkey -e '^Y' x-yank
 
-# Prompt
-fpath+=$HOME/.config/zsh/pure
-autoload -U promptinit; promptinit
-prompt pure
-
-TYPEWRITTEN_PROMPT_LAYOUT="pure"
-
 # alias
 alias ls="exa --color=always --group-directories-first"
 alias ll="exa -lah --color=always --group-directories-first"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# Prompt
+fpath+=$HOME/.guix-home/profile/share/zsh/plugins/pure
+autoload -U promptinit; promptinit
+prompt pure
+
+TYPEWRITTEN_PROMPT_LAYOUT="pure"
 
 # autosuggestions
 source $HOME/.guix-home/profile/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh

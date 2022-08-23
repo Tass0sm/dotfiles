@@ -20,7 +20,8 @@
             (home-zsh-configuration
              (xdg-flavor? #t)
              (environment-variables
-              '(("EDITOR" . "emacsclient -a ''")
+              '(("MONITOR" . "eDP")
+                ("EDITOR" . "emacsclient -a ''")
                 ("XCURSOR_THEME" . "Nordzy-cursors")
                 ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale")
                 ("GUIX_EXTRA_PROFILES" . "$HOME/.guix-extra-profiles")

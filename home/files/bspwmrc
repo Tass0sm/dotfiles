@@ -22,7 +22,7 @@ polybar main &
 # touchPadID=$(xinput | grep "TouchPad" | awk '{print substr($6,4,2)}')
 # xinput set-prop $touchPadID "Device Enabled" 1
 
-bspc monitor eDP1 -d 1 2 3 4 5 6 7 8
+bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8
 
 bspc config border_width                3
 bspc config top_padding                 18

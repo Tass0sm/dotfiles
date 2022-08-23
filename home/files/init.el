@@ -17,6 +17,7 @@
 (global-set-key (kbd "C-x C-z") 'ignore)
 (global-set-key (kbd "C-x k") 'kill-current-buffer)
 
+(setq ring-bell-function 'ignore)
 (setq inhibit-startup-screen t)
 
 (use-package recentf
