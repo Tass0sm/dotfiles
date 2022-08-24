@@ -23,6 +23,7 @@
         "waybar"
         "polybar"
         "flameshot"
+        "xsel"
         "wl-clipboard"
         "xwallpaper"
         "nordic-theme"

@@ -59,7 +59,7 @@ eval "$(direnv hook zsh)"
 
 # Prompt
 fpath+=$HOME/.guix-home/profile/share/zsh/plugins/pure
-autoload -U promptinit; promptinit
+autoload -Uz promptinit; promptinit
 prompt pure
 
 TYPEWRITTEN_PROMPT_LAYOUT="pure"
