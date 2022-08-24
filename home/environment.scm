@@ -25,6 +25,7 @@
 (define base-packages
   (map specification->package
        (list
+        "foot"
 	"alacritty"
 	"exa"
         "pamixer"

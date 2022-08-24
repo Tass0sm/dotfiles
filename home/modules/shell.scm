@@ -22,6 +22,7 @@
              (environment-variables
               '(("MONITOR" . "eDP")
                 ("EDITOR" . "emacsclient -a ''")
+                ("MOZ_ENABLE_WAYLAND" . "1")
                 ("XCURSOR_THEME" . "Nordzy-cursors")
                 ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale")
                 ("GUIX_EXTRA_PROFILES" . "$HOME/.guix-extra-profiles")
