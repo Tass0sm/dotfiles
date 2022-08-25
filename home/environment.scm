@@ -66,6 +66,7 @@
     `(#:install-plan
       '(("ec.sh" "bin/ec")
         ("term.sh" "bin/term")
+        ("todos.sh" "bin/todos")
         ("reconfigure.sh" "bin/reconfigure"))))
    (propagated-inputs
     `(("epipe" ,epipe)))
