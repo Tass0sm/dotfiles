@@ -1,6 +1,12 @@
 (define-module (home modules xdg)
+  #:use-module (gnu packages)
   #:use-module (gnu home services)
   #:use-module (gnu home services xdg))
+
+(define-public xdg-packages
+  (map specification->package
+       (list
+        "xdg-utils")))
 
 (define-public xdg-services
   (list

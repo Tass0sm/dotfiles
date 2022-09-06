@@ -34,7 +34,7 @@
          "emacs-unkillable-scratch"
          "emacs-wgrep"
          "emacs-bufler"
-         "emacs-jupyter"
+         "emacs-jupyter-next"
          "emacs-frames-only-mode"
          ;; Tool Modes
          "emacs-magit"
@@ -55,6 +55,7 @@
          "emacs-dante"
          "emacs-clojure-mode"
          "emacs-cider"
+         "emacs-sly"
          "emacs-rust-mode"
          "emacs-macrostep"
          "emacs-web-mode"

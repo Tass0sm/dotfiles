@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-LOCAL_CHANNEL="$HOME/src/tassos-guix"
+LOCAL_CHANNEL="$HOME/software/tassos-guix"
 GUIX_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/guix"
 ENV_FILE="$GUIX_DIR/home/environment.scm"
 

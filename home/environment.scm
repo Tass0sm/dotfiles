@@ -34,7 +34,8 @@
         "curl"
         "inetutils"
 	"nss-certs"
-        "gnome-keyring")))
+        "gnome-keyring"
+        "glibc-locales")))
 
 (define font-packages
   (map specification->package
@@ -78,6 +79,7 @@
 (home-environment
  (packages
   `(,@base-packages
+    ,@xdg-packages
     ,@zsh-packages
     ,@git-packages
     ,@mail-packages

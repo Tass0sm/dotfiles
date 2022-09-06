@@ -396,6 +396,10 @@ the emacs server."
   ;;       python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True")
   )
 
+(use-package sly
+  :config
+  (setq inferior-lisp-program "sbcl"))
+
 (use-package graphviz-dot-mode
   :config
   (setq graphviz-dot-indent-width 4))

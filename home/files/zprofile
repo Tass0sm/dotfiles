@@ -1,0 +1,5 @@
+# -*- mode: shell-script; -*-
+
+GUIX_PROFILE="$HOME/.guix-profile"
+PROFILE_FILE="$GUIX_PROFILE/etc/profile"
+[ -f $PROFILE_FILE ] && . $PROFILE_FILE

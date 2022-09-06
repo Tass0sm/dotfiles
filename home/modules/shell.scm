@@ -34,7 +34,10 @@
                 ("DIRSTACKSIZE" . "8")))
              (zshrc
               (list
-               (local-file "../files/zshrc")))))
+               (local-file "../files/zshrc")))
+             (zprofile
+              (list
+               (local-file "../files/zprofile")))))
    (simple-service 'direnvrc
                    home-files-service-type
                    `((".config/direnv/direnvrc"
