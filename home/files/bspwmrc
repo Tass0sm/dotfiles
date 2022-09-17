@@ -1,7 +1,7 @@
 #! /bin/sh
 
 # set wallpaper
-xwallpaper --zoom "$HOME/pictures/genome-wallpaper.png"
+xwallpaper --zoom "$HOME/pictures/wallpaper.png"
 
 # set x resources
 xrdb "$HOME/.Xresources"
@@ -13,6 +13,7 @@ pidof blugon || blugon &
 pidof poweralertd || poweralertd &
 pidof emacs || emacs --daemon &
 pidof nm-applet || nm-applet &
+# pidof polkit-dumb-agent || polkit-dumb-agent &
 # pidof picom || picom &
 # pidof bspswallow || bspswallow &
 pidof polybar && killall polybar

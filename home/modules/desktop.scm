@@ -62,4 +62,8 @@
         	   `((".config/gtk-3.0/settings.ini"
                       ,(local-file "../files/gtk3.ini"))
         	     (".config/gtk-3.0/gtk.css"
-                      ,(local-file "../files/gtk3.css"))))))
+                      ,(local-file "../files/gtk3.css"))))
+   (simple-service 'wallpaper-file
+        	   home-files-service-type
+        	   `(("pictures/wallpaper.png"
+                      ,(local-file "../files/images/genome-wallpaper.png"))))))

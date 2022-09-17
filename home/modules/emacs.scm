@@ -81,6 +81,7 @@
          "emacs-org-download"
          "emacs-org-contrib"
          "emacs-org-fragtog"
+         "emacs-ox-haunt-latest"
          ;; Appearance
          "emacs-nord-theme"
          "emacs-moody"

@@ -458,6 +458,8 @@ the emacs server."
                            "~/org/projects.org"
                            "~/org/personal.org"
                            "~/org/work.org"))
+  (setq org-agenda-custom-commands
+        '(("g" "Goals" ((todo "" ((org-agenda-tag-filter-preset '("+goal"))))))))
   (setq org-todo-keywords
         '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
   (setq org-edit-src-content-indentation 0))
@@ -480,6 +482,8 @@ the emacs server."
 (use-package ox-latex
   :config
   (setq org-latex-pdf-process (list "latexmk -f -pdf %f")))
+
+(use-package ox-haunt)
 
 (use-package org-roam
   :init
