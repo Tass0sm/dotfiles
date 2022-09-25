@@ -1,17 +1,29 @@
 (define-module (home modules desktop)
   #:use-module (gnu home)
-  #:use-module (gnu packages)
   #:use-module (gnu services)
+  #:use-module (gnu packages)
+  #:use-module (gnu packages gnome-xyz)
   #:use-module (gnu home services)
   #:use-module (gnu home-services xorg)
 
   #:use-module (guix gexp)
+  #:use-module (guix packages)
   #:use-module (tassos-guix packages xorg)
   #:use-module (tassos-guix home-services wm)
   #:use-module (tassos-guix home-services notifications)
   ;; from rde
   #:use-module (rde gexp)
   #:use-module (gnu home-services-utils))
+
+(define-public shallow-nordic-theme
+  (package
+    (inherit nordic-theme)
+    (name "shallow-nordic-theme")
+    (arguments
+     `(#:install-plan
+       `(("." "."
+          #:exclude ("README.md" "LICENSE" "Art/" "package.json"
+                     "package-lock.json" "Gulpfile.js")))))))
 
 (define-public desktop-packages
   (map specification->package
@@ -66,4 +78,8 @@
    (simple-service 'wallpaper-file
         	   home-files-service-type
         	   `(("pictures/wallpaper.png"
-                      ,(local-file "../files/images/genome-wallpaper.png"))))))
+                      ,(local-file "../files/images/genome-wallpaper.png"))))
+   (simple-service 'gtk-theme
+        	   home-files-service-type
+        	   `((".local/share/themes/Nordic"
+                      ,shallow-nordic-theme)))))
