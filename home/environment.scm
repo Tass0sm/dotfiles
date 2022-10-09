@@ -32,6 +32,7 @@
 	"hunspell-dict-en"
         "poweralertd"
         "curl"
+        "ripgrep"
         "inetutils"
 	"nss-certs"
         "gnome-keyring"

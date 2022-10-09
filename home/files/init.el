@@ -38,7 +38,7 @@ the emacs server."
             (cdr (assq 'default-directory
                        (buffer-local-variables (tm/desired-buffer)))))))
     (if root
-        (projectile-project-root d)
+        (project-root (project-current nil d))
       d)))
 
 (defun tm/new-term (&optional root)
@@ -223,18 +223,7 @@ the emacs server."
   :init
   (which-key-mode 1))
 
-(use-package projectile
-  :bind-keymap
-  ("C-c p" . projectile-command-map)
-  :config
-  (defun store-path-p (path)
-    "Returns non-nil if path is in the guix store."
-    (s-prefix-p "/gnu/store/" path))
-
-  (setq projectile-ignored-project-function 'store-path-p)
-
-  (require 'subr-x)
-  (projectile-mode +1))
+(use-package project)
 
 (use-package dired
   :config
@@ -280,6 +269,9 @@ the emacs server."
                                     corfu-auto nil))))
 
 (use-package popper
+  :init
+  (popper-mode 1)
+  (popper-echo-mode 1)
   :bind
   (("C-`"   . popper-toggle-latest)
    ("M-`"   . popper-cycle)
@@ -291,13 +283,14 @@ the emacs server."
           "Output\\*$"
           "\\*Async Shell Command\\*"
           "shell\\*$"
-          "^magit"
-          org-agenda-mode
           help-mode
           helpful-mode
           compilation-mode))
-  (popper-mode 1)
-  (popper-echo-mode 1))
+  (setq popper-window-height
+        (lambda (win)
+          (fit-window-to-buffer
+           win
+           (floor (frame-height) 2)))))
 
 (use-package consult-dir
   :bind (("C-x C-d" . consult-dir)
@@ -305,7 +298,7 @@ the emacs server."
          ("C-x C-d" . consult-dir))
   :config
   ;; (setq consult-dir-shadow-filenames nil)
-  (setq consult-dir-project-list-function #'consult-dir-projectile-dirs))
+  (setq consult-dir-project-list-function #'consult-dir-project-dirs))
 
 (use-package direnv
   :config
@@ -318,6 +311,89 @@ the emacs server."
 (use-package unkillable-scratch
   :config
   (unkillable-scratch t))
+
+(use-package bufler
+  :init
+  (bufler-mode 1)
+  :bind ("C-x C-b" . bufler)
+  :config
+  (setf bufler-groups (bufler-defgroups
+                        (group
+                         ;; Subgroup collecting all named workspaces.
+                         (auto-workspace))
+                        (group
+                         ;; Subgroup collecting all `help-mode' and `info-mode' buffers.
+                         (group-or "*Help/Info*"
+                                   (mode-match "*Help*" (rx bos "help-"))
+                                   (mode-match "*Info*" (rx bos "info-"))))
+                        (group
+                         ;; Subgroup collecting all special buffers (i.e. ones that are not
+                         ;; file-backed), except `magit-status-mode' buffers (which are allowed to fall
+                         ;; through to other groups, so they end up grouped with their project buffers).
+                         (group-and "*Special*"
+                                    (lambda (buffer)
+                                      (unless (or (funcall (mode-match "Vterm" (rx bos "vterm"))
+                                                           buffer)
+                                                  (funcall (mode-match "Magit" (rx bos "magit-status"))
+                                                           buffer)
+                                                  (funcall (mode-match "Dired" (rx bos "dired"))
+                                                           buffer)
+                                                  (funcall (auto-file) buffer))
+                                        "*Special*")))
+                         (group
+                          ;; Subgroup collecting these "special special" buffers
+                          ;; separately for convenience.
+                          (name-match "**Special**"
+                                      (rx bos "*" (or "Messages" "Warnings" "scratch" "Backtrace") "*")))
+                         (group
+                          ;; Subgroup collecting all other Magit buffers, grouped by directory.
+                          (mode-match "*Magit* (non-status)" (rx bos (or "magit" "forge") "-"))
+                          (auto-directory))
+                         ;; Subgroup for Helm buffers.
+                         (mode-match "*Helm*" (rx bos "helm-"))
+                         ;; Remaining special buffers are grouped automatically by mode.
+                         (auto-mode))
+                        ;; All buffers under "~/.emacs.d" (or wherever it is).
+                        (dir user-emacs-directory)
+                        (group
+                         ;; Subgroup collecting buffers in `org-directory' (or "~/org" if
+                         ;; `org-directory' is not yet defined).
+                         (dir (if (bound-and-true-p org-directory)
+                                  org-directory
+                                "~/org"))
+                         (group
+                          ;; Subgroup collecting indirect Org buffers, grouping them by file.
+                          ;; This is very useful when used with `org-tree-to-indirect-buffer'.
+                          (auto-indirect)
+                          (auto-file))
+                         ;; Group remaining buffers by whether they're file backed, then by mode.
+                         (group-not "*special*" (auto-file))
+                         (auto-mode))
+                        (group
+                         ;; Subgroup collecting buffers in a version-control project,
+                         ;; grouping them by directory.
+                         (auto-project))
+                        ;; Group remaining buffers by directory, then major mode.
+                        (auto-directory)
+                        (auto-mode))))
+
+(use-package bufler-workspace
+  :init
+  (bufler-workspace-mode 1)
+
+  (defun set-workspace ()
+    "Set workspace based on current directory."
+    (interactive)
+    (let ((path (bufler-buffer-workspace-path (current-buffer))))
+      (bufler-workspace-frame-set path)))
+
+  (defun clear-workspace ()
+    "Set workspace based on current directory."
+    (interactive)
+    (bufler-workspace-frame-set nil))
+
+  :bind (("C-x w s" . set-workspace)
+         ("C-x w c" . clear-workspace)))
 
 (use-package jupyter)
 

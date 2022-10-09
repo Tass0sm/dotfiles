@@ -25,7 +25,6 @@
          "emacs-corfu"
          "emacs-cape"
          "emacs-which-key"
-         "emacs-projectile"
          "emacs-popper"
          "emacs-consult-dir"
          "emacs-direnv"
@@ -63,6 +62,7 @@
          "emacs-typescript-mode"
          "emacs-add-node-modules-path"
          "emacs-prettier"
+         "emacs-gdscript-mode"
          "emacs-graphviz-dot-mode"
          ;; General Editing Modes
          "emacs-sudo-edit"
