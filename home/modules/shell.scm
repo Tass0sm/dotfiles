@@ -23,7 +23,7 @@
               '(("MONITOR" . "eDP")
                 ("EDITOR" . "emacsclient -a ''")
                 ("XCURSOR_THEME" . "Nordzy-cursors")
-                ("GUIX_LOCPATH" . "$HOME/.guix-profile/lib/locale")
+                ("GUIX_LOCPATH" . "$HOME/.guix-home/profile/lib/locale")
                 ("GUIX_EXTRA_PROFILES" . "$HOME/.guix-extra-profiles")
                 ("SSH_AUTH_SOCK" . "$XDG_RUNTIME_DIR/ssh-agent.socket")
                 ("SSL_CERT_DIR" . "$HOME/.guix-home/profile/etc/ssl/certs")
@@ -34,17 +34,11 @@
                 ("DIRSTACKSIZE" . "8")))
              (zshrc
               (list
-               (local-file "../files/zshrc")))
-             (zprofile
-              (list
-               (local-file "../files/zprofile")))))
+               (local-file "../files/zshrc")))))
    (simple-service 'direnvrc
                    home-files-service-type
                    `((".config/direnv/direnvrc"
                       ,(local-file "../files/direnvrc"))))
    (simple-service 'login-variables
                    home-environment-variables-service-type
-                   `(("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/usr/local/share/:/usr/share/")
-                     ;; ("XDG_CONFIG_DIRS" . "$XDG_CONFIG_DIRS:/etc/xdg/")
-                     ;; ("XDG_CONFIG_DIRS" . "$HOME/.guix-home/profile/etc/xdg:$XDG_CONFIG_DIRS")
-                     ("PATH" . "$HOME/.local/bin:$PATH")))))
+                   `(("PATH" . "$HOME/.local/bin:$PATH")))))
