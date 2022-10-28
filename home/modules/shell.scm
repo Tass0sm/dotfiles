@@ -35,6 +35,9 @@
              (zshrc
               (list
                (local-file "../files/zshrc")))))
+   (simple-service 'profile-additions
+                   home-shell-profile-service-type
+                   (list (local-file "../files/profile")))
    (simple-service 'direnvrc
                    home-files-service-type
                    `((".config/direnv/direnvrc"
