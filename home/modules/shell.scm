@@ -25,7 +25,7 @@
                 ("XCURSOR_THEME" . "Nordzy-cursors")
                 ("GUIX_LOCPATH" . "$HOME/.guix-home/profile/lib/locale")
                 ("GUIX_EXTRA_PROFILES" . "$HOME/.guix-extra-profiles")
-                ("SSH_AUTH_SOCK" . "$XDG_RUNTIME_DIR/ssh-agent.socket")
+                ("SSH_AUTH_SOCK" . "/run/user/$(id -u)/gcr/ssh")
                 ("SSL_CERT_DIR" . "$HOME/.guix-home/profile/etc/ssl/certs")
                 ("SSL_CERT_FILE" . "$HOME/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")
                 ("GIT_SSL_CAINFO" . "$SSL_CERT_FILE")

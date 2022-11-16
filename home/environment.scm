@@ -35,7 +35,6 @@
         "ripgrep"
         "inetutils"
 	"nss-certs"
-        "gnome-keyring"
         "glibc-locales")))
 
 (define font-packages
@@ -83,7 +82,6 @@
     ,@xdg-packages
     ,@zsh-packages
     ,@git-packages
-    ,@mail-packages
     ,@desktop-packages
     ,@font-packages
     ,home-scripts))
@@ -91,7 +89,6 @@
   `(,@xdg-services
     ,@zsh-services
     ,@git-services
-    ,@mail-services
     ,@herd-services
     ,@emacs-services
     ,@desktop-services)))
