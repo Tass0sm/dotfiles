@@ -32,7 +32,6 @@
         "light"
         "dmenu"
         "bemenu"
-        "waybar"
         "polybar"
         "flameshot"
         "xsel"
@@ -49,10 +48,14 @@
                       ,(mixed-executable-text-file
                         "sxrc"
                         (slurp-file-like (local-file "../files/sxrc"))))))
+   (simple-service 'nord-xresources-file
+        	   home-files-service-type
+        	   `((".config/nord-xresources"
+                      ,(local-file "../files/nord-xresources"))))
    (service home-xresources-service-type
-	    (home-xresources-configuration
-	     (config
-	      `((include . "\"/home/tassos/.config/guix/home/files/nord-xresources\"")))))
+            (home-xresources-configuration
+             (config
+              `((include . ,(string-append "\"" (getenv "HOME") "/.config/nord-xresources\""))))))
    (service home-dunst-service-type
             (home-dunst-configuration
              (dunstrc (list
