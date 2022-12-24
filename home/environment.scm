@@ -7,12 +7,18 @@
 (define-module (home environment)
   #:use-module (gnu home)
   #:use-module (gnu home services)
+  #:use-module (gnu home services shells)
+  #:use-module (gnu home services fontutils)
+  #:use-module (gnu home services xdg)
+  #:use-module (gnu home services symlink-manager)
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs-xyz)
   #:use-module (guix gexp)
   #:use-module (guix packages)
   #:use-module (guix build-system copy)
   #:use-module ((guix licenses) #:prefix license:)
+  ;; custom services
+  #:use-module ((tassos-guix home-services shells) #:prefix my:)
   ;; personal modules
   #:use-module (home modules xdg)
   #:use-module (home modules git)
@@ -43,19 +49,6 @@
 	"font-iosevka"
         "font-awesome")))
 
-(define xfce-packages
-  (map specification->package
-       (list
-	"xfce"
-	"xfce4-session"
-	"xfconf"
-	"xfce4-battery-plugin"
-	"xfce4-volumed-pulse"
-	"xfce4-notifyd"
-	"pulseaudio"
-	"xbacklight"
-	"pavucontrol")))
-
 (define home-scripts
   (package
    (name "home-scripts")
@@ -76,8 +69,7 @@
    (description "My personal scripts.")
    (license license:expat)))
 
-(home-environment
- (packages
+(define my-packages
   `(,@base-packages
     ,@xdg-packages
     ,@zsh-packages
@@ -85,6 +77,23 @@
     ,@desktop-packages
     ,@font-packages
     ,home-scripts))
+
+(home-environment
+ (packages my-packages)
+ (essential-services
+  (list
+   (service home-run-on-first-login-service-type)
+   (service home-activation-service-type)
+   (service home-environment-variables-service-type)
+
+   (service home-symlink-manager-service-type)
+
+   (service home-fontconfig-service-type)
+   (service home-xdg-base-directories-service-type)
+   (service my:home-shell-profile-service-type)
+
+   (service home-service-type)
+   (service home-profile-service-type my-packages)))
  (services
   `(,@xdg-services
     ,@zsh-services

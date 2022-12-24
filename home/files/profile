@@ -1,4 +1,19 @@
 # -*- mode:shell-script; -*-
 
+$HOME/.guix-home/profile/bin/cache-env -f /tmp/login-process.env save base-env
+
+# _GUIX_PROFILE: `guix pull` profile
+_GUIX_PROFILE="$HOME/.config/guix/current"
+export PATH="$_GUIX_PROFILE/bin${PATH:+:}$PATH"
+# Export INFOPATH so that the updated info pages can be found
+# and read by both /usr/bin/info and/or $GUIX_PROFILE/bin/info
+# When INFOPATH is unset, add a trailing colon so that Emacs
+# searches 'Info-default-directory-list'.
+export INFOPATH="$_GUIX_PROFILE/share/info:$INFOPATH"
+
+HOME_ENVIRONMENT=$HOME/.guix-home
+. $HOME_ENVIRONMENT/setup-environment
+$HOME_ENVIRONMENT/on-first-login
+
 GUIX_PROFILE="$HOME/.guix-profile"
 [ -f "$GUIX_PROFILE/etc/profile" ] && . "$GUIX_PROFILE/etc/profile"

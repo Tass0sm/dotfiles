@@ -5,26 +5,29 @@
   #:use-module (gnu packages shellutils)
   #:use-module (gnu services)
   #:use-module (gnu home services)
-  #:use-module (gnu home services shells)
+  #:use-module ((gnu home services shells)
+                #:select (home-zsh-service-type
+                          home-zsh-configuration))
   #:use-module (gnu home-services shellutils)
-  #:use-module (tassos-guix packages shellutils))
+  ;; custom services and packages
+  #:use-module (tassos-guix packages shellutils)
+  #:use-module ((tassos-guix home-services shells) #:prefix my:))
 
 (define-public zsh-packages
   (list direnv
+	cache-env
         zsh-pure
         zsh-autosuggestions))
 
 (define-public zsh-services
   (list
-   (service home-zsh-service-type
-            (home-zsh-configuration
+   (service my:home-zsh-service-type
+            (my:home-zsh-configuration
              (xdg-flavor? #t)
              (environment-variables
               '(("MONITOR" . "eDP")
                 ("EDITOR" . "emacsclient -a ''")
                 ("XCURSOR_THEME" . "Nordzy-cursors")
-                ("GUIX_LOCPATH" . "$HOME/.guix-home/profile/lib/locale")
-                ("GUIX_EXTRA_PROFILES" . "$HOME/.guix-extra-profiles")
                 ("SSH_AUTH_SOCK" . "/run/user/$(id -u)/gcr/ssh")
                 ("SSL_CERT_DIR" . "$HOME/.guix-home/profile/etc/ssl/certs")
                 ("SSL_CERT_FILE" . "$HOME/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")
@@ -32,11 +35,14 @@
                 ("GEM_PATH" . "$HOME/.local/share/gem")
                 ("_JAVA_AWT_WM_NONREPARENTING" . "1")
                 ("DIRSTACKSIZE" . "8")))
+             (zprofile
+              (list
+               (local-file "../files/zprofile")))
              (zshrc
               (list
                (local-file "../files/zshrc")))))
-   (simple-service 'profile-additions
-                   home-shell-profile-service-type
+   (simple-service 'main-profile
+                   my:home-shell-profile-service-type
                    (list (local-file "../files/profile")))
    (simple-service 'direnvrc
                    home-files-service-type
@@ -44,4 +50,8 @@
                       ,(local-file "../files/direnvrc"))))
    (simple-service 'login-variables
                    home-environment-variables-service-type
-                   `(("PATH" . "$HOME/.local/bin:$PATH")))))
+                   `(("PATH" . "$HOME/.local/bin:$PATH")
+		     ;; This should be loaded before any guile code is
+		     ;; run, like the on-first-login script.
+		     ("GUIX_LOCPATH" . "$HOME/.guix-home/profile/lib/locale")
+		     ("GUIX_EXTRA_PROFILES" . "$HOME/.guix-extra-profiles")))))
