@@ -28,6 +28,7 @@
 (define-public desktop-packages
   (map specification->package
        (list
+        "sx"
         "cava"
         "light"
         "dmenu"
