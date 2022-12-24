@@ -1,0 +1,2 @@
+# Set up current guix profile, guix-home, and main profile.
+source ~/.profile
