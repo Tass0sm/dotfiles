@@ -24,6 +24,7 @@
    (service my:home-zsh-service-type
             (my:home-zsh-configuration
              (xdg-flavor? #t)
+             ;; Sourced in every shell (zshenv)
              (environment-variables
               '(("MONITOR" . "eDP")
                 ("EDITOR" . "emacsclient -a ''")
@@ -48,9 +49,14 @@
                    home-files-service-type
                    `((".config/direnv/direnvrc"
                       ,(local-file "../files/direnvrc"))))
+   ;; Things sourced in the profile. Sourced in login shells when they're
+   ;; configured to load .profile.
    (simple-service 'login-variables
                    home-environment-variables-service-type
                    `(("PATH" . "$HOME/.local/bin:$PATH")
+                     ("GSETTINGS_SCHEMA_DIR" . "/usr/share/glib-2.0/schemas/")
+                     ("XDG_DATA_DIRS" . "$XDG_DATA_DIRS:/usr/local/share:/usr/share")
+                     ("XDG_CONFIG_DIRS" . "$XDG_CONFIG_DIRS:/etc/xdg")
 		     ;; This should be loaded before any guile code is
 		     ;; run, like the on-first-login script.
 		     ("GUIX_LOCPATH" . "$HOME/.guix-home/profile/lib/locale")

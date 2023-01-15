@@ -73,6 +73,10 @@
 	    (home-polybar-configuration
 	     (config (list
 		      (local-file "../files/polybar.ini")))))
+   (simple-service 'polybar-scripts-config
+        	   home-files-service-type
+        	   `((".config/polybar/mic-tog.sh"
+                      ,(local-file "../files/polybar/mic-tog.sh" #:recursive? #t))))
    (simple-service 'gtk-config
         	   home-files-service-type
         	   `((".config/gtk-3.0/settings.ini"
