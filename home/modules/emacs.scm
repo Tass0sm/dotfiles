@@ -85,13 +85,14 @@
          ;; Appearance
          "emacs-nord-theme"
          "emacs-moody"
-         "emacs-olivetti")))
+         "emacs-olivetti"
+         "emacs-ligature")))
 
 (define-public emacs-services
   (list
     (service home-emacs-service-type
              (home-emacs-configuration
-              (package emacs-next-pgtk-treesitter)
+              (package emacs)
               ;; (rebuild-elisp-packages? #t)
               (elisp-packages emacs-packages)
               (init-el

@@ -46,6 +46,8 @@
 (define font-packages
   (map specification->package
        (list
+        "font-noto-emoji"
+        "font-noto-color-emoji"
 	"font-iosevka"
         "font-awesome")))
 

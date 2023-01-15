@@ -634,3 +634,16 @@ the emacs server."
   (moody-replace-mode-line-buffer-identification)
   (moody-replace-vc-mode))
 
+(use-package ligature
+  :config
+  ;; Enable all Iosevka ligatures in programming modes
+  ;; Iosevka needs to be built with all of these, but it isn't by default.
+  (ligature-set-ligatures
+   'prog-mode
+   '("-<" "-<-" "<--" "<---" "<<-" "<-" "->" "->>" "-->" "--->" "->-" ">-" ">>-"
+     "=<<" "=<" "=<=" "<==" "<===" "<<=" "<=" "=>" "=>>" "==>" "===>" "=>=" ">=" ">>="
+     "<->" "<-->" "<--->" "<---->" "<=>" "<==>" "<===>" "<====>" "::" ":::" "__"
+     "<~~" "</" "</>" "/>" "~~>" "==" "!=" "/=" "~=" "<>" "===" "!==" "!===" "=/=" "=!="
+     "<:" ":=" ":-" ":+" "<*" "<*>" "*>" "<|" "<|>" "|>" "<." "<.>" ".>" "+:" "-:" "=:" ":>"
+     "(*" "*)" "/*" "*/" "[|" "|]" "{|" "|}" "++" "+++" "|-" "-|" "<!--" "<!---"))
+  (global-ligature-mode t))
