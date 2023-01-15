@@ -103,9 +103,9 @@ the emacs server."
 ;;   :hook
 ;;   (embark-collect-mode . consult-preview-at-point-mode))
 
-;; (use-package consult
-;;   ;; Replace bindings. Lazily loaded due by `use-package'.
-;;   :bind (;; C-c bindings (mode-specific-map)
+(use-package consult
+  ;; Replace bindings. Lazily loaded due by `use-package'.
+  :bind (;; C-c bindings (mode-specific-map)
 ;;          ("C-c h" . consult-history)
 ;;          ("C-c m" . consult-mode-command)
 ;;          ("C-c k" . consult-kmacro)
@@ -133,18 +133,16 @@ the emacs server."
 ;;          ("M-g k" . consult-global-mark)
 ;;          ("M-g i" . consult-imenu)
 ;;          ("M-g I" . consult-imenu-multi)
-;;          ;; M-s bindings (search-map)
-;;          ("M-s d" . consult-find)
-;;          ("M-s D" . consult-locate)
-;;          ("M-s g" . consult-grep)
-;;          ("M-s G" . consult-git-grep)
-;;          ("M-s r" . consult-ripgrep)
+         ;; M-s bindings (search-map)
+         ("M-s d" . consult-find)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
 ;;          ("M-s l" . consult-line)
 ;;          ("M-s L" . consult-line-multi)
 ;;          ("M-s m" . consult-multi-occur)
 ;;          ("M-s k" . consult-keep-lines)
 ;;          ("M-s u" . consult-focus-lines)
-;;          ;; Isearch integration
+         ;; Isearch integration
 ;;          ("M-s e" . consult-isearch-history)
 ;;          :map isearch-mode-map
 ;;          ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
@@ -154,14 +152,13 @@ the emacs server."
 ;;          ;; Minibuffer history
 ;;          :map minibuffer-local-map
 ;;          ("M-s" . consult-history)                 ;; orig. next-matching-history-element
-;;          ("M-r" . consult-history))                ;; orig. previous-matching-history-element
 
-;;   ;; Enable automatic preview at point in the *Completions* buffer. This is
-;;   ;; relevant when you use the default completion UI.
-;;   :hook (completion-list-mode . consult-preview-at-point-mode)
+         ;; orig. previous-matching-history-element
+         ;; ("M-r" . consult-history)
+         )
 
-;;   ;; The :init configuration is always executed (Not lazy)
-;;   :init
+  ;; ;; The :init configuration is always executed (Not lazy)
+  ;; :init
 
 ;;   ;; Optionally configure the register formatting. This improves the register
 ;;   ;; preview for `consult-register', `consult-register-load',
@@ -205,19 +202,8 @@ the emacs server."
 ;;   ;; You may want to use `embark-prefix-help-command' or which-key instead.
 ;;   ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
 
-;;   ;; By default `consult-project-function' uses `project-root' from project.el.
-;;   ;; Optionally configure a different project root function.
-;;   ;; There are multiple reasonable alternatives to chose from.
-;;   ;;;; 1. project.el (the default)
-;;   ;; (setq consult-project-function #'consult--default-project--function)
-;;   ;;;; 2. projectile.el (projectile-project-root)
-;;   ;; (autoload 'projectile-project-root "projectile")
-;;   ;; (setq consult-project-function (lambda (_) (projectile-project-root)))
-;;   ;;;; 3. vc.el (vc-root-dir)
-;;   ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
-;;   ;;;; 4. locate-dominating-file
-;;   ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
-;; )
+  ;; By default `consult-project-function' uses `project-root' from project.el.
+  )
 
 (use-package which-key
   :init

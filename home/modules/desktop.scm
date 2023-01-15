@@ -34,7 +34,9 @@
         "dmenu"
         "bemenu"
         "polybar"
+        "redshift"
         "flameshot"
+        "xclip" ;; needed by org-download-clipboard
         "xsel"
         "wl-clipboard"
         "xwallpaper"
