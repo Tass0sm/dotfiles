@@ -9,7 +9,9 @@
 
 
 (setq custom-file (concat user-emacs-directory "custom.el"))
-(load custom-file)
+(unless (load custom-file)
+  (write-region "" nil custom-file))
+
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
