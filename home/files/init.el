@@ -44,8 +44,9 @@ the emacs server."
 (defun tm/new-term (&optional root)
   "Open a new terminal in the desired directory"
   (interactive)
-  (let* ((default-directory (tm/desired-directory root)))
-    (vterm t)))
+  (let* ((default-directory (tm/desired-directory root))
+         (vterm-buffer-name (format "*%s-vterm*" (f-base default-directory))))
+    (vterm)))
 
                                         ; Basic Tools
 
