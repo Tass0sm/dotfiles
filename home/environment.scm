@@ -26,7 +26,8 @@
   #:use-module (home modules herd)
   #:use-module (home modules emacs)
   #:use-module (home modules shell)
-  #:use-module (home modules desktop))
+  #:use-module (home modules desktop)
+  #:use-module (home modules secrets))
 
 (define base-packages
   (map specification->package
@@ -77,6 +78,7 @@
     ,@zsh-packages
     ,@git-packages
     ,@desktop-packages
+    ,@secrets-packages
     ,@font-packages
     ,home-scripts))
 
@@ -92,7 +94,12 @@
 
    (service home-fontconfig-service-type)
    (service home-xdg-base-directories-service-type)
-   (service my:home-shell-profile-service-type)
+   (service my:home-shell-profile-service-type
+            (my:home-shell-profile-configuration
+             (profile-head
+              (list (local-file "files/profile")))
+             (profile-tail
+              '())))
 
    (service home-service-type)
    (service home-profile-service-type my-packages)))
@@ -102,4 +109,5 @@
     ,@git-services
     ,@herd-services
     ,@emacs-services
-    ,@desktop-services)))
+    ,@desktop-services
+    ,@secrets-services)))

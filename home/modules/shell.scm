@@ -29,7 +29,6 @@
               '(("MONITOR" . "eDP")
                 ("EDITOR" . "emacsclient -a ''")
                 ("XCURSOR_THEME" . "Nordzy-cursors")
-                ("SSH_AUTH_SOCK" . "/run/user/$(id -u)/gcr/ssh")
                 ("SSL_CERT_DIR" . "$HOME/.guix-home/profile/etc/ssl/certs")
                 ("SSL_CERT_FILE" . "$HOME/.guix-home/profile/etc/ssl/certs/ca-certificates.crt")
                 ("GIT_SSL_CAINFO" . "$SSL_CERT_FILE")
@@ -42,9 +41,6 @@
              (zshrc
               (list
                (local-file "../files/zshrc")))))
-   (simple-service 'main-profile
-                   my:home-shell-profile-service-type
-                   (list (local-file "../files/profile")))
    (simple-service 'direnvrc
                    home-files-service-type
                    `((".config/direnv/direnvrc"
