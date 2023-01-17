@@ -12,7 +12,6 @@
 (unless (load custom-file)
   (write-region "" nil custom-file))
 
-
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 (global-set-key (kbd "C-z") 'ignore)
@@ -47,7 +46,11 @@ the emacs server."
   "Open a new terminal in the desired directory"
   (interactive)
   (let* ((default-directory (tm/desired-directory root))
-         (vterm-buffer-name (format "*%s-vterm*" (f-base default-directory))))
+         (vterm-buffer-name (format
+                             "*%s-vterm*"
+                             (if (project-current nil)
+                                 (f-base (project-root (project-current nil)))
+                               (f-base default-directory)))))
     (vterm)))
 
                                         ; Basic Tools

@@ -40,6 +40,7 @@
         "xsel"
         "wl-clipboard"
         "xwallpaper"
+        "libcanberra"
         "nordic-theme"
 	"xcursor-nordzy")))
 
