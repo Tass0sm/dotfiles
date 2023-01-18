@@ -2,6 +2,7 @@
   #:use-module (gnu home)
   #:use-module (gnu services)
   #:use-module (gnu packages)
+  #:use-module (gnu packages xdisorg)
   #:use-module (gnu packages gnome-xyz)
   #:use-module (gnu home services)
   #:use-module (gnu home-services xorg)
@@ -10,6 +11,7 @@
   #:use-module (guix packages)
   #:use-module (tassos-guix packages xorg)
   #:use-module (tassos-guix home-services wm)
+  #:use-module (tassos-guix home-services desktop)
   #:use-module (tassos-guix home-services notifications)
   ;; from rde
   #:use-module (rde gexp)
@@ -28,7 +30,6 @@
 (define-public desktop-packages
   (map specification->package
        (list
-        "sx"
         "cava"
         "light"
         "dmenu"
@@ -46,12 +47,12 @@
 
 (define-public desktop-services
   (list
-   (simple-service 'sx-config
-        	   home-files-service-type
-        	   `((".config/sx/sxrc"
-                      ,(mixed-executable-text-file
-                        "sxrc"
-                        (slurp-file-like (local-file "../files/sxrc"))))))
+   (service home-sx-service-type
+            (home-sx-configuration
+             (sxrc-head (list
+        	         (local-file "../files/sxrc-head")))
+             (sxrc-tail (list
+        	         (local-file "../files/sxrc-tail")))))
    (simple-service 'nord-xresources-file
         	   home-files-service-type
         	   `((".config/nord-xresources"

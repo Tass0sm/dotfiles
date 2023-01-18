@@ -25,7 +25,14 @@
 (define-public secrets-services
   (list
    (simple-service 'keyring-setup
-                   my:home-shell-profile-service-type
-                   (list
-                    (plain-file "keyring-setup"
-                                "eval $(gnome-keyring-daemon --daemonize --components=secrets,ssh)")))))
+                   home-bspwm-service-type
+        	   (list
+                    (plain-file
+                     "keyring-setup"
+                     "eval $(gnome-keyring-daemon --daemonize --components=secrets,ssh)")))
+   (simple-service 'keyring-env-vars
+                   my:home-zsh-service-type
+                   (my:home-zsh-extension
+                    (environment-variables
+                     '(("GNOME_KEYRING_CONTROL" . "$XDG_RUNTIME_DIR/keyring")
+                       ("SSH_AUTH_SOCK" . "$XDG_RUNTIME_DIR/keyring/ssh")))))))
