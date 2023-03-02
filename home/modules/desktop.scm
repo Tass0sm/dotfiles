@@ -32,6 +32,7 @@
        (list
         "cava"
         "light"
+        "dockd"
         "dmenu"
         "bemenu"
         "polybar"
@@ -43,7 +44,8 @@
         "xwallpaper"
         "libcanberra"
         "nordic-theme"
-	"xcursor-nordzy")))
+	"xcursor-nordzy"
+        "blueman")))
 
 (define-public desktop-services
   (list

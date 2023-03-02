@@ -57,7 +57,8 @@ the emacs server."
 
 (use-package vertico
   :bind (:map minibuffer-local-map
-              ("C-j" . vertico-insert))
+              ("C-j" . vertico-insert)
+              ("M-DEL" . vertico-directory-delete-word))
   :init
   (vertico-mode 1))
 
@@ -67,7 +68,7 @@ the emacs server."
 
 (use-package orderless
   :init
-  (setq ;; completion-category-defaults nil
+  (setq completion-category-defaults nil
         completion-styles '(orderless basic)
         ;; For tramp:
         completion-category-overrides '((file (styles basic partial-completion)))))

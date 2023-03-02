@@ -35,6 +35,8 @@
          "emacs-bufler"
          "emacs-jupyter-next"
          "emacs-frames-only-mode"
+         "emacs-citar"
+         "emacs-citar-org-roam"
          ;; Tool Modes
          "emacs-magit"
          "emacs-magit-todos"

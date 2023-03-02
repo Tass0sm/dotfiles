@@ -9,7 +9,7 @@ xrdb "$HOME/.Xresources"
 # Launch all the background programs.
 pidof sxhkd || sxhkd &
 pidof dunst || dunst &
-pidof blugon || blugon &
+pidof dockd || dockd --daemon &
 pidof poweralertd || poweralertd &
 pidof emacs || emacs --daemon &
 pidof nm-applet || nm-applet &
