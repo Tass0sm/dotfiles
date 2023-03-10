@@ -78,7 +78,6 @@
          "emacs-flyspell-correct"
          ;; Org
          "emacs-org-analyzer"
-         "emacs-org-journal"
          "emacs-org-roam"
          "emacs-org-download"
          "emacs-org-contrib"

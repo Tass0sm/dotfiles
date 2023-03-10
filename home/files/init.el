@@ -113,7 +113,7 @@ the emacs server."
 (use-package consult
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (;; C-c bindings (mode-specific-map)
-;;          ("C-c h" . consult-history)
+         ("C-c h" . consult-history)
 ;;          ("C-c m" . consult-mode-command)
 ;;          ("C-c k" . consult-kmacro)
 ;;          ;; C-x bindings (ctl-x-map)
@@ -418,7 +418,8 @@ the emacs server."
 
 (use-package pdf-tools
   :magic ("%PDF" .  pdf-view-mode)
-  :hook (pdf-view-mode . pdf-isearch-minor-mode))
+  :hook ((pdf-view-mode . pdf-isearch-minor-mode)
+         (pdf-view-mode . pdf-links-minor-mode)))
 
 (use-package notmuch
   :config
@@ -572,11 +573,16 @@ the emacs server."
                             (concat org-directory "/notes/")))
   (org-roam-db-autosync-mode))
 
-(use-package org-journal
+(use-package org-roam-dailies
   :bind
-  ("C-c j" . org-journal-new-entry)
+  ("C-c j" . org-roam-dailies-goto-today)
   :config
-  (setq org-journal-dir "~/org/diary"))
+  (setq org-roam-dailies-directory "daily/")
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry
+           "* %?"
+           :target (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%Y-%m-%d>\n")))))
 
 (use-package org-download
   :config

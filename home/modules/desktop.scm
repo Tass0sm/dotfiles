@@ -6,6 +6,7 @@
   #:use-module (gnu packages gnome-xyz)
   #:use-module (gnu home services)
   #:use-module (gnu home-services xorg)
+  #:use-module (gnu home services desktop)
 
   #:use-module (guix gexp)
   #:use-module (guix packages)
