@@ -6,17 +6,21 @@
 ! Repository: https://github.com/arcticicestudio/nord-xresources
 ! License:    MIT
 
+! dark base elements
 #define nord0 #2E3440
 #define nord1 #3B4252
 #define nord2 #434C5E
 #define nord3 #4C566A
+! light base elements
 #define nord4 #D8DEE9
 #define nord5 #E5E9F0
 #define nord6 #ECEFF4
+! heart pallet of bluish colors
 #define nord7 #8FBCBB
 #define nord8 #88C0D0
 #define nord9 #81A1C1
 #define nord10 #5E81AC
+! additional colors: red, orange, yellow, green, and purple
 #define nord11 #BF616A
 #define nord12 #D08770
 #define nord13 #EBCB8B

@@ -6,7 +6,8 @@
   #:use-module (gnu home-services version-control))
 
 (define-public git-packages
-  (list (specification->package+output "git:send-email")))
+  (list (specification->package+output "git:send-email")
+        (specification->package "git-lfs")))
 
 (define-public git-services
   (list
