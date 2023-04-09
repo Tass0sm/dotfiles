@@ -478,6 +478,10 @@ the emacs server."
 
 (setq-default indent-tabs-mode nil)
 
+(use-package treesit
+  :config
+  (setq treesit-extra-load-path '("~/.guix-home/profile/lib/tree-sitter/"))
+
 (use-package expand-region
   :bind
   ("C-=" . er/expand-region))

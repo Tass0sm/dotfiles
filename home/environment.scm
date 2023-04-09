@@ -80,6 +80,7 @@
     ,@desktop-packages
     ,@secrets-packages
     ,@font-packages
+    ,@tree-sitter-packages
     ,home-scripts))
 
 (home-environment

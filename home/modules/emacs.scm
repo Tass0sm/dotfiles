@@ -3,6 +3,7 @@
   #:use-module (gnu home)
   #:use-module (gnu packages)
   #:use-module (gnu packages emacs)
+  #:use-module (gnu packages tree-sitter)
   #:use-module (gnu services)
   #:use-module (gnu home services)
   #:use-module (tassos-guix packages emacs)
@@ -89,11 +90,14 @@
          "emacs-olivetti"
          "emacs-ligature")))
 
+(define-public tree-sitter-packages
+  (list tree-sitter-c))
+
 (define-public emacs-services
   (list
     (service home-emacs-service-type
              (home-emacs-configuration
-              (package emacs)
+              (package emacs-next-tree-sitter)
               ;; (rebuild-elisp-packages? #t)
               (elisp-packages emacs-packages)
               (init-el
