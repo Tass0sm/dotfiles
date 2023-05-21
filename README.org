@@ -9,7 +9,7 @@ it's really neat.
 - Bar : polybar
 - Terminal: alacritty
 - Shell : zsh
-- Editor : Emacs v29 with =pgtk=, =xwidgets=, and =tree-sitter=.
+- Editor : Emacs v30 with =tree-sitter=.
 
 * Screenshot
 [[file:screenshot.png]]

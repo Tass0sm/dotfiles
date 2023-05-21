@@ -26,7 +26,7 @@
              (xdg-flavor? #t)
              ;; Sourced in every shell (zshenv)
              (environment-variables
-              '(("MONITOR" . "eDP")
+              '(("MONITOR" . "eDP-1")
                 ("EDITOR" . "emacsclient -a ''")
                 ("XCURSOR_THEME" . "Nordzy-cursors")
                 ("SSL_CERT_DIR" . "$HOME/.guix-home/profile/etc/ssl/certs")
