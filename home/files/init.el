@@ -20,6 +20,8 @@
 
 (setq ring-bell-function 'ignore)
 (setq inhibit-startup-screen t)
+(setq scroll-conservatively 5)
+
 
 (use-package recentf
   :init
@@ -116,36 +118,36 @@ the emacs server."
          ("C-c h" . consult-history)
 ;;          ("C-c m" . consult-mode-command)
 ;;          ("C-c k" . consult-kmacro)
-;;          ;; C-x bindings (ctl-x-map)
+         ;; C-x bindings (ctl-x-map)
 ;;          ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-;;          ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+         ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
 ;;          ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
 ;;          ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
 ;;          ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-;;          ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
 ;;          ;; Custom M-# bindings for fast register access
 ;;          ("M-#" . consult-register-load)
 ;;          ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
 ;;          ("C-M-#" . consult-register)
 ;;          ;; Other custom bindings
-;;          ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+         ("M-y" . consult-yank-pop)                ;; orig. yank-pop
 ;;          ("<help> a" . consult-apropos)            ;; orig. apropos-command
 ;;          ;; M-g bindings (goto-map)
 ;;          ("M-g e" . consult-compile-error)
 ;;          ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
 ;;          ("M-g g" . consult-goto-line)             ;; orig. goto-line
 ;;          ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-;;          ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+         ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
 ;;          ("M-g m" . consult-mark)
 ;;          ("M-g k" . consult-global-mark)
-;;          ("M-g i" . consult-imenu)
-;;          ("M-g I" . consult-imenu-multi)
+         ("M-g i" . consult-imenu)
+         ("M-g I" . consult-imenu-multi)
          ;; M-s bindings (search-map)
          ("M-s d" . consult-find)
          ("M-s G" . consult-git-grep)
          ("M-s r" . consult-ripgrep)
-;;          ("M-s l" . consult-line)
-;;          ("M-s L" . consult-line-multi)
+         ("M-s l" . consult-line)
+         ("M-s L" . consult-line-multi)
 ;;          ("M-s m" . consult-multi-occur)
 ;;          ("M-s k" . consult-keep-lines)
 ;;          ("M-s u" . consult-focus-lines)
@@ -394,6 +396,18 @@ the emacs server."
   :init
   (frames-only-mode 1))
 
+(use-package citar
+  :config
+  (setq citar-bibliography '("~/documents/research/bibliography.bib")
+        citar-library-paths '("~/documents/research/library/")))
+
+(use-package citar-latex)
+
+(use-package citar-org-roam
+  :after citar org-roam
+  :no-require
+  :config (citar-org-roam-mode))
+
                                         ; Tool Modes
 
 (use-package magit
@@ -429,6 +443,9 @@ the emacs server."
   :config
   (setq message-send-mail-function 'mailclient-send-it))
 
+
+(use-package eglot)
+
                                         ; Specific Editing Modes
 
 (use-package macrostep
@@ -461,6 +478,7 @@ the emacs server."
   (add-hook 'js2-mode-hook 'prettier-js-mode))
 
 (use-package python
+  :hook (python-mode . eglot-ensure)
   :config
   ;; (setq python-shell-interpreter "ipython"
   ;;       python-shell-interpreter-args "-i --simple-prompt --InteractiveShell.display_page=True")
@@ -474,13 +492,19 @@ the emacs server."
   :config
   (setq graphviz-dot-indent-width 4))
 
+(use-package glsl-mode
+  :mode (("\\.glsl\\'" . glsl-mode)
+         ("\\.vert\\'" . glsl-mode)
+         ("\\.frag\\'" . glsl-mode)
+         ("\\.geom\\'" . glsl-mode)))
+
                                         ; General Editing Modes
 
 (setq-default indent-tabs-mode nil)
 
 (use-package treesit
   :config
-  (setq treesit-extra-load-path '("~/.guix-home/profile/lib/tree-sitter/"))
+  (setq treesit-extra-load-path '("~/.guix-home/profile/lib/tree-sitter/")))
 
 (use-package expand-region
   :bind
@@ -538,6 +562,24 @@ the emacs server."
         '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
   (setq org-edit-src-content-indentation 0))
 
+
+(use-package oc
+  :after citar
+  :bind (:map org-mode-map ("C-c b" . #'org-cite-insert))
+  :custom
+  (org-cite-insert-processor 'citar)
+  (org-cite-follow-processor 'citar)
+  (org-cite-activate-processor 'citar)
+  (org-cite-global-bibliography citar-bibliography))
+
+(use-package oc-biblatex
+  :config
+  (setq org-cite-biblatex-styles `(,@org-cite-biblatex-styles
+                                   ("parencite" nil "parencite" "parencites")
+                                   ("footcite" nil "footcite" "footcites")
+                                   ("footfullcite" nil "footfullcite" "footfullcites")
+                                   ("supercite" nil "supercite" "supercites"))))
+
 (require 'org-analyzer)
 
 (use-package ob
@@ -560,6 +602,7 @@ the emacs server."
 (use-package ox-haunt)
 
 (use-package org-roam
+  :demand
   :init
   (setq org-roam-v2-ack t)
   :bind (("C-c n f" . org-roam-node-find)
@@ -579,7 +622,7 @@ the emacs server."
 
 (use-package org-roam-dailies
   :bind
-  ("C-c j" . org-roam-dailies-goto-today)
+  ("C-c n d" . org-roam-dailies-goto-today)
   :config
   (setq org-roam-dailies-directory "daily/")
   (setq org-roam-dailies-capture-templates

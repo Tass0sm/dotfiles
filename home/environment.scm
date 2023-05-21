@@ -27,7 +27,8 @@
   #:use-module (home modules emacs)
   #:use-module (home modules shell)
   #:use-module (home modules desktop)
-  #:use-module (home modules secrets))
+  #:use-module (home modules secrets)
+  #:use-module (home modules programming))
 
 (define base-packages
   (map specification->package
@@ -37,6 +38,9 @@
         "pamixer"
 	"hunspell"
 	"hunspell-dict-en"
+        "aspell"
+        "aspell-dict-en"
+        "aspell-dict-el"
         "poweralertd"
         "curl"
         "ripgrep"
@@ -80,6 +84,7 @@
     ,@desktop-packages
     ,@secrets-packages
     ,@font-packages
+    ,@programming-tool-packages
     ,@tree-sitter-packages
     ,home-scripts))
 
