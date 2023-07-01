@@ -36,7 +36,7 @@
    emacs-which-key
    emacs-popper
    emacs-consult-dir
-   emacs-direnv
+   emacs-envrc
    emacs-avy
    emacs-embark
    emacs-unkillable-scratch

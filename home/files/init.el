@@ -295,9 +295,9 @@ the emacs server."
   ;; (setq consult-dir-shadow-filenames nil)
   (setq consult-dir-project-list-function #'consult-dir-project-dirs))
 
-(use-package direnv
+(use-package envrc
   :config
-  (direnv-mode 1))
+  (envrc-global-mode 1))
 
 (use-package avy
   :bind

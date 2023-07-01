@@ -81,6 +81,7 @@
     ,@xdg-packages
     ,@zsh-packages
     ,@git-packages
+    ,@mail-packages
     ,@desktop-packages
     ,@secrets-packages
     ,@font-packages

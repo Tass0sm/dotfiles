@@ -7,11 +7,15 @@
   #:use-module (gnu services)
   #:use-module (gnu home services)
   ;; from rde
-  #:use-module (gnu home-services mail))
+  #:use-module (gnu home-services mail)
+  ;; custom
+  #:use-module (tassos-guix packages mail))
 
 (define-public mail-packages
-  (map specification->package
-       '("evolution")))
+  (list
+   evolution
+   evolution-data-server
+   evolution-ews))
 
 (define-public mail-services
   (list
