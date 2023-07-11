@@ -17,7 +17,7 @@
                       ("inode/directory" . "emacsclient.desktop")))
              (default '(("x-scheme-handler/http" . "firefox.desktop")
                         ("x-scheme-handler/https" . "firefox.desktop")
-                        ("x-scheme-handler/mailto" . "userapp-Evolution-7C6SL1.desktop")
+                        ("x-scheme-handler/mailto" . "org.gnome.Evolution.desktop")
                         ("application/pdf" . "emacsclient.desktop")
                         ("text/plain" . "emacsclient.desktop")
                         ("image/jpeg" . "sxiv.desktop")
