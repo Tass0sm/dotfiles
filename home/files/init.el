@@ -22,7 +22,6 @@
 (setq inhibit-startup-screen t)
 (setq scroll-conservatively 5)
 
-
 (use-package recentf
   :init
   (recentf-mode 1))
@@ -406,7 +405,10 @@ the emacs server."
 (use-package citar-org-roam
   :after citar org-roam
   :no-require
-  :config (citar-org-roam-mode))
+  :config
+  (setq citar-org-roam-subdir "citar")
+  (citar-org-roam-mode 1))
+
 
                                         ; Tool Modes
 
@@ -635,14 +637,6 @@ the emacs server."
   :config
   (setq org-download-display-inline-images nil
         org-download-screenshot-method "flameshot gui --raw > %s"))
-
-(use-package org-notify
-  :config
-  (org-notify-add 'default '(:time "1h" :actions -notify/window
-                                   :period "10m" :duration 30))
-  (org-notify-add 'class   '(:time "30m" :actions -notify/window
-                                   :period "10m" :duration 30))
-  (org-notify-start))
 
 (use-package org-fragtog
   :hook
