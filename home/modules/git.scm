@@ -1,13 +1,15 @@
 (define-module (home modules git)
   #:use-module (gnu home)
-  #:use-module (gnu packages)
   #:use-module (gnu services)
+  #:use-module (gnu packages)
+  #:use-module (gnu packages version-control)
   #:use-module (gnu home services)
   #:use-module (gnu home-services version-control))
 
 (define-public git-packages
-  (list (specification->package+output "git:send-email")
-        (specification->package "git-lfs")))
+  (list `(,git "send-email")
+        `(,git "credential-libsecret")
+        git-lfs))
 
 (define-public git-services
   (list
