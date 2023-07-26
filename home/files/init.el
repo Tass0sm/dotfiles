@@ -549,20 +549,34 @@ the emacs server."
 
                                         ; Markup
 
+(use-package org-ql)
+
 (use-package org
-  :bind (("C-c a" . org-agenda)
-         ("C-c l" . org-agenda-list))
+  :bind (("C-c a"   . org-agenda)
+         ("C-c C-l" . org-agenda-list)
+         ("C-c l"   . org-store-link)
+         ("C-c a"   . org-agenda)
+         ("C-c c"   . org-capture))
   :config
+  (setq org-log-done 'time)
   (setq org-startup-indented t)
-  (setq org-agenda-files '("~/org/school.org"
-                           "~/org/projects.org"
-                           "~/org/personal.org"
-                           "~/org/work.org"))
-  (setq org-agenda-custom-commands
-        '(("g" "Goals" ((todo "" ((org-agenda-tag-filter-preset '("+goal"))))))))
   (setq org-todo-keywords
         '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
   (setq org-edit-src-content-indentation 0))
+
+
+(use-package org-agenda
+  :config
+  (setq org-agenda-files '("~/org/school.org"
+                           "~/org/projects.org"
+                           "~/org/personal.org"
+                           "~/org/work.org"
+                           "~/org/notes/projects"))
+  (setq org-agenda-custom-commands
+        '(("g" "Goals" ((todo "" ((org-agenda-tag-filter-preset '("+goal"))))))
+          ("ces" "Custom: QL Todos"
+           ((org-ql-block '(todo)))))))
+
 
 
 (use-package oc
@@ -599,6 +613,7 @@ the emacs server."
 
 (use-package ox-latex
   :config
+  (setq org-latex-src-block-backend 'engraved)
   (setq org-latex-pdf-process (list "latexmk -f -pdf %f")))
 
 (use-package ox-haunt)
