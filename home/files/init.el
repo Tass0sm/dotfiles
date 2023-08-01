@@ -227,34 +227,30 @@ the emacs server."
   (add-hook 'dired-mode-hook 'dired-hide-details-mode))
 
 (use-package cape
-  :init
-  ;; This modifies the default value of completion-at-point-functions. This will
-  ;; be tried after the capfs in the buffer local value.
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-file)
   :config
+  ;; In increasing precedence.
+  (setq cape-dict-file (expand-file-name "~/.guix-home/profile/share/web2"))
+  (add-to-list 'completion-at-point-functions 'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions 'cape-dict)
+  (add-to-list 'completion-at-point-functions 'cape-file)
   (setq cape-dabbrev-check-other-buffers nil))
-
-(defun corfu-complete-or-expand ()
-  "Try to complete current input unless there exists a snippet to expand."
-  (interactive)
-  (if (yas-expand)
-      (corfu-quit)
-    (corfu-complete)))
 
 (use-package corfu
   :init
   (global-corfu-mode 1)
   :bind (:map corfu-map
+              ;; I want it to be easy to get out of corfu
+              ([remap move-beginning-of-line] . nil)
+              ([remap next-line] . nil)
+              ([remap previous-line] . nil)
               ("RET" . nil)
-              ("C-j" . corfu-complete)
-              ("<tab>" . corfu-complete-or-expand))
+              ;; A single, non-conflicting way to complete
+              ("C-j" . corfu-complete))
   :config
   (setq corfu-auto t
         corfu-auto-prefix 2
         corfu-quit-at-boundary t
-        corfu-auto-delay 0
+        corfu-auto-delay 0.0
         corfu-cycle t
         corfu-preselect-first t)
   :hook (shell-mode . (lambda ()
@@ -529,14 +525,21 @@ the emacs server."
   :config
   (ws-butler-global-mode 1))
 
-(use-package yasnippet
+(use-package tempel
+  :custom
+  (tempel-trigger-prefix "<")
+  :bind (("M-+" . tempel-expand)
+         ("M-*" . tempel-insert)
+         :map tempel-map
+         ("<tab>" . tempel-next)
+         ("<backtab>" . tempel-previous))
   :config
-  (yas-global-mode 1))
+  (defun tempel-setup-capf ()
+    (add-hook 'completion-at-point-functions #'tempel-complete nil t))
 
-(use-package flyspell
-  :config
-  (add-hook 'text-mode-hook #'flyspell-mode)
-  (add-hook 'prog-mode-hook #'flyspell-prog-mode))
+  (add-hook 'prog-mode-hook #'tempel-setup-capf)
+  (add-hook 'text-mode-hook #'tempel-setup-capf))
+
 
 (use-package flyspell-correct
   :after flyspell

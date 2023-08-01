@@ -46,6 +46,7 @@
         "ripgrep"
         "inetutils"
 	"nss-certs"
+        "miscfiles"
         "glibc-locales")))
 
 (define font-packages
