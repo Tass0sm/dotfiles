@@ -1,4 +1,5 @@
 (define-module (home modules git)
+  #:use-module (guix gexp)
   #:use-module (gnu home)
   #:use-module (gnu services)
   #:use-module (gnu packages)
@@ -19,9 +20,14 @@
               `((user
 		 ((name . "Tassos Manganaris")
                   (email . "tassos.manganaris@gmail.com")))
-		(github
+	        (github
 		 ((user . "Tass0sm")))
-		(credential
-		 ((helper . "/usr/share/git/credential/libsecret/git-credential-libsecret")))))
+                (sendemail
+                 ((smtpServer . "smtp.gmail.com")
+                  (smtpServerPort . "587")
+                  (smtpencryption . "tls")
+                  (smtpuser . "tassos.manganaris@gmail.com")))
+	        (credential
+		 ((helper . ,#~(string-append #$git:credential-libsecret "/bin/git-credential-libsecret"))))))
              (ignore
  	      '(".envrc"))))))
