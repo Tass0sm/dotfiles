@@ -18,7 +18,7 @@
              (default '(("x-scheme-handler/http" . "firefox.desktop")
                         ("x-scheme-handler/https" . "firefox.desktop")
                         ("x-scheme-handler/mailto" . "org.gnome.Evolution.desktop")
-                        ("application/pdf" . "emacsclient.desktop")
+                        ("application/pdf" . "sioyek.desktop")
                         ("text/plain" . "emacsclient.desktop")
                         ("image/jpeg" . "sxiv.desktop")
                         ("image/png" . "sxiv.desktop")))
