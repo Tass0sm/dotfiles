@@ -13,6 +13,7 @@ pidof dockd || dockd --daemon &
 pidof poweralertd || poweralertd &
 pidof emacs || emacs --daemon &
 pidof nm-applet || nm-applet &
+pidof evolution || evolution &
 # pidof polkit-dumb-agent || polkit-dumb-agent &
 # pidof picom || picom &
 # pidof bspswallow || bspswallow &
@@ -23,7 +24,7 @@ polybar main &
 # touchPadID=$(xinput | grep "TouchPad" | awk '{print substr($6,4,2)}')
 # xinput set-prop $touchPadID "Device Enabled" 1
 
-bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8
+bspc monitor $MONITOR -d 1 2 3 4 5 6 7 8 9 10
 
 bspc config border_width                3
 bspc config top_padding                 18

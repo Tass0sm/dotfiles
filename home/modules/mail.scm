@@ -15,7 +15,8 @@
   (list
    evolution
    evolution-data-server
-   evolution-ews))
+   evolution-ews
+   evolution-on))
 
 (define-public mail-services
   (list
