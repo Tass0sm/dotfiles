@@ -122,7 +122,7 @@ the emacs server."
          ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
 ;;          ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
 ;;          ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-;;          ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
          ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
 ;;          ;; Custom M-# bindings for fast register access
 ;;          ("M-#" . consult-register-load)
@@ -209,15 +209,41 @@ the emacs server."
 ;;   ;; Optionally make narrowing help available in the minibuffer.
 ;;   ;; You may want to use `embark-prefix-help-command' or which-key instead.
 ;;   ;; (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help)
-
-  ;; By default `consult-project-function' uses `project-root' from project.el.
   )
 
 (use-package which-key
   :init
   (which-key-mode 1))
 
-(use-package project)
+(use-package project
+  :config
+  (defun project-vterm ()
+    "Open a new terminal in the desired directory"
+    (interactive)
+    (let* ((default-directory (project-root (project-current t)))
+           (vterm-buffer-name (format
+                               "*%s-vterm*"
+                               (if (project-current nil)
+                                   (f-base (project-root (project-current nil)))
+                                 (f-base default-directory)))))
+      (vterm)))
+
+  (bind-key "v" 'project-vterm 'project-prefix-map)
+  (bind-key "r" 'consult-ripgrep 'project-prefix-map)
+  (bind-key "m" 'magit-project-status 'project-prefix-map)
+
+  (setq project-switch-commands
+        '((project-find-file "Find file")
+          (project-find-regexp "Find regexp")
+          (project-find-dir "Find directory")
+          (project-vterm "VTerm")
+          (consult-ripgrep "Ripgrep")
+          (magit-project-status "Magit"))))
+
+(use-package project-x
+  :after project
+  :config
+  (add-hook 'project-find-functions 'project-x-try-local 90))
 
 (use-package dired
   :config
@@ -393,8 +419,12 @@ the emacs server."
 
 (use-package citar
   :config
+  (add-to-list 'citar-file-open-functions
+               '("pdf" . citar-file-open-external))
+
   (setq citar-bibliography '("~/documents/research/bibliography.bib")
-        citar-library-paths '("~/documents/research/library/")))
+        citar-library-paths '("~/documents/research/library/")
+        citar-notes-paths '("~/org/notes/citar/")))
 
 (use-package citar-latex)
 
@@ -432,6 +462,17 @@ the emacs server."
   :magic ("%PDF" .  pdf-view-mode)
   :hook ((pdf-view-mode . pdf-isearch-minor-mode)
          (pdf-view-mode . pdf-links-minor-mode)))
+
+(use-package tex
+  :config
+  (setq TeX-view-program-selection
+        '(((output-dvi has-no-display-manager)
+           "dvi2tty")
+          ((output-dvi style-pstricks)
+           "dvips and gv")
+          (output-dvi "xdvi")
+          (output-pdf "Sioyek")
+          (output-html "xdg-open"))))
 
 (use-package notmuch
   :config
@@ -496,6 +537,8 @@ the emacs server."
          ("\\.frag\\'" . glsl-mode)
          ("\\.geom\\'" . glsl-mode)))
 
+(use-package cmake-mode)
+
                                         ; General Editing Modes
 
 (setq-default indent-tabs-mode nil)
@@ -556,25 +599,31 @@ the emacs server."
 
 (use-package org
   :bind (("C-c a"   . org-agenda)
-         ("C-c C-l" . org-agenda-list)
-         ("C-c l"   . org-store-link)
-         ("C-c a"   . org-agenda)
-         ("C-c c"   . org-capture))
+         ("C-c o a"   . org-agenda)
+         ("C-c o l"   . org-store-link)
+         ("C-c o c"   . org-capture)
+         ("C-c o f"   . consult-org-agenda))
   :config
   (setq org-log-done 'time)
+  (setq org-default-notes-file (f-join org-directory "notes.org"))
   (setq org-startup-indented t)
   (setq org-todo-keywords
         '((sequence "TODO" "INPROG" "|" "DONE" "KILL" "FAIL")))
   (setq org-edit-src-content-indentation 0))
 
+(use-package org-capture
+  :config
+  (setq org-refile-targets
+        '((org-agenda-files . (:maxlevel . 1)))))
 
 (use-package org-agenda
   :config
-  (setq org-agenda-files '("~/org/school.org"
-                           "~/org/projects.org"
-                           "~/org/personal.org"
-                           "~/org/work.org"
-                           "~/org/notes/projects"))
+  (setq org-agenda-files (list "~/org/school.org"
+                               "~/org/projects.org"
+                               "~/org/personal.org"
+                               "~/org/work.org"
+                               (f-join org-directory "notes.org")
+                               "~/org/notes/projects"))
   (setq org-agenda-custom-commands
         '(("g" "Goals" ((todo "" ((org-agenda-tag-filter-preset '("+goal"))))))
           ("ces" "Custom: QL Todos"

@@ -2,6 +2,7 @@
   #:use-module (guix gexp)
   #:use-module (gnu home)
   #:use-module (gnu packages)
+  #:use-module (gnu packages cmake)
   #:use-module (gnu packages emacs)
   #:use-module (gnu packages emacs-xyz)
   #:use-module (gnu packages mail)
@@ -55,6 +56,7 @@
    emacs-notmuch
    emacs-elfeed
    emacs-helpful
+   emacs-project-x
    ;; Specific Editing Modes
    emacs-markdown-mode
    emacs-ledger-mode
@@ -79,6 +81,7 @@
    emacs-graphviz-dot-mode
    emacs-glsl-mode
    emacs-nim-mode
+   emacs-cmake-mode
    ;; General Editing Modes
    emacs-sudo-edit
    emacs-expand-region
@@ -99,6 +102,7 @@
    emacs-org-fragtog
    emacs-org-re-reveal
    emacs-ox-haunt-latest
+   emacs-engrave-faces
    ;; Appearance
    emacs-nord-theme
    emacs-moody
